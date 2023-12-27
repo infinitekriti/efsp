@@ -1,5 +1,7 @@
 import "./RegistrationForm.scss"
 import Button from "../../../common/button/Button"
+
+
 const RegistrationForm = () => {
   return (
     <section className="registMain paddingTb-2em">
