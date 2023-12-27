@@ -1,0 +1,35 @@
+:root {
+    //COLOR
+    --primaryColor: #005191;
+    --primaryColorLight: #539ED0;
+    --bodyTextColor: #000;
+
+
+    //body max width
+    --maxWidth: 1264px;
+    --bodyGap: 4em;
+    --smallBodyGap: 2em;
+
+    //container WIDTH
+    --containerSmWidth: 540px;
+    --containerMdWidth: 720px;
+    --containerLgWidth: 960x;
+    --containerXlWidth: 1170px;
+    --containerXxlWidth: 1320px;
+
+    //FONT SIZE
+    --baseSmallSize: 11px;
+    --baseMideumSize: 12px;
+    --baseLargeSize: 13px;
+    --baseExtraLargeSize: 15px;
+    --headingFontSize: 2.3em;
+
+    //HEADER NAV
+    --headerBorder: #969696;
+
+    //FORM
+    --inputFormBorderColor: #969696;
+    --inputFormLabelColor: #969696;
+    --buttonBGColor: #f57814;
+    --buttonColor: #000;
+}

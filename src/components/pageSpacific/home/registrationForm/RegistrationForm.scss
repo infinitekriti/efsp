@@ -1,0 +1,72 @@
+.registMain {
+    display: flex;
+    gap: 6em;
+
+    .registTitle {
+        position: relative;
+        margin-bottom: 2em;
+
+        h1 {
+            font-size: 1.8em;
+        }
+    }
+
+    .registWrap {
+        position: relative;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5em;
+            width: 60%;
+
+            .formWrapIn {
+                display: flex;
+                gap: 2em;
+
+                .fromInput {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5em;
+
+                    label {
+                        font-size: 0.8em;
+                        color: var(--inputFormLabelColor);
+                        font-weight: 400;
+
+                        span {
+                            color: var(--primaryColor);
+                        }
+                    }
+
+                    input,
+                    textarea,
+                    select {
+                        font-size: 0.8em;
+                        border: 1px solid var(--inputFormBorderColor);
+                        padding: 1em;
+                        font-family: inherit;
+                        color: #000;
+                        border-radius: 4px;
+
+                        &::placeholder {
+                            color: #000;
+                        }
+                    }
+
+                    select {
+                        option {
+                            color: #000;
+                        }
+                    }
+
+                    button {
+                        padding: 1.2em;
+                    }
+                }
+            }
+
+        }
+    }
+}

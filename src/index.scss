@@ -1,0 +1,49 @@
+@import "./assets/scss/breakpoints.scss";
+@import url("./assets/scss/normalize.scss");
+@import url("./assets/scss/font.scss");
+@import url("./assets/scss/variable.scss");
+@import url("./assets/scss/common.scss");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: var(--bodyTextColor);
+}
+
+.pageContainer {
+    max-width: var(--maxWidth);
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+@media only screen and (max-width: $desktopViewWidth) {
+    body {
+        font-size: var(--baseMideumSize);
+    }
+
+    .pageContainer {
+        max-width: var(--containerLgWidth);
+        width: calc(100% - var(--bodyGap));
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: $tabletViewWidth) {
+    body {
+        font-size: var(--baseSmallSize);
+    }
+
+    .pageContainer {
+        max-width: var(--containerMdWidth);
+        width: calc(100% - var(--smallBodyGap));
+        margin: 0 auto;
+    }
+}

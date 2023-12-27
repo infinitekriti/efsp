@@ -1,0 +1,32 @@
+$sizes: 1em, 2em, 3em, 4em, 5em;
+//$halfSize: 0.5em, 1.5em, 2.5em, 3.5em, 4.5em, 5.5em;
+
+//for padding ex padding: 1em 0
+@each $size in $sizes {
+    .paddingTb-#{$size} {
+        padding: $size 0;
+    }
+  }
+
+
+//for margin ex margin: 1em 0
+@each $size in $sizes {
+    .margin-#{$size} {
+        padding: $size 0;
+    }
+  }
+  
+//for padding ex padding: 1em 1em 1em 1em
+@each $size in $sizes {
+    .paddingAll-#{$size} {
+        padding: $size;
+    }
+  }
+
+//for margin ex margin: 1em 1em 1em 1em
+@each $size in $sizes {
+    .margin-#{$size} {
+        padding: $size;
+    }
+  }
+
