@@ -111,60 +111,65 @@ const RegistrationForm = () => {
 
   const handleSignup = () => {
     if (!validateName(formData.name)) {
+      console.log("mail");
       setBorderColor((prevData) => ({
         ...prevData,
-        name: "red"
+        name: "red",
       }));
       return;
-    }
-    if (!validateEmail(formData.mail)) {
+    } else if (!formData.mail) {
+      console.log("mail");
       setBorderColor((prevData) => ({
         ...prevData,
-        mail: "red"
+        mail: "red",
       }));
       return;
-    }
-    if (!validatePhoneNumber(formData.phoneNumber)) {
+    } else if (!validatePhoneNumber(formData.phoneNumber)) {
+      console.log("phone");
       setBorderColor((prevData) => ({
         ...prevData,
-        phoneNumber: "red"
+        phoneNumber: "red",
       }));
       return;
-    }
-    if (!validateCity(formData.city)) {
+    } else if (!validateCity(formData.city)) {
+      console.log("password");
       setBorderColor((prevData) => ({
         ...prevData,
-        city: "red"
+        city: "red",
       }));
       return;
-    }
-    if (!validatePassword(formData.password)) {
+    } else if (!validatePassword(formData.password)) {
+      console.log("password");
       setBorderColor((prevData) => ({
         ...prevData,
-        password: "red"
+        password: "red",
       }));
       return;
-    }
-    if (!validateConfirmPassword(formData.confirmPassword)) {
+    } else if (!validateConfirmPassword(formData.confirmPassword)) {
       setBorderColor((prevData) => ({
         ...prevData,
-        confirmPassword: "red"
+        confirmPassword: "red",
       }));
       return;
+    } else {
+      setUserDetail((prevData) => [...prevData, formData]);
+      setBorderColor({
+        name: "#969696",
+        mail: "#969696",
+        phoneNumber: "#969696",
+        city: "#969696",
+        password: "#969696",
+        confirmPassword: "#969696",
+      });
+      setFormData({
+        name: "",
+        mail: "",
+        phoneNumber: "",
+        city: "",
+        password: "",
+        confirmPassword: "",
+      });
     }
-
-    setUserDetail((prevData) => ({
-      ...prevData,
-      formData,
-    }));
-    setFormData({
-      name: "",
-      mail: "",
-      phoneNumber: "",
-      city: "",
-      password: "",
-      confirmPassword: "",
-    });
   };
 
   return (

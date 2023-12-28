@@ -1,37 +1,6 @@
 import { useState } from "react";
 import "./UserDetails.scss"
 import DataTable from "react-data-table-component";
-const userData = [
-    {
-      id: 1,
-      name: "Jhon",
-      email: "jhon@gmail.com",
-      city: "usa",
-      password: "*****"
-    },
-    {
-        id: 2,
-        name: "Raman",
-        email: "raman@gmail.com",
-        city: "usa",
-        password: "*****"
-      },
-      {
-        id: 3,
-        name: "akhil",
-        email: "akhil@gmail.com",
-        city: "usa",
-        password: "*****"
-      },
-      {
-        id: 4,
-        name: "marck",
-        email: "marck@gmail.com",
-        city: "usa",
-        password: "*****"
-      },
-    
-  ];
 
   const columns = [
     {
@@ -41,8 +10,13 @@ const userData = [
     },
     {
       name: "Email",
-      selector: (row) => row.email,
+      selector: (row) => row.mail,
       sortable: true
+    },
+    {
+        name: "Moblie Number",
+        selector: (row) => row.phoneNumber,
+        sortable: true
     },
     {
         name: "City",
@@ -57,9 +31,9 @@ const userData = [
 
 
   ];
-const UserDetails = () => {
+const UserDetails = ({UserDetail}) => {
     const [filterText, setFilterText] = useState("");
-    const filteredItems = userData.filter(
+    const filteredItems = UserDetail.filter(
         (item) =>
         JSON.stringify(item).toLowerCase().indexOf(filterText.toLowerCase()) !==
         -1

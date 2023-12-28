@@ -40,6 +40,10 @@
                             color: var(--primaryColor);
                         }
                     }
+                    .formWarning{
+                        color: red;
+                        font-size: 0.6em;
+                    }
 
                     input,
                     textarea,
