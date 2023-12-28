@@ -95,7 +95,7 @@ const RegistrationForm = () => {
                     id="mail"
                     value={formData.mail}
                     onChange={handleInputChange}
-                    placeholder="Joe@email.com"
+                    placeholder="eg : Joe@email.com"
                   />
                 </div>
               </div>
@@ -146,7 +146,7 @@ const RegistrationForm = () => {
           </div>
         </div>
       </section>
-      <h1>News</h1>
+      <h1>User Details</h1>
       {Loading ? (
         <p>Loading...</p>
       ) : error ? (
