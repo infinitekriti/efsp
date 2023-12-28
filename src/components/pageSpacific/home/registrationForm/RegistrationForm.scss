@@ -7,7 +7,8 @@
         margin-bottom: 2em;
 
         h1 {
-            font-size: 1.8em;
+            font-size: 1.5em;
+            color: var(--primaryColor);
         }
     }
 
@@ -47,11 +48,12 @@
                         border: 1px solid var(--inputFormBorderColor);
                         padding: 1em;
                         font-family: inherit;
+                        box-shadow: 1px 2px 1px 0px #e2e2e2;
                         color: #000;
                         border-radius: 4px;
 
                         &::placeholder {
-                            color: #000;
+                            color: #e2e2e2;
                         }
                     }
 

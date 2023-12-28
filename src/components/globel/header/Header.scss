@@ -1,5 +1,9 @@
 .headerMain {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: #fff;
+    box-shadow: 1px 2px 1px 0px #e8e8e8;
 
     .headerWrap {
         position: relative;
@@ -26,6 +30,10 @@
                             font-weight: 400;
                             cursor: pointer;
                             font-size: 0.8em;
+
+                            &:hover {
+                                color: var(--buttonBGColor);
+                            }
                         }
 
                         &:last-child {
