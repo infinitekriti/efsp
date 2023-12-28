@@ -245,9 +245,13 @@ const RegistrationForm = () => {
                     style={{ borderColor: borderColor.city }}
                   >
                     <option value="">Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
+                    <option value="ALABAMA">ALABAMA</option>
+                    <option value="ALASKA">ALASKA</option>
+                    <option value="AMERICAN SAMOA">AMERICAN SAMOA</option>
+                    <option value="ARIZONA">ARIZONA</option>
+                    <option value="ARKANSAS">ARKANSAS</option>
+                    <option value="CALIFORNIA">CALIFORNIA</option>
+                    <option value="COLORADO">COLORADO</option>
                   </select>
                   {borderColor.city === "red" && (
                     <span className="formWarning">Please select a city</span>
