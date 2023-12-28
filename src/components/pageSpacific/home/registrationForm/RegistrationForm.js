@@ -1,6 +1,7 @@
 import "./RegistrationForm.scss";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import Button from "../../../common/button/Button";
+import UserDetails from "../userDetails/UserDetails";
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -69,7 +70,7 @@ const RegistrationForm = () => {
       });
   };
   return (
-    <div>
+    <Fragment>
       <section className="registMain paddingTb-2em">
         <div className="pageContainer">
           <div className="registTitle">
@@ -85,6 +86,7 @@ const RegistrationForm = () => {
                     className="InputFeild"
                     id="name"
                     value={formData.name}
+                    placeholder="jhon Deo"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -106,6 +108,7 @@ const RegistrationForm = () => {
                     type="tel"
                     className="InputFeild"
                     id="phoneNumber"
+                    placeholder="9876543223"
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
                     //   pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
@@ -124,6 +127,25 @@ const RegistrationForm = () => {
                     <option value="female">Female</option>
                     <option value="other">Other</option>
                   </select>
+                </div>
+              </div>
+              <div className="formWrapIn">
+                <div className="fromInput">
+                  <label>Password </label>
+                  <input
+                    type="password"
+                    className="InputFeild"
+                    id=""
+                    placeholder=""
+                  />
+                </div>
+                <div className="fromInput">
+                  <label>Confirm Password</label>
+                  <input
+                    type="password"
+                    id=""
+                    placeholder=""
+                  />
                 </div>
               </div>
               <div className="formWrapIn">
@@ -152,6 +174,7 @@ const RegistrationForm = () => {
       ) : error ? (
         <p>{error}</p>
       ) : (
+      
         <ul>
           <li>
             <ul>
@@ -187,7 +210,8 @@ const RegistrationForm = () => {
           </li>
         </ul>
       )}
-    </div>
+       <UserDetails />
+    </Fragment>
   );
 };
 
