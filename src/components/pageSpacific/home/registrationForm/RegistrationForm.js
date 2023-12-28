@@ -1,74 +1,172 @@
-import "./RegistrationForm.scss";
-import { Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 import Button from "../../../common/button/Button";
 import UserDetails from "../userDetails/UserDetails";
+import "./RegistrationForm.scss";
+
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     mail: "",
     phoneNumber: "",
-    gender: "",
-    message: "",
+    city: "",
+    password: "",
+    confirmPassword: "",
   });
-  const [formData1, setFormData1] = useState({
+
+  const [borderColor, setBorderColor] = useState({
     name: "",
     mail: "",
     phoneNumber: "",
-    gender: "",
-    message: "",
+    city: "",
+    password: "",
+    confirmPassword: "",
   });
-  const [error, seterror] = useState(true);
-  const [Loading, setLoading] = useState(true);
+
+  const [UserDetail, setUserDetail] = useState([]);
+
+  const handleFocus = (id) => {
+    setBorderColor((prevData) => ({
+      ...prevData,
+      [id]: "blue",
+    }));
+  };
+
+  const validateName = (value) => value.length >= 7;
+
+  const validateEmail = (value) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value);
+  };
+
+  const validatePhoneNumber = (value) => value.length === 10;
+
+  const validateCity = (value) => !!value;
+
+  const validatePassword = (value) =>
+    value.length >= 8 &&
+    value.length <= 15 &&
+    !!value.match(/[a-z]/g) &&
+    !!value.match(/[A-Z]/g) &&
+    !!value.match(/[0-9]/g);
+
+  const validateConfirmPassword = (value) => value === formData.password;
+
+  const validateMessage = (value) => !!value;
 
   const handleInputChange = (event) => {
     const { id, value } = event.target;
-    if (id === "gender") {
-      setFormData((prevData) => ({
-        ...prevData,
-        [id]: value,
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [id]: value,
-      }));
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+
+    switch (id) {
+      case "name":
+        setBorderColor((prevData) => ({
+          ...prevData,
+          [id]: validateName(value) ? "green" : "red",
+        }));
+        break;
+      case "mail":
+        setBorderColor((prevData) => ({
+          ...prevData,
+          [id]: validateEmail(value) ? "green" : "red",
+        }));
+        break;
+      case "phoneNumber":
+        setBorderColor((prevData) => ({
+          ...prevData,
+          [id]: validatePhoneNumber(value) ? "green" : "red",
+        }));
+        break;
+      case "city":
+        setBorderColor((prevData) => ({
+          ...prevData,
+          [id]: validateCity(value) ? "green" : "red",
+        }));
+        break;
+      case "password":
+        setBorderColor((prevData) => ({
+          ...prevData,
+          [id]: validatePassword(value) ? "green" : "red",
+        }));
+        break;
+      case "confirmPassword":
+        setBorderColor((prevData) => ({
+          ...prevData,
+          [id]: validateConfirmPassword(value) ? "green" : "red",
+        }));
+        break;
+      case "message":
+        setBorderColor((prevData) => ({
+          ...prevData,
+          [id]: validateMessage(value) ? "green" : "red",
+        }));
+        break;
+      default:
+        break;
     }
   };
-  const isEmailValid = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+
   const handleSignup = () => {
-    if (
-      !formData.name ||
-      !formData.mail ||
-      !formData.phoneNumber ||
-      !formData.gender ||
-      !formData.message
-    ) {
-      alert("Please enter all the feilds");
-      seterror(true);
-      setLoading(false);
+    if (!validateName(formData.name)) {
+      setBorderColor((prevData) => ({
+        ...prevData,
+        name: "red"
+      }));
       return;
     }
-    if (!isEmailValid(formData.mail)) {
-      alert("Please enter a valid email address.");
-      seterror(true);
-      setLoading(false);
+    if (!validateEmail(formData.mail)) {
+      setBorderColor((prevData) => ({
+        ...prevData,
+        mail: "red"
+      }));
+      return;
+    }
+    if (!validatePhoneNumber(formData.phoneNumber)) {
+      setBorderColor((prevData) => ({
+        ...prevData,
+        phoneNumber: "red"
+      }));
+      return;
+    }
+    if (!validateCity(formData.city)) {
+      setBorderColor((prevData) => ({
+        ...prevData,
+        city: "red"
+      }));
+      return;
+    }
+    if (!validatePassword(formData.password)) {
+      setBorderColor((prevData) => ({
+        ...prevData,
+        password: "red"
+      }));
+      return;
+    }
+    if (!validateConfirmPassword(formData.confirmPassword)) {
+      setBorderColor((prevData) => ({
+        ...prevData,
+        confirmPassword: "red"
+      }));
       return;
     }
 
-    seterror(false);
-    setLoading(false);
-    setFormData1(formData);
+    setUserDetail((prevData) => ({
+      ...prevData,
+      formData,
+    }));
     setFormData({
-        name: "",
-        mail: "",
-        phoneNumber: "",
-        gender: "",
-        message:"",
-      });
+      name: "",
+      mail: "",
+      phoneNumber: "",
+      city: "",
+      password: "",
+      confirmPassword: "",
+    });
   };
+
   return (
     <Fragment>
       <section className="registMain paddingTb-2em">
@@ -86,9 +184,16 @@ const RegistrationForm = () => {
                     className="InputFeild"
                     id="name"
                     value={formData.name}
-                    placeholder="jhon Deo"
+                    placeholder="John Doe"
+                    onFocus={() => handleFocus("name")}
+                    style={{ borderColor: borderColor.name }}
                     onChange={handleInputChange}
                   />
+                  {borderColor.name === "red" && (
+                    <span className="formWarning">
+                      Minimum length of name is 7
+                    </span>
+                  )}
                 </div>
                 <div className="fromInput">
                   <label>Email</label>
@@ -97,8 +202,14 @@ const RegistrationForm = () => {
                     id="mail"
                     value={formData.mail}
                     onChange={handleInputChange}
-                    placeholder="eg : Joe@email.com"
+                    style={{ borderColor: borderColor.mail }}
+                    placeholder="e.g.: Joe@email.com"
                   />
+                  {borderColor.mail === "red" && (
+                    <span className="formWarning">
+                      Please enter a valid email
+                    </span>
+                  )}
                 </div>
               </div>
               <div className="formWrapIn">
@@ -111,22 +222,31 @@ const RegistrationForm = () => {
                     placeholder="9876543223"
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
-                    //   pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                    style={{ borderColor: borderColor.phoneNumber }}
                   />
+                  {borderColor.phoneNumber === "red" && (
+                    <span className="formWarning">
+                      Enter a valid phone number
+                    </span>
+                  )}
                 </div>
                 <div className="fromInput">
-                  <label>Gender</label>
+                  <label>City</label>
                   <select
-                    name="Gender"
-                    id="gender"
-                    value={formData.gender}
+                    name="City"
+                    id="city"
+                    value={formData.city}
                     onChange={handleInputChange}
+                    style={{ borderColor: borderColor.city }}
                   >
-                    <option value="select">Select</option>
+                    <option value="">Select</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
                   </select>
+                  {borderColor.city === "red" && (
+                    <span className="formWarning">Please select a city</span>
+                  )}
                 </div>
               </div>
               <div className="formWrapIn">
@@ -135,29 +255,32 @@ const RegistrationForm = () => {
                   <input
                     type="password"
                     className="InputFeild"
-                    id=""
-                    placeholder=""
+                    id="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    style={{ borderColor: borderColor.password }}
                   />
+                  {borderColor.password === "red" && (
+                    <span className="formWarning">
+                      Follow the pattern: length must be between 8 to 15,
+                      <br /> must have at least one upper case, one lower case,
+                      and one number
+                    </span>
+                  )}
                 </div>
                 <div className="fromInput">
                   <label>Confirm Password</label>
                   <input
                     type="password"
-                    id=""
-                    placeholder=""
-                  />
-                </div>
-              </div>
-              <div className="formWrapIn">
-                <div className="fromInput">
-                  <label>Messages</label>
-                  <textarea
-                    rows="5"
-                    placeholder="Your Message"
-                    id="message"
-                    value={formData.message}
+                    id="confirmPassword"
                     onChange={handleInputChange}
+                    style={{ borderColor: borderColor.confirmPassword }}
                   />
+                  {borderColor.confirmPassword === "red" && (
+                    <span className="formWarning">
+                      Please enter the same password to confirm
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -168,49 +291,7 @@ const RegistrationForm = () => {
           </div>
         </div>
       </section>
-      <h1>User Details</h1>
-      {Loading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>{error}</p>
-      ) : (
-      
-        <ul>
-          <li>
-            <ul>
-              <li>
-                <h3>Name</h3>
-              </li>
-              <li>{formData1.name}</li>
-            </ul>
-            <ul>
-              <li>
-                <h3>Email</h3>
-              </li>
-              <li>{formData1.mail}</li>
-            </ul>
-            <ul>
-              <li>
-                <h3>PhoneNumber</h3>
-              </li>
-              <li>{formData1.phoneNumber}</li>
-            </ul>
-            <ul>
-              <li>
-                <h3>Gender</h3>
-              </li>
-              <li>{formData1.gender}</li>
-            </ul>
-            <ul>
-              <li>
-                <h3>Gender</h3>
-              </li>
-              <li>{formData1.message}</li>
-            </ul>
-          </li>
-        </ul>
-      )}
-       <UserDetails />
+      <UserDetails UserDetail={UserDetail} />
     </Fragment>
   );
 };
