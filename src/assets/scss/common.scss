@@ -46,6 +46,12 @@ $sizes: 1em, 2em, 3em, 4em, 5em;
         display: flex;
         flex-direction: column;
         gap: 0.5em;
+        .special-label{
+          display: none;
+        }
+        .form-control {
+          width: 100%;
+        }
 
         label {
           font-size: 0.8em;
