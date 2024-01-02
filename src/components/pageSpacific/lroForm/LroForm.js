@@ -218,27 +218,23 @@ const LroForm = () => {
                 </div>
               </div>
               <div className="formWrapIn">
-                <div className="fromInput">
-                  <label>
-                    <input type="checkbox" id="super1" name="super1" />
-                    super1
-                  </label>
-                </div>
-                <div className="fromInput">
-                  <label>
+                <div className="fromInput formCheck">
+                    <div className="checkBoxContainer">
+                        <input type="checkbox" id="super1" name="super1" />
+                        <label> Super1 </label>
+                    </div>
+                    <div className="checkBoxContainer">
                     <input type="checkbox" id="super2" name="super2" />
-                    super2
-                  </label>
-                </div>
-                <div className="fromInput">
-                  <label>
+                        <label> Super2 </label>
+                    </div>
+                    <div className="checkBoxContainer">
                     <input
                       type="checkbox"
                       id="fiscalagent"
                       name="fiscalagent"
                     />
-                    fiscalagent
-                  </label>
+                    <label> Fiscalagent </label>
+                    </div>
                 </div>
               </div>
 
