@@ -1,10 +1,10 @@
-@import "../../../../assets/scss/common.scss";
+@import "../../../assets/scss/common.scss";
 
-.registMain {
+.lroMain {
     display: flex;
     gap: 6em;
 
-    .registTitle {
+    .lroTitle {
         position: relative;
         margin-bottom: 2em;
 
@@ -14,7 +14,7 @@
         }
     }
 
-    .registWrap {
+    .lroWrap {
         position: relative;
         @include inputField;
     }

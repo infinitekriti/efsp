@@ -3,30 +3,92 @@ $sizes: 1em, 2em, 3em, 4em, 5em;
 
 //for padding ex padding: 1em 0
 @each $size in $sizes {
-    .paddingTb-#{$size} {
-        padding: $size 0;
-    }
+  .paddingTb-#{$size} {
+    padding: $size 0;
   }
+}
 
 
 //for margin ex margin: 1em 0
 @each $size in $sizes {
-    .margin-#{$size} {
-        padding: $size 0;
-    }
+  .margin-#{$size} {
+    padding: $size 0;
   }
-  
+}
+
 //for padding ex padding: 1em 1em 1em 1em
 @each $size in $sizes {
-    .paddingAll-#{$size} {
-        padding: $size;
-    }
+  .paddingAll-#{$size} {
+    padding: $size;
   }
+}
 
 //for margin ex margin: 1em 1em 1em 1em
 @each $size in $sizes {
-    .margin-#{$size} {
-        padding: $size;
-    }
+  .margin-#{$size} {
+    padding: $size;
   }
+}
 
+@mixin inputField {
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    width: 60%;
+
+    .formWrapIn {
+      display: flex;
+      gap: 1.2em;
+
+      .fromInput {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+
+        label {
+          font-size: 0.8em;
+          color: var(--inputFormLabelColor);
+          font-weight: 400;
+
+          span {
+            color: var(--primaryColor);
+          }
+        }
+
+        .formWarning {
+          color: red;
+          font-size: 0.6em;
+        }
+
+        input,
+        textarea,
+        select {
+          font-size: 0.8em;
+          border: 1px solid var(--inputFormBorderColor);
+          padding: 1em;
+          font-family: inherit;
+          box-shadow: 1px 2px 1px 0px #e2e2e2;
+          color: #000;
+          border-radius: 4px;
+
+          &::placeholder {
+            color: #dbd8d8;
+          }
+        }
+
+        select {
+          option {
+            color: #000;
+          }
+        }
+
+        button {
+          padding: 1.2em;
+        }
+      }
+    }
+
+  }
+}
