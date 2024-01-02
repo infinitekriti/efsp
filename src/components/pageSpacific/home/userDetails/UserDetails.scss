@@ -1,0 +1,38 @@
+.userDetailsMain {
+    position: relative;
+
+    .userDetailsHeading {
+        width: 80%;
+        margin-bottom: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h2 {
+            color: var(--primaryColor);
+        }
+
+        input {
+            padding: 0.5em 0.6em;
+            border: 1px solid var(--tableBorderColor);
+            border-radius: 16px;
+            box-shadow: 1px 2px 1px 0px #e2e2e2;
+        }
+
+    }
+
+    .userDetailsData {
+        width: 80%;
+
+        .userData {
+            border: 1px solid var(--tableBorderColor);
+            box-shadow: 1px 2px 1px 0px #e2e2e2;
+
+            .rdt_TableHeadRow {
+                background-color: var(--primaryColor);
+                color: #fff;
+                border-radius: 4px 4px 0 0px;
+            }
+        }
+    }
+}
