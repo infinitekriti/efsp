@@ -105,7 +105,7 @@ const LroForm = () => {
                   />
                 </div>
                 <div className="fromInput">
-                  <label>phoneNumber</label>
+                  <label>phone Number</label>
                   <PhoneInput
                     name="phoneNumber"
                     type="text"
@@ -127,7 +127,7 @@ const LroForm = () => {
                   <input type="email" placeholder="infinite@Alyx.com" />
                 </div>
                 <div className="fromInput">
-                  <label>password</label>
+                  <label>Password</label>
                   <input type="password" placeholder="" />
                 </div>
               </div>
@@ -143,7 +143,7 @@ const LroForm = () => {
               </div>
               <div className="formWrapIn">
                 <div className="fromInput">
-                  <label>Account type</label>
+                  <label>Account Type</label>
                   <input type="text" placeholder="" />
                 </div>
               </div>
@@ -155,7 +155,7 @@ const LroForm = () => {
                   </select>
                 </div>
                 <div className="fromInput">
-                  <label>ext</label>
+                  <label>Ext</label>
                   <input type="number" placeholder="" />
                 </div>
               </div>
@@ -189,31 +189,31 @@ const LroForm = () => {
               </div>
               <div className="formWrapIn">
                 <div className="fromInput">
-                  <label>ein</label>
+                  <label>Ein</label>
                   <input type="text" placeholder="" />
                 </div>
                 <div className="fromInput">
-                  <label>subordinateein</label>
-                  <input type="text" placeholder="" />
-                </div>
-              </div>
-              <div className="formWrapIn">
-                <div className="fromInput">
-                  <label>websitelink</label>
-                  <input type="text" placeholder="" />
-                </div>
-                <div className="fromInput">
-                  <label>abano</label>
+                  <label>Subordinateein</label>
                   <input type="text" placeholder="" />
                 </div>
               </div>
               <div className="formWrapIn">
                 <div className="fromInput">
-                  <label>einextension</label>
+                  <label>Website Link</label>
                   <input type="text" placeholder="" />
                 </div>
                 <div className="fromInput">
-                  <label>eftrcvd</label>
+                  <label>Abano</label>
+                  <input type="text" placeholder="" />
+                </div>
+              </div>
+              <div className="formWrapIn">
+                <div className="fromInput">
+                  <label>Einextension</label>
+                  <input type="text" placeholder="" />
+                </div>
+                <div className="fromInput">
+                  <label>Eftrcvd</label>
                   <input type="date" id="eftrcvd" name="eftrcvd" />
                 </div>
               </div>
@@ -221,7 +221,7 @@ const LroForm = () => {
                 <div className="fromInput formCheck">
                     <div className="checkBoxContainer">
                         <input type="checkbox" id="super1" name="super1" />
-                        <label> Super1 </label>
+                        <label>Super1 </label>
                     </div>
                     <div className="checkBoxContainer">
                     <input type="checkbox" id="super2" name="super2" />
