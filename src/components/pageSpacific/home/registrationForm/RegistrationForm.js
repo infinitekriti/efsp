@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
 import Button from "../../../common/button/Button";
 import UserDetails from "../userDetails/UserDetails";
+import { toast } from "react-toastify";
 import "./RegistrationForm.scss";
 
 const RegistrationForm = () => {
@@ -169,6 +170,7 @@ const RegistrationForm = () => {
         password: "",
         confirmPassword: "",
       });
+      toast.success("Form Saved Successfully");
     }
   };
 
