@@ -2,12 +2,32 @@ import React, { Fragment, useState } from "react";
 import "./LroForm.scss";
 import Button from "../../common/button/Button";
 import PhoneInput from "react-phone-input-2";
-import { validateText } from "../../common/formValidation/FormValidation";
+import {
+  validateText,
+  validateEmail,
+  validatePhoneNumber,
+} from "../../common/formValidation/FormValidation";
 
 const LroForm = () => {
-  const [borderColor, setBorderColor] = useState({
-    lroName: "black",
+  const [lrocontacts , setlrocontacts] = useState({
+    lroFaxNumber:"+1"
   });
+  const [borderColor, setBorderColor] = useState({
+    lroName: "",
+    lroContact: "",
+    lroAddress1: "",
+    lroAddress2: "",
+    lroAddress3: "",
+    lroFaxNumber: "",
+    lroEmail: "",
+  });
+
+  const defaultInputColour = (name) => {
+    setBorderColor((prevData) => ({
+      ...prevData,
+      [name]: "blue",
+    }));
+  };
 
   const feildColour = (name, validate) => {
     setBorderColor((prevData) => ({
@@ -15,12 +35,39 @@ const LroForm = () => {
       [name]: validate ? "green" : "red",
     }));
   };
+  const handleInputChangeFocus = (event) => {
+    const { name } = event.target;
+    defaultInputColour(name);
+  };
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     switch (name) {
       case "lroName":
         feildColour(name, validateText(value, 3, 100));
         break;
+      case "lroContact":
+        feildColour(name, validateText(value, 3, 50));
+        break;
+      case "lroAddress1":
+        feildColour(name, validateText(value, 3, 40));
+        break;
+      case "lroAddress2":
+        feildColour(name, validateText(value, 3, 40));
+        break;
+      case "lroAddress3":
+        feildColour(name, validateText(value, 3, 40));
+        break;
+      case "lroFaxNumber":
+        setlrocontacts((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+        feildColour(name, validatePhoneNumber(value));
+        break;
+      case "lroEmail":
+        feildColour(name, validateEmail(value));
+        break;
+
       default:
         break;
     }
@@ -58,6 +105,7 @@ const LroForm = () => {
                     name="lroName"
                     placeholder="jhon Deo"
                     style={{ borderColor: borderColor.lroName }}
+                    onFocus={handleInputChangeFocus}
                     onChange={handleInputChange}
                   />
                   {borderColor.lroName === "red" && (
@@ -71,26 +119,63 @@ const LroForm = () => {
                   <input
                     type="text"
                     className="InputFeild"
+                    name="lroContact"
                     placeholder="contact"
+                    style={{ borderColor: borderColor.lroContact }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
                   />
+                  {borderColor.lroContact === "red" && (
+                    <span className="formWarning"></span>
+                  )}
                 </div>
               </div>
               <div className="formWrapIn">
                 <div className="fromInput">
                   <label>Address1</label>
-                  <textarea rows="2" placeholder="address1" />
+                  <textarea
+                    rows="2"
+                    placeholder="address1"
+                    name="lroAddress1"
+                    style={{ borderColor: borderColor.lroAddress1 }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                  />
+                  {borderColor.lroAddress1 === "red" && (
+                    <span className="formWarning"></span>
+                  )}
                 </div>
               </div>
               <div className="formWrapIn">
                 <div className="fromInput">
                   <label>Address2</label>
-                  <textarea rows="2" placeholder="address1" />
+                  <textarea
+                    rows="2"
+                    placeholder="address2"
+                    name="lroAddress2"
+                    style={{ borderColor: borderColor.lroAddress2 }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                  />
+                  {borderColor.lroAddress2 === "red" && (
+                    <span className="formWarning"></span>
+                  )}
                 </div>
               </div>
               <div className="formWrapIn">
                 <div className="fromInput">
                   <label>Address3</label>
-                  <textarea rows="2" placeholder="address1" />
+                  <textarea
+                    rows="2"
+                    placeholder="address3"
+                    name="lroAddress3"
+                    style={{ borderColor: borderColor.lroAddress3 }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                  />
+                  {borderColor.lroAddress3 === "red" && (
+                    <span className="formWarning"></span>
+                  )}
                 </div>
               </div>
               <div className="formWrapIn">
@@ -120,7 +205,7 @@ const LroForm = () => {
               <div className="formWrapIn">
                 <div className="fromInput">
                   <label>Fax</label>
-                  <PhoneInput
+                  {/* <PhoneInput
                     name="phoneNumber"
                     type="text"
                     country={"us"}
@@ -132,10 +217,22 @@ const LroForm = () => {
                       required: true,
                       autoFocus: true,
                     }}
+                  /> */}
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="lroFaxNumber"
+                    value={lrocontacts.lroFaxNumber}
+                    style={{ borderColor: borderColor.lroFaxNumber }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
                   />
+                  {borderColor.lroFaxNumber === "red" && (
+                    <span className="formWarning"></span>
+                  )}
                 </div>
                 <div className="fromInput">
-                  <label>phone Number</label>
+                  <label>Phone Number</label>
                   <PhoneInput
                     name="phoneNumber"
                     type="text"
@@ -154,7 +251,17 @@ const LroForm = () => {
               <div className="formWrapIn">
                 <div className="fromInput">
                   <label>Email</label>
-                  <input type="email" placeholder="infinite@Alyx.com" />
+                  <input
+                    type="email"
+                    placeholder="infinite@Alyx.com"
+                    name="lroEmail"
+                    style={{ borderColor: borderColor.lroEmail }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                  />
+                  {borderColor.lroEmail === "red" && (
+                    <span className="formWarning"></span>
+                  )}
                 </div>
                 <div className="fromInput">
                   <label>Password</label>
