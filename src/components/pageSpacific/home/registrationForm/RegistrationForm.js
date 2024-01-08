@@ -3,6 +3,7 @@ import Button from "../../../common/button/Button";
 import UserDetails from "../userDetails/UserDetails";
 import { toast } from "react-toastify";
 import "./RegistrationForm.scss";
+// import {validateName} from "../../../common/formValidation/FormValidation"
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({

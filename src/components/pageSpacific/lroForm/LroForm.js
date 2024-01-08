@@ -1,9 +1,30 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import "./LroForm.scss";
 import Button from "../../common/button/Button";
 import PhoneInput from "react-phone-input-2";
+import { validateText } from "../../common/formValidation/FormValidation";
 
 const LroForm = () => {
+  const [borderColor, setBorderColor] = useState({
+    lroName: "black",
+  });
+
+  const feildColour = (name, validate) => {
+    setBorderColor((prevData) => ({
+      ...prevData,
+      [name]: validate ? "green" : "red",
+    }));
+  };
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    switch (name) {
+      case "lroName":
+        feildColour(name, validateText(value, 3, 100));
+        break;
+      default:
+        break;
+    }
+  };
   return (
     <Fragment>
       <section className="lroMain paddingTb-2em">
@@ -32,7 +53,16 @@ const LroForm = () => {
                 </div>
                 <div className="fromInput">
                   <label>LRO Name</label>
-                  <input type="text" placeholder="jhon Deo" />
+                  <input
+                    type="text"
+                    name="lroName"
+                    placeholder="jhon Deo"
+                    style={{ borderColor: borderColor.lroName }}
+                    onChange={handleInputChange}
+                  />
+                  {borderColor.lroName === "red" && (
+                    <span className="formWarning"></span>
+                  )}
                 </div>
               </div>
               <div className="formWrapIn">
@@ -219,22 +249,22 @@ const LroForm = () => {
               </div>
               <div className="formWrapIn">
                 <div className="fromInput formCheck">
-                    <div className="checkBoxContainer">
-                        <input type="checkbox" id="super1" name="super1" />
-                        <label>Super1 </label>
-                    </div>
-                    <div className="checkBoxContainer">
+                  <div className="checkBoxContainer">
+                    <input type="checkbox" id="super1" name="super1" />
+                    <label>Super1 </label>
+                  </div>
+                  <div className="checkBoxContainer">
                     <input type="checkbox" id="super2" name="super2" />
-                        <label> Super2 </label>
-                    </div>
-                    <div className="checkBoxContainer">
+                    <label> Super2 </label>
+                  </div>
+                  <div className="checkBoxContainer">
                     <input
                       type="checkbox"
                       id="fiscalagent"
                       name="fiscalagent"
                     />
                     <label> Fiscalagent </label>
-                    </div>
+                  </div>
                 </div>
               </div>
 
