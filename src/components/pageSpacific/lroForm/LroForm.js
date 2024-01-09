@@ -7,11 +7,19 @@ import {
   validateEmail,
   validatePhoneNumber,
   formatePhoneNumber,
+  validatePassword,
+  validateEni,
+  formatEin,
 } from "../../common/formValidation/FormValidation";
 
 const LroForm = () => {
   const [lroFaxNumber, setlroFaxNumber] = useState("+1");
   const [lroPhoneNumber, setlroPhoneNumber] = useState("+1");
+  const [lroEni, setlroEni] = useState({
+    lroEni:"",
+    lroSubOrdinateEin:"",
+  });
+  // const [lroSubOrdinateEin , setlroSubOrdinateEin] = useState();
 
   const [borderColor, setBorderColor] = useState({});
 
@@ -62,11 +70,18 @@ const LroForm = () => {
       case "lroAddress3":
         feildColour(name, validateText(value, 3, 40));
         break;
+      case "lroZip1":
+        // const ZipRegex = /^\d{5}$/;
+        feildColour(name, /^\d{5}$/.test(value));
+        break;
+      case "lroZip2":
+        feildColour(name, /^\d{4}$/.test(value));
+        break;
       case "lroEmail":
         feildColour(name, validateEmail(value));
         break;
       case "lroPassword":
-        feildColour(name, validateText(value, 8, 40));
+        feildColour(name, validatePassword(value, 8, 50));
         break;
       case "lroFaxNumber":
         const FaxNumber = formatePhoneNumber(value);
@@ -77,6 +92,31 @@ const LroForm = () => {
         const PhoneNumber = formatePhoneNumber(value);
         setlroPhoneNumber(PhoneNumber);
         feildColour(name, validatePhoneNumber(PhoneNumber));
+        break;
+      case "lroAccountType":
+        feildColour(name, /^.{1}$/.test(value));
+        break;
+      case "lroExt":
+        feildColour(name, /^\d{2,4}$/.test(value));
+        break;
+      case "lroEni":
+        const Eni1 = formatEin(value);
+        setlroEni((prevData) => ({
+          ...prevData,
+          [name]: Eni1,
+        }));
+        // setlroEni(Eni1);
+        feildColour(name, validateEni(Eni1));
+        break;
+      case "lroSubOrdinateEin":
+        // console.log(value);
+        const Eni2 = formatEin(value);
+        setlroEni((prevData) => ({
+          ...prevData,
+          [name]: Eni2,
+        }));
+        // setlroSubOrdinateEin(Eni2);
+        feildColour(name, validateEni(Eni2));
         break;
       default:
         break;
@@ -210,11 +250,33 @@ const LroForm = () => {
               <div className="formWrapIn">
                 <div className="fromInput">
                   <label>Zip1</label>
-                  <input type="number" placeholder="123456" />
+                  <input
+                    type="tel"
+                    placeholder="36092"
+                    name="lroZip1"
+                    style={{ borderColor: borderColor.lroZip1 }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                    onBlur={handleInputChangeBlur}
+                  />
+                  {borderColor.lroZip1 === "red" && (
+                    <span className="formWarning"></span>
+                  )}
                 </div>
                 <div className="fromInput">
                   <label>Zip2</label>
-                  <input type="number" placeholder="123456" />
+                  <input
+                    type="tel"
+                    placeholder="2107"
+                    name="lroZip2"
+                    style={{ borderColor: borderColor.lroZip2 }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                    onBlur={handleInputChangeBlur}
+                  />
+                  {borderColor.lroZip2 === "red" && (
+                    <span className="formWarning"></span>
+                  )}
                 </div>
               </div>
               <div className="formWrapIn">
@@ -236,19 +298,6 @@ const LroForm = () => {
                 </div>
                 <div className="fromInput">
                   <label>Phone Number</label>
-                  {/* <PhoneInput
-                    name="phoneNumber"
-                    type="text"
-                    country={"us"}
-                    enableAreaCodes={true}
-                    onlyCountries={["us"]}
-                    areaCodes={{ us: ["332"] }}
-                    inputProps={{
-                      country: "us",
-                      required: true,
-                      autoFocus: true,
-                    }}
-                  /> */}
                   <input
                     type="tel"
                     id="phone"
@@ -309,7 +358,18 @@ const LroForm = () => {
               <div className="formWrapIn">
                 <div className="fromInput">
                   <label>Account Type</label>
-                  <input type="text" placeholder="" />
+                  <input
+                    type="text"
+                    placeholder="S"
+                    name="lroAccountType"
+                    style={{ borderColor: borderColor.lroAccountType }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                    onBlur={handleInputChangeBlur}
+                  />
+                  {borderColor.lroAccountType === "red" && (
+                    <span className="formWarning"></span>
+                  )}
                 </div>
               </div>
               <div className="formWrapIn">
@@ -321,7 +381,18 @@ const LroForm = () => {
                 </div>
                 <div className="fromInput">
                   <label>Ext</label>
-                  <input type="number" placeholder="" />
+                  <input
+                    type="number"
+                    placeholder=""
+                    name="lroExt"
+                    style={{ borderColor: borderColor.lroExt }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                    onBlur={handleInputChangeBlur}
+                  />
+                  {borderColor.lroExt === "red" && (
+                    <span className="formWarning"></span>
+                  )}
                 </div>
               </div>
               <div className="formWrapIn">
@@ -355,11 +426,36 @@ const LroForm = () => {
               <div className="formWrapIn">
                 <div className="fromInput">
                   <label>Ein</label>
-                  <input type="text" placeholder="" />
+                  <input
+                    type="tel"
+                    id="phone"
+                    placeholder="23-7363262"
+                    name="lroEni"
+                    value={lroEni.lroEni}
+                    style={{ borderColor: borderColor.lroEni }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                    onBlur={handleInputChangeBlur}
+                  />
+                  {borderColor.lroEni === "red" && (
+                    <span className="formWarning"></span>
+                  )}
                 </div>
                 <div className="fromInput">
-                  <label>Subordinateein</label>
-                  <input type="text" placeholder="" />
+                  <label>Sub Ordinate Ein</label>
+                  <input
+                    type="text"
+                    placeholder="23-7363262"
+                    name="lroSubOrdinateEin"
+                    value={lroEni.lroSubOrdinateEin}
+                    style={{ borderColor: borderColor.lroSubOrdinateEin }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                    onBlur={handleInputChangeBlur}
+                  />
+                  {borderColor.lroSubOrdinateEin === "red" && (
+                    <span className="formWarning"></span>
+                  )}
                 </div>
               </div>
               <div className="formWrapIn">
