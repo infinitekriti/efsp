@@ -12,7 +12,7 @@ export const validatePhoneNumber = (value) => {
   return usPhoneNumberRegex.test(value);
 };
 export const validateEni = (value) => {
-  const EniRegex = /^\d{2}-\d{7}$/;
+  const EniRegex = /^\d{2} - \d{7}$/;
   return EniRegex.test(value);
 };
 export const validatePassword = (value, min, max) => {
@@ -22,21 +22,20 @@ export const validatePassword = (value, min, max) => {
   return passwordRegex.test(value);
 };
 export const formatEin = (value) => {
-    const cleaned1 = value.replace(/\D/g, "");
-  
-    let formatted = "";
-  
-    if (cleaned1.length >= 2) {
-        formatted += `${cleaned1.substring(0, 2)} `;
-      }
-    
-      if (cleaned1.length >= 9) {
-        formatted += `- ${cleaned1.substring(2, 9)}`;
-      }
-  
-    return formatted;
-  };
-  
+  const cleaned1 = value.replace(/\D/g, "");
+
+  let formatted = "";
+
+  if (cleaned1.length >= 0) {
+    formatted += `${cleaned1.substring(0, 2)} `;
+  }
+  if (cleaned1.length >= 2) {
+    formatted += `- ${cleaned1.substring(2, 9)}`;
+  }
+
+  return formatted;
+};
+
 export const formatePhoneNumber = (value) => {
   const cleaned = value.replace(/\D/g, "");
 

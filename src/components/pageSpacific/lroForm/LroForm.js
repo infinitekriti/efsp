@@ -15,11 +15,8 @@ import {
 const LroForm = () => {
   const [lroFaxNumber, setlroFaxNumber] = useState("+1");
   const [lroPhoneNumber, setlroPhoneNumber] = useState("+1");
-  const [lroEni, setlroEni] = useState({
-    lroEni:"",
-    lroSubOrdinateEin:"",
-  });
-  // const [lroSubOrdinateEin , setlroSubOrdinateEin] = useState();
+  const [lroEni, setlroEni] = useState("");
+  const [lroSubOrdinateEin , setlroSubOrdinateEin] = useState("");
 
   const [borderColor, setBorderColor] = useState({});
 
@@ -54,6 +51,7 @@ const LroForm = () => {
   };
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+
     switch (name) {
       case "lroName":
         feildColour(name, validateText(value, 3, 100));
@@ -71,7 +69,6 @@ const LroForm = () => {
         feildColour(name, validateText(value, 3, 40));
         break;
       case "lroZip1":
-        // const ZipRegex = /^\d{5}$/;
         feildColour(name, /^\d{5}$/.test(value));
         break;
       case "lroZip2":
@@ -101,21 +98,12 @@ const LroForm = () => {
         break;
       case "lroEni":
         const Eni1 = formatEin(value);
-        setlroEni((prevData) => ({
-          ...prevData,
-          [name]: Eni1,
-        }));
-        // setlroEni(Eni1);
+        setlroEni(Eni1);
         feildColour(name, validateEni(Eni1));
         break;
       case "lroSubOrdinateEin":
-        // console.log(value);
         const Eni2 = formatEin(value);
-        setlroEni((prevData) => ({
-          ...prevData,
-          [name]: Eni2,
-        }));
-        // setlroSubOrdinateEin(Eni2);
+        setlroSubOrdinateEin(Eni2);
         feildColour(name, validateEni(Eni2));
         break;
       default:
@@ -284,7 +272,6 @@ const LroForm = () => {
                   <label>Fax</label>
                   <input
                     type="tel"
-                    id="phone"
                     name="lroFaxNumber"
                     value={lroFaxNumber}
                     style={{ borderColor: borderColor.lroFaxNumber }}
@@ -300,7 +287,6 @@ const LroForm = () => {
                   <label>Phone Number</label>
                   <input
                     type="tel"
-                    id="phone"
                     name="lroPhoneNumber"
                     value={lroPhoneNumber}
                     style={{ borderColor: borderColor.lroPhoneNumber }}
@@ -428,10 +414,9 @@ const LroForm = () => {
                   <label>Ein</label>
                   <input
                     type="tel"
-                    id="phone"
                     placeholder="23-7363262"
                     name="lroEni"
-                    value={lroEni.lroEni}
+                    value={lroEni}
                     style={{ borderColor: borderColor.lroEni }}
                     onChange={handleInputChange}
                     onFocus={handleInputChangeFocus}
@@ -447,7 +432,7 @@ const LroForm = () => {
                     type="text"
                     placeholder="23-7363262"
                     name="lroSubOrdinateEin"
-                    value={lroEni.lroSubOrdinateEin}
+                    value={lroSubOrdinateEin}
                     style={{ borderColor: borderColor.lroSubOrdinateEin }}
                     onChange={handleInputChange}
                     onFocus={handleInputChangeFocus}
