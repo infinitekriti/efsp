@@ -16,7 +16,7 @@ const LroForm = () => {
   const [lroFaxNumber, setlroFaxNumber] = useState("+1");
   const [lroPhoneNumber, setlroPhoneNumber] = useState("+1");
   const [lroEni, setlroEni] = useState("");
-  const [lroSubOrdinateEin , setlroSubOrdinateEin] = useState("");
+  const [lroSubOrdinateEin, setlroSubOrdinateEin] = useState("");
 
   const [borderColor, setBorderColor] = useState({});
 
@@ -115,33 +115,20 @@ const LroForm = () => {
       <section className="lroMain paddingTb-2em">
         <div className="pageContainer">
           <div className="lroTitle">
-            <h1>Lro Form</h1>
+            <h1>LRO Registration Form</h1>
           </div>
           <div className="lroWrap">
             <div className="form">
+              <div className="lroSubTitle">
+                <h1>Registration Details</h1>
+              </div>
               <div className="formWrapIn">
                 <div className="fromInput">
-                  <label>Lb Number </label>
-                  <select>
-                    <option>Select</option>
-                  </select>
-                </div>
-                <div className="fromInput">
-                  <label>LRO Number </label>
-                  <input
-                    type="text"
-                    className="InputFeild"
-                    id="name"
-                    placeholder="300"
-                    readOnly
-                  />
-                </div>
-                <div className="fromInput">
-                  <label>LRO Name</label>
+                  <label>Name of the Local Recipient Organization</label>
                   <input
                     type="text"
                     name="lroName"
-                    placeholder="jhon Deo"
+                    placeholder="LRO Name"
                     style={{ borderColor: borderColor.lroName }}
                     onFocus={handleInputChangeFocus}
                     onChange={handleInputChange}
@@ -153,6 +140,12 @@ const LroForm = () => {
                 </div>
               </div>
               <div className="formWrapIn">
+                <div className="fromInput" style={{ width: "auto" }}>
+                  <label>Salut</label>
+                  <select>
+                    <option value="">select</option>
+                  </select>
+                </div>
                 <div className="fromInput">
                   <label>Contact</label>
                   <input
@@ -172,9 +165,112 @@ const LroForm = () => {
               </div>
               <div className="formWrapIn">
                 <div className="fromInput">
+                  <label>Email / UserID</label>
+                  <input
+                    type="email"
+                    placeholder="infinite@Alyx.com"
+                    name="lroEmail"
+                    style={{ borderColor: borderColor.lroEmail }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                    onBlur={handleInputChangeBlur}
+                  />
+                  {borderColor.lroEmail === "red" && (
+                    <span className="formWarning"></span>
+                  )}
+                </div>
+              </div>
+              <div className="formWrapIn">
+                <div className="fromInput">
+                  <label>Password</label>
+                  <input
+                    type="password"
+                    placeholder=""
+                    name="lroPassword"
+                    style={{ borderColor: borderColor.lroPassword }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                    onBlur={handleInputChangeBlur}
+                  />
+                  {borderColor.lroPassword === "red" && (
+                    <span className="formWarning"></span>
+                  )}
+                </div>
+                <div className="fromInput">
+                  <label>Re-enter Password</label>
+                  <input
+                    type="password"
+                    placeholder=""
+                    name="lroCPassword"
+                    style={{ borderColor: borderColor.lroCPassword }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                    onBlur={handleInputChangeBlur}
+                  />
+                  {borderColor.lroPassword === "red" && (
+                    <span className="formWarning"></span>
+                  )}
+                </div>
+              </div>
+              <div className="formWrapIn">
+                <div className="fromInput">
+                  <label>Captcha</label>
+                  <div
+                    className="fromInput"
+                    style={{
+                      flexDirection: "row",
+                      margin: "0",
+                      padding: "0",
+                    }}
+                  >
+                    <div
+                      style={{
+                        borderColor: borderColor.lroCaptcha,
+                        width: "30%",
+                        textAlign: "center",
+                      }}
+                    >
+                      12 + 27{" "}
+                    </div>
+                    <input
+                      type="text"
+                      placeholder=""
+                      name="lroCaptcha"
+                      style={{
+                        borderColor: borderColor.lroCaptcha,
+                        width: "80%",
+                      }}
+                      onChange={handleInputChange}
+                      onFocus={handleInputChangeFocus}
+                      onBlur={handleInputChangeBlur}
+                    />
+                  </div>
+                  {borderColor.lroCaptchas === "red" && (
+                    <span className="formWarning"></span>
+                  )}
+                </div>
+              </div>
+              <br />
+              <div className="lroSubTitle">
+                <h1>Address Information</h1>
+              </div>
+              <div className="formWrapIn">
+                <div className="fromInput">
+                  <label>LRO Name </label>
+                  <input
+                    type="text"
+                    className="InputFeild"
+                    id="name"
+                    placeholder="300"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="formWrapIn">
+                <div className="fromInput">
                   <label>Address1</label>
-                  <textarea
-                    rows="2"
+                  <input
+                    type="text"
                     placeholder="address1"
                     name="lroAddress1"
                     style={{ borderColor: borderColor.lroAddress1 }}
@@ -189,9 +285,8 @@ const LroForm = () => {
               </div>
               <div className="formWrapIn">
                 <div className="fromInput">
-                  <label>Address2</label>
-                  <textarea
-                    rows="2"
+                  <input
+                    type="text"
                     placeholder="address2"
                     name="lroAddress2"
                     style={{ borderColor: borderColor.lroAddress2 }}
@@ -206,9 +301,8 @@ const LroForm = () => {
               </div>
               <div className="formWrapIn">
                 <div className="fromInput">
-                  <label>Address3</label>
-                  <textarea
-                    rows="2"
+                  <input
+                    type="text"
                     placeholder="address3"
                     name="lroAddress3"
                     style={{ borderColor: borderColor.lroAddress3 }}
@@ -223,13 +317,13 @@ const LroForm = () => {
               </div>
               <div className="formWrapIn">
                 <div className="fromInput">
-                  <label>City</label>
+                  <label>State Code</label>
                   <select>
                     <option>Select</option>
                   </select>
                 </div>
                 <div className="fromInput">
-                  <label>State Code</label>
+                  <label>City</label>
                   <select>
                     <option>Select</option>
                   </select>
@@ -237,7 +331,7 @@ const LroForm = () => {
               </div>
               <div className="formWrapIn">
                 <div className="fromInput">
-                  <label>Zip1</label>
+                  <label>Zip Code</label>
                   <input
                     type="tel"
                     placeholder="36092"
@@ -252,23 +346,6 @@ const LroForm = () => {
                   )}
                 </div>
                 <div className="fromInput">
-                  <label>Zip2</label>
-                  <input
-                    type="tel"
-                    placeholder="2107"
-                    name="lroZip2"
-                    style={{ borderColor: borderColor.lroZip2 }}
-                    onChange={handleInputChange}
-                    onFocus={handleInputChangeFocus}
-                    onBlur={handleInputChangeBlur}
-                  />
-                  {borderColor.lroZip2 === "red" && (
-                    <span className="formWarning"></span>
-                  )}
-                </div>
-              </div>
-              <div className="formWrapIn">
-                <div className="fromInput">
                   <label>Fax</label>
                   <input
                     type="tel"
@@ -280,6 +357,23 @@ const LroForm = () => {
                     onBlur={handleInputChangeBlur}
                   />
                   {borderColor.lroFaxNumber === "red" && (
+                    <span className="formWarning"></span>
+                  )}
+                </div>
+              </div>
+              <div className="formWrapIn">
+                <div className="fromInput">
+                  <label>Ext</label>
+                  <input
+                    type="number"
+                    placeholder=""
+                    name="lroExt"
+                    style={{ borderColor: borderColor.lroExt }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                    onBlur={handleInputChangeBlur}
+                  />
+                  {borderColor.lroExt === "red" && (
                     <span className="formWarning"></span>
                   )}
                 </div>
@@ -299,117 +393,27 @@ const LroForm = () => {
                   )}
                 </div>
               </div>
-              <div className="formWrapIn">
-                <div className="fromInput">
-                  <label>Email</label>
-                  <input
-                    type="email"
-                    placeholder="infinite@Alyx.com"
-                    name="lroEmail"
-                    style={{ borderColor: borderColor.lroEmail }}
-                    onChange={handleInputChange}
-                    onFocus={handleInputChangeFocus}
-                    onBlur={handleInputChangeBlur}
-                  />
-                  {borderColor.lroEmail === "red" && (
-                    <span className="formWarning"></span>
-                  )}
-                </div>
-                <div className="fromInput">
-                  <label>Password</label>
-                  <input
-                    type="password"
-                    placeholder=""
-                    name="lroPassword"
-                    style={{ borderColor: borderColor.lroPassword }}
-                    onChange={handleInputChange}
-                    onFocus={handleInputChangeFocus}
-                    onBlur={handleInputChangeBlur}
-                  />
-                  {borderColor.lroPassword === "red" && (
-                    <span className="formWarning"></span>
-                  )}
-                </div>
+              <br />
+              <div className="lroSubTitle">
+                <h1>Employee Identification Information</h1>
               </div>
               <div className="formWrapIn">
                 <div className="fromInput">
-                  <label>Bank Name</label>
-                  <input type="text" placeholder="" />
-                </div>
-                <div className="fromInput">
-                  <label>Account Number</label>
-                  <input type="text" placeholder="" />
-                </div>
-              </div>
-              <div className="formWrapIn">
-                <div className="fromInput">
-                  <label>Account Type</label>
+                  <label>LRO Name </label>
                   <input
                     type="text"
-                    placeholder="S"
-                    name="lroAccountType"
-                    style={{ borderColor: borderColor.lroAccountType }}
-                    onChange={handleInputChange}
-                    onFocus={handleInputChangeFocus}
-                    onBlur={handleInputChangeBlur}
+                    className="InputFeild"
+                    id="name"
+                    placeholder="300"
+                    readOnly
                   />
-                  {borderColor.lroAccountType === "red" && (
-                    <span className="formWarning"></span>
-                  )}
                 </div>
               </div>
               <div className="formWrapIn">
                 <div className="fromInput">
-                  <label>Salut</label>
-                  <select>
-                    <option value="">select</option>
-                  </select>
+                  <label>Einextension</label>
+                  <input type="text" placeholder="" />
                 </div>
-                <div className="fromInput">
-                  <label>Ext</label>
-                  <input
-                    type="number"
-                    placeholder=""
-                    name="lroExt"
-                    style={{ borderColor: borderColor.lroExt }}
-                    onChange={handleInputChange}
-                    onFocus={handleInputChangeFocus}
-                    onBlur={handleInputChangeBlur}
-                  />
-                  {borderColor.lroExt === "red" && (
-                    <span className="formWarning"></span>
-                  )}
-                </div>
-              </div>
-              <div className="formWrapIn">
-                <div className="fromInput">
-                  <label>Affiliate</label>
-                  <select>
-                    <option value="">select</option>
-                  </select>
-                </div>
-                <div className="fromInput">
-                  <label>Target 1</label>
-                  <select>
-                    <option value="">select</option>
-                  </select>
-                </div>
-              </div>
-              <div className="formWrapIn">
-                <div className="fromInput">
-                  <label>Target 2</label>
-                  <select>
-                    <option value="">select</option>
-                  </select>
-                </div>
-                <div className="fromInput">
-                  <label>Target 3</label>
-                  <select>
-                    <option value="">select</option>
-                  </select>
-                </div>
-              </div>
-              <div className="formWrapIn">
                 <div className="fromInput">
                   <label>Ein</label>
                   <input
@@ -443,6 +447,69 @@ const LroForm = () => {
                   )}
                 </div>
               </div>
+              <br />
+              <div className="lroSubTitle">
+                <h1>Bank Details</h1>
+              </div>
+              <div className="formWrapIn">
+                <div className="fromInput">
+                  <label>LRO Name </label>
+                  <input
+                    type="text"
+                    className="InputFeild"
+                    id="name"
+                    placeholder="300"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="formWrapIn">
+                <div className="fromInput">
+                  <label>Name as per Bank Records</label>
+                  <input type="text" placeholder="" />
+                </div>
+              </div>
+              <div className="formWrapIn">
+                <div className="fromInput">
+                  <label>Bank Name</label>
+                  <input type="text" placeholder="" />
+                </div>
+              </div>
+              <div className="formWrapIn">
+                <div className="fromInput">
+                  <label>Account Number</label>
+                  <input type="text" placeholder="" />
+                </div>
+              </div>
+              <div className="formWrapIn">
+                <div className="fromInput">
+                  <label>Affiliate</label>
+                  <select>
+                    <option value="">select</option>
+                  </select>
+                </div>
+                <div className="fromInput">
+                  <label>Target 1</label>
+                  <select>
+                    <option value="">select</option>
+                  </select>
+                </div>
+              </div>
+              <div className="formWrapIn">
+                <div className="fromInput">
+                  <label>Target 2</label>
+                  <select>
+                    <option value="">select</option>
+                  </select>
+                </div>
+                <div className="fromInput">
+                  <label>Target 3</label>
+                  <select>
+                    <option value="">select</option>
+                  </select>
+                </div>
+              </div>
+
               <div className="formWrapIn">
                 <div className="fromInput">
                   <label>Website Link</label>
@@ -454,10 +521,6 @@ const LroForm = () => {
                 </div>
               </div>
               <div className="formWrapIn">
-                <div className="fromInput">
-                  <label>Einextension</label>
-                  <input type="text" placeholder="" />
-                </div>
                 <div className="fromInput">
                   <label>Eftrcvd</label>
                   <input type="date" id="eftrcvd" name="eftrcvd" />
@@ -481,6 +544,23 @@ const LroForm = () => {
                     />
                     <label> Fiscalagent </label>
                   </div>
+                </div>
+              </div>
+              <div className="formWrapIn">
+                <div className="fromInput">
+                  <label>Account Type</label>
+                  <input
+                    type="text"
+                    placeholder="S"
+                    name="lroAccountType"
+                    style={{ borderColor: borderColor.lroAccountType }}
+                    onChange={handleInputChange}
+                    onFocus={handleInputChangeFocus}
+                    onBlur={handleInputChangeBlur}
+                  />
+                  {borderColor.lroAccountType === "red" && (
+                    <span className="formWarning"></span>
+                  )}
                 </div>
               </div>
 
