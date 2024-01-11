@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from "react";
-import Button from "../../../common/button/Button";
+//import Button from "../../../common/button/Button";
 import UserDetails from "../userDetails/UserDetails";
 import { toast } from "react-toastify";
 import "./RegistrationForm.scss";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 // import {validateName} from "../../../common/formValidation/FormValidation"
 
 const RegistrationForm = () => {
@@ -182,6 +184,19 @@ const RegistrationForm = () => {
           <div className="registTitle">
             <h1>Registration Form</h1>
           </div>
+          <Form>
+      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control type="email" placeholder="name@example.com" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+        <Form.Label>Example textarea</Form.Label>
+        <Form.Control as="textarea" rows={3} />
+      </Form.Group>
+    </Form>
+          <Button as="a" variant="primary">
+              Button as link
+            </Button>
           <div className="registWrap">
             <div className="form">
               <div className="formWrapIn">

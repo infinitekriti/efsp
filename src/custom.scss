@@ -1,0 +1,10 @@
+/* Your customizations here */
+$primary: green;
+$theme-colors: (
+    "primary": $primary,
+);
+
+/* import bootstrap to set changes */
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import '~bootstrap/scss/bootstrap';
