@@ -11,7 +11,7 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'metropoils', sans-serif;
     font-weight: 400;
     color: var(--bodyTextColor);
 }
@@ -20,4 +20,28 @@ body {
     max-width: var(--maxWidth);
     width: 100%;
     margin: 0 auto;
+}
+
+@media only screen and (max-width: 1192px) {
+    body {
+        font-size: var(--baseMideumSize);
+    }
+
+    .pageContainer {
+        max-width: var(--containerLgWidth);
+        width: calc(100% - var(--bodyGap));
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    body {
+        font-size: var(--baseSmallSize);
+    }
+
+    .pageContainer {
+        max-width: var(--containerMdWidth);
+        width: calc(100% - var(--smallBodyGap));
+        margin: 0 auto;
+    }
 }
