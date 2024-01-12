@@ -1,0 +1,117 @@
+.footer-main {
+    position: relative;
+    margin-top: 95px;
+
+    .footer-volunter-main {
+        width: 100%;
+        position: absolute;
+        top: -60px;
+    }
+
+    .footer-volunteer {
+        background-color: var(--footerVolBgColor);
+        border-radius: 6px;
+        padding: 2em 3em;
+
+        .footer-volLeft {
+            h2 {
+                font-size: 2em;
+                font-weight: 600;
+                color: var(--footerBgColor);
+            }
+
+            p {
+                margin-bottom: 0;
+                font-size: 0.7em;
+                color: var(--footerBgColor);
+            }
+        }
+
+        .footer-volRight {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            justify-content: flex-end;
+
+            button {
+                background-color: var(--footerBgColor);
+                padding: 0.8em 3.8em;
+            }
+        }
+    }
+
+    .footer-description {
+        background-color: var(--footerBgColor);
+        padding-top: 135px;
+        color: var(--footerColor);
+
+        .footer-descrip-logo {
+            h4 {
+                margin-bottom: 1em;
+            }
+
+            p {
+                font-size: 0.7em;
+                margin-bottom: 2em;
+            }
+
+            .footer-socialicon {
+                display: flex;
+                gap: 1em;
+                margin-bottom: 1em;
+
+                .icon-name {
+                    width: 28px;
+                    height: 28px;
+                    background-color: #fff;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .footer-descrip-link {
+            h6 {
+                font-size: 1em;
+                margin-bottom: 2em;
+            }
+
+            .footer-link {
+                div {
+                    font-size: 0.7em;
+                    cursor: pointer;
+                    margin-bottom: 1.5em;
+                    font-weight: 300;
+
+                    &:hover {
+                        color: var(--primaryColor);
+                    }
+                }
+            }
+        }
+
+        .footer-descrip-copyright {
+            position: relative;
+            border-top: 1px solid #575555;
+            padding-top: 1.8em;
+
+            p {
+                font-size: 0.7em;
+            }
+
+            .footer-termcondion {
+                display: flex;
+                justify-content: flex-end;
+                gap: 1em;
+
+                div {
+                    cursor: pointer;
+                    font-size: 0.7em;
+
+                    &:hover {
+                        color: var(--primaryColor);
+                    }
+                }
+            }
+        }
+    }
+}
