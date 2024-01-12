@@ -10,9 +10,22 @@
         font-size: 1.8em;
     }
 
+    .border {
+        height: 20px;
+
+        @media only screen and (max-width: 992px) {
+            display: none;
+        }
+    }
+
     .nav-link {
         color: var(--bodyTextColor);
         font-weight: 500;
+        font-size: 0.95em;
+
+        &:hover {
+            color: var(--primaryColor);
+        }
     }
 
     .me-auto {

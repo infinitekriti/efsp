@@ -22,6 +22,7 @@ const Header = () => {
               <Nav.Link>About</Nav.Link>
               <Nav.Link>Contact</Nav.Link>
               <Nav.Link>News</Nav.Link>
+              <div className="border"></div>
               <Nav.Link>Sign Up</Nav.Link>
               <Nav.Link>
                 <Button title="Log In" />
