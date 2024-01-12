@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
 import "./LroForm.scss";
 import Button from "../../common/button/Button";
-// import PhoneInput from "react-phone-input-2";
 import {
   validateText,
   validateEmail,
@@ -11,7 +10,6 @@ import {
   validateEni,
   formatEin,
 } from "../../common/formValidation/FormValidation";
-import TestProgressBar from "../LRORegistrationForm/TestProgressBar/TestProgressBar";
 
 const LroForm = () => {
   const [lroFaxNumber, setlroFaxNumber] = useState("+1");
@@ -596,7 +594,6 @@ const LroForm = () => {
           </div>
         </div>
       </section>
-      <TestProgressBar />
     </Fragment>
   );
 };

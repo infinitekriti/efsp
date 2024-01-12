@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Row from "react-bootstrap/Row";
@@ -65,10 +64,6 @@ export default function RegistrationForm() {
                   <Form.Control type="text" placeholder="" />
                 </div>
               </Form.Group>
-
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
             </Form>
           </Col>
         </Row>
