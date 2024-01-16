@@ -1,8 +1,8 @@
 
 import "./Button.scss"
-const Button = ({title,onClick}) => {
+const Button = ({title,onClick,img ,alt}) => {
   return (
-    <button onClick={onClick}>{title}  </button>
+    <button className="btn-icon" onClick={onClick}>{title} {img && <img src={img} alt={alt} />}  </button>
   )
 }
 

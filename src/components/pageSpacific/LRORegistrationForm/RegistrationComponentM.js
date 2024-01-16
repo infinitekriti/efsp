@@ -1,12 +1,14 @@
 import React, { Fragment, useCallback, useState } from 'react'
-import { Container } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import "./RegistrationComponentM.scss"
 import RegistrationForm from './registrationForm/RegistrationForm';
 import LroTopTitle from './lroTopTitle/LroTopTitle';
+import LroLeftTabContent from './lroLeftTabContent/LroLeftTabContent';
+import AddressForm from './AddressForm/AddressForm';
 const tabData = [
   {
     id: 1,
-    name: "Registration Details",
+    name: "LRO Registration Information",
   },
   {
     id: 2,
@@ -14,7 +16,7 @@ const tabData = [
   },
   {
     id: 3,
-    name: "Employee Identification Information",
+    name: "Employer Identification Information",
   },
   {
     id: 4,
@@ -22,7 +24,7 @@ const tabData = [
   },
   {
     id: 5,
-    name: "Afiliation Details",
+    name: "Afiliation",
   },
 ]
 export default function RegistrationComponentM() {
@@ -33,15 +35,11 @@ export default function RegistrationComponentM() {
   const getProperComponent = useCallback(() => {
     if (activeTab?.id === 1) {
       return (
-        <RegistrationForm
-        newTabData={tabData}
-        activeTab={activeTab.id}
-        setActiveTab={setActiveTab}
-        />
+       <></>
       );
     } else if (activeTab?.id === 2) {
       return (
-        <p>44</p>
+        <AddressForm />
       );
     } else if (activeTab?.id === 3) {
       return (
@@ -65,6 +63,7 @@ export default function RegistrationComponentM() {
                   <LroTopTitle />
               </Fragment>
               <Fragment>
+              {activeTab?.id !== 1 &&
                  <ul className="lro-progress-steps">
                   {tabData.map((selectedTab, id) => {
                     return (
@@ -81,16 +80,34 @@ export default function RegistrationComponentM() {
                         onClick={()=>
                           tabChangeHandler(selectedTab)}
                       >
-                        {selectedTab.name}
+                        <div className="lro-value">
+                          <p>{selectedTab.name}</p></div>
                       </li>
                     );
                   })}
                 </ul>
+              }
                 <Container>
-                <div className="lro-components">
-                      {getProperComponent()}
-                  </div>
-                </Container>
+                {activeTab?.id === 1 ?
+                <div className="lro-components mb-5">
+                  <RegistrationForm
+                  newTabData={tabData}
+                  activeTab={activeTab}
+                  setActiveTab={setActiveTab}
+                  />
+                  </div>:
+                  <Row>
+                     <Col sm={12} md={5} xl={6}>
+                          <LroLeftTabContent />
+                     </Col>
+                     <Col sm={12} md={7} xl={6}>
+                     <div className="lro-components mb-5">
+                        {getProperComponent()}
+                        </div>
+                     </Col>
+                  </Row>
+                  }
+                  </Container>
               </Fragment>
          </div>
        </Fragment>

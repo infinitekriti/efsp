@@ -2,8 +2,8 @@
     //COLOR
     --primaryColor: #ff8811;
     --primaryColorLight: #539ED0;
-    --bodyTextColor: #000;
-
+    --bodyTextColor: #0D0D0D;
+    counter-reset: li;
 
     //body max width
     --maxWidth: 1264px;
@@ -52,7 +52,9 @@
     --footerColor: #fff;
 
     //STEP PROGRESS
-    --completeColor: #2ecc71;
-    --progressColor: #7f8c8d;
+    --completeColor: #FF8811;
+    --progressColor: #FF8811;
     --labelColor: #0A2540;
+    --borderColor: #D9DBE3;
+    --placeHolderColor: #7F7F7F;
 }

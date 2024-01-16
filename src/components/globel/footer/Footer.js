@@ -1,6 +1,7 @@
 
 import { Col, Container, Row } from 'react-bootstrap';
 import Button from '../../common/button/Button';
+import arrowRight from "../../../assets/images/svgIcons/arrow-right.svg"
 import "./Footer.scss"
 const Footer = () => {
   return (
@@ -17,7 +18,7 @@ const Footer = () => {
                 </Col>
                 <Col>
                     <div className="footer-volRight">
-                        <Button title="Learn how" />
+                        <Button title="Learn how" img={arrowRight}/>
                     </div>
                 </Col>
             </Row>

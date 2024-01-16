@@ -1,13 +1,22 @@
 @mixin largeScreenBefore {
-    content: "";
+    counter-increment: li;
+    content: counters(li, "") " ";
     width: 20px;
     height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
 }
 
 @mixin smallScreenBefore {
-    content: "";
+    counter-increment: li;
+    content: counters(li, "") " ";
     width: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
     height: 12px;
     border-radius: 50%;
 }
@@ -15,15 +24,40 @@
 .lro-registration-main {
     position: relative;
 
+    .lro-top-title {
+        h1 {
+            color: #0A2540;
+            font-weight: 600;
+            font-size: 2.5em;
+            margin-bottom: 0.2em;
+        }
+
+        p {
+            color: #7F7F7F;
+            font-size: 0.85em;
+            font-weight: 400;
+        }
+    }
+
     .lro-progress-steps {
         margin: 0;
         list-style-type: none;
 
         li {
             position: relative;
-            font-size: 0.9em;
+            font-size: 0.8em;
             color: var(--progressColor);
-            padding: 0.1em 0 0.1em 2em;
+            padding: 0.1em 0 0.4em 2em;
+
+            .lro-value {
+                position: relative;
+                display: flex;
+                align-items: center;
+
+                p {
+                    margin-bottom: 0;
+                }
+            }
 
             &.current {
                 color: var(--primaryColor);
@@ -35,16 +69,16 @@
             }
 
             &.upcoming {
-                color: var(--progressColor);
+                color: #2B3E52;
 
                 &:before {
-                    background-color: var(--progressColor);
+                    border: 2px solid var(--progressColor);
                     @include smallScreenBefore;
                 }
             }
 
             &.completed {
-                color: var(--completeColor);
+                color: #7F7F7F;
 
                 &:before {
                     background-color: var(--completeColor);
@@ -56,7 +90,7 @@
                 position: absolute;
                 left: 0;
                 font-size: 0.9em;
-                background-color: var(--primaryColor);
+                background-color: #fff;
                 width: 12px;
                 height: 12px;
                 border-radius: 50%;
@@ -81,15 +115,29 @@
                 text-align: center;
                 padding: 0;
                 padding-bottom: 1em;
-                font-size: 0.9em;
+                font-size: 0.8em;
                 position: relative;
                 border-left-width: 0;
-                border-bottom-width: 4px;
+                border-bottom-width: 2px;
                 border-bottom-style: solid;
                 border-bottom-color: var(--progressColor);
 
+                .lro-value {
+                    position: absolute;
+                    width: 100%;
+                    height: 50px;
+                    bottom: -70px;
+                    display: flex;
+                    justify-content: center;
+
+                    p {
+                        margin-bottom: 0;
+                        width: 153px;
+                    }
+                }
+
                 &.upcoming {
-                    color: var(--progressColor);
+                    color: #2B3E52;
                     border-bottom-color: var(--progressColor);
 
                     &:before {
@@ -100,11 +148,11 @@
 
 
                 &.completed {
-                    color: var(--completeColor);
+                    color: #7F7F7F;
                     border-bottom-color: var(--completeColor);
 
                     &:before {
-                        color: var(--primaryColor);
+                        color: #fff;
                         @include largeScreenBefore;
                     }
                 }
@@ -114,7 +162,7 @@
                     border-bottom-color: var(--primaryColor);
 
                     &:before {
-                        color: var(--primaryColor);
+                        color: #fff;
                         @include largeScreenBefore;
                     }
                 }
@@ -123,7 +171,7 @@
                     bottom: -12px;
                     left: 50%;
                     margin-left: -9px;
-                    background-color: var(--progressColor);
+
 
                 }
             }
@@ -132,13 +180,13 @@
 
     .lro-components {
         position: relative;
-        width: 712px;
+        width: 650px;
         margin: auto;
         box-shadow: 0px 8px 22px 0px rgba(57, 47, 90, 0.10);
         -webkit-box-shadow: 0px 8px 22px 0px rgba(57, 47, 90, 0.10);
         border-radius: 24px;
         margin-top: 4em;
-        padding: 40px 56px;
+        padding: 2.5em 3em;
 
         @media all and (max-width: 767px) {
             width: 100%;
@@ -146,7 +194,8 @@
 
         label {
             font-size: 0.85em;
-            color: var(--labelColor)
+            color: var(--labelColor);
+            font-weight: 400;
         }
 
         button {
@@ -155,13 +204,60 @@
             font-size: 1em;
         }
 
+        .requred {
+            color: #A30000;
+            margin-left: 0.2em;
+        }
+
         input,
         select {
             font-size: 0.8em;
+            border: 1px solid var(--borderColor);
+            color: var(--placeHolderColor);
+
+            &::placeholder {
+                color: var(--placeHolderColor);
+            }
+        }
+
+        .btn-padding {
+            padding: 0.6em 3.5em !important;
+            text-transform: capitalize;
+        }
+
+        .btn-icon {
+            display: flex;
+            gap: 0.8em;
+
+            img {
+                width: 1.4em;
+            }
         }
 
         .btn-secondary {
-            border: 1px solid #7a7979;
+            border: 1px solid #D9DBE3;
+            background-color: #D9DBE3;
+            color: #000;
+        }
+
+        .address-step-title {
+            display: flex;
+            align-items: center;
+
+            img {
+                width: 4em;
+            }
+
+            h6 {
+                color: #0A2540;
+                font-weight: 500;
+                font-size: 1em;
+                margin-bottom: 0;
+            }
+
+            .address-step-save {
+                cursor: pointer;
+            }
         }
     }
 }
