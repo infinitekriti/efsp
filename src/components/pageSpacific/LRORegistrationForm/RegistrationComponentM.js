@@ -2,8 +2,7 @@ import React, { Fragment, useCallback, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import "./RegistrationComponentM.scss"
 import RegistrationForm from './RegistrationForm/RegistrationForm';
-// import RegistrationForm from './RegistrationForm/RegistrationForm'
-// import AddressForm from './AddressForm/AddressForm'
+import LroTopTitle from './lroTopTitle/LroTopTitle';
 const tabData = [
   {
     id: 1,
@@ -60,13 +59,13 @@ export default function RegistrationComponentM() {
   }, [activeTab?.id]);
 
   return (
-    <div>
-      {/* <RegistrationForm/> */}
-      {/* <AddressForm/> */}
        <Fragment>
          <div className="lro-registration-main mt-5 mb-5">
-            
-                 <ul className={"lro-progress-steps"}>
+              <Fragment>
+                  <LroTopTitle />
+              </Fragment>
+              <Fragment>
+                 <ul className="lro-progress-steps">
                   {tabData.map((selectedTab, id) => {
                     return (
                       <li
@@ -92,9 +91,9 @@ export default function RegistrationComponentM() {
                       {getProperComponent()}
                   </div>
                 </Container>
+              </Fragment>
          </div>
        </Fragment>
-    </div>
   )
 }
 
