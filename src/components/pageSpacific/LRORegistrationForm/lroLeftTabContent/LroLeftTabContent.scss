@@ -1,0 +1,29 @@
+.lro-left-content {
+    margin-top: 7em;
+    width: 65%;
+
+    h3 {
+        color: 000;
+        font-weight: 600;
+        font-size: 1.2em;
+    }
+
+    p {
+        color: #2B3E52;
+        font-size: 0.8em;
+    }
+
+    .lro-conent-main {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+
+        p {
+            margin-bottom: 0;
+            color: #2B3E52;
+            font-weight: 400;
+            font-size: 0.8em;
+        }
+    }
+
+}
