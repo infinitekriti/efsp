@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState , useCallback } from 'react'
+import RegistrationForm from "./registrationForm/RegistrationForm"
 
 export default function RegistrationComponentM() {
   const [activeTab, setActiveTab] = useState(tabData[0]);
