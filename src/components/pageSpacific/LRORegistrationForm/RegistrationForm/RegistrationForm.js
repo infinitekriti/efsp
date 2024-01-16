@@ -21,11 +21,40 @@ export default function RegistrationForm({
 }) {
   const [LRODetails, setLRODetails] = useState({});
   const [borderColor, setBorderColor] = useState({});
+  const [ErrorMessage, setErrorMessage] = useState({});
 
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
+  const SErrorMessage = (name, Message) => {
+    setErrorMessage((prevData) => ({
+      ...prevData,
+      [name]: Message,
+    }));
+  };
   const feildColour = (name, validate) => {
+    switch (name) {
+      case "lroName":
+        SErrorMessage(name, "Enter Valid Name");
+        break;
+      case "lroSalute":
+        SErrorMessage(name, "Select valid Value");
+        break;
+      case "lroContact":
+        SErrorMessage(name, "Enter Valid Name");
+        break;
+      case "lroEmail":
+        SErrorMessage(name, "Enter Valid Email formate");
+        break;
+      case "lroPassword":
+        SErrorMessage(name, "Match the Password Pattern");
+        break;
+      case "lroCPassword":
+        SErrorMessage(name, "Match the Password");
+        break;
+      default:
+        break;
+    }
     setBorderColor((prevData) => ({
       ...prevData,
       [name]: validate ? "#dee2e6" : "red",
@@ -42,13 +71,42 @@ export default function RegistrationForm({
 
   const handleInputChangeBlur = (event) => {
     const { name, value } = event.target;
+    if (name === "lroSalute") {
+      SErrorMessage(name, "Select the Salutation");
+      if (value === "Select") {
+        setBorderColor((prevData) => ({
+          ...prevData,
+          [name]: "red",
+        }));
+      }
+    }
     if (value.length === 0 || value === "+1") {
+      switch (name) {
+        case "lroName":
+          SErrorMessage(name, "Enter the Name");
+          break;
+        case "lroContact":
+          SErrorMessage(name, "Enter the Name");
+          break;
+        case "lroEmail":
+          SErrorMessage(name, "Enter the Email");
+          break;
+        case "lroPassword":
+          SErrorMessage(name, "Match the Password");
+          break;
+        case "lroCPassword":
+          SErrorMessage(name, "Conform the Password");
+          break;
+        default:
+          break;
+      }
       setBorderColor((prevData) => ({
         ...prevData,
         [name]: "red",
       }));
     }
   };
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     switch (name) {
@@ -83,7 +141,7 @@ export default function RegistrationForm({
   const handleNext = () => {
     let userCaptcha = document.getElementById("user_captcha_input").value;
     if (!validateCaptcha(userCaptcha)) {
-      alert("enter valid captcha");
+      alert("Enter valid captcha");
     } else {
       const currentTabIndex = newTabData.findIndex(
         (tab) => tab.id === activeTab.id
@@ -96,7 +154,7 @@ export default function RegistrationForm({
   return (
     <div className="registration-form">
       <Form>
-        <Form.Group className="mb-2" controlId="formLroName">
+        <Form.Group className="mb-3" controlId="formLroName">
           <Form.Label>Local Recipient Organization Name</Form.Label>
           <Form.Control
             type="text"
@@ -106,12 +164,15 @@ export default function RegistrationForm({
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
+          {borderColor.lroName === "red" && (
+            <span className="formWarning">{ErrorMessage.lroName}</span>
+          )}
         </Form.Group>
         <Form.Group>
           <Form.Label>LRO Representative Name</Form.Label>
           <Row>
             <Col xs={3}>
-              <Form.Group className="mb-2" controlId="formSalut">
+              <Form.Group className="mb-3" controlId="formSalut">
                 <Form.Select
                   name="lroSalute"
                   style={{ borderColor: borderColor.lroSalute }}
@@ -123,10 +184,13 @@ export default function RegistrationForm({
                   <option value="Mrs">Mrs</option>
                   <option value="Miss">Miss</option>
                 </Form.Select>
+                {borderColor.lroSalute === "red" && (
+                  <span className="formWarning">{ErrorMessage.lroSalute}</span>
+                )}
               </Form.Group>
             </Col>
             <Col xs={9}>
-              <Form.Group className="mb-2" controlId="formLroContact">
+              <Form.Group className="mb-3" controlId="formLroContact">
                 <Form.Control
                   type="text"
                   placeholder="contact"
@@ -135,11 +199,14 @@ export default function RegistrationForm({
                   onChange={handleInputChange}
                   onBlur={handleInputChangeBlur}
                 />
+                {borderColor.lroContact === "red" && (
+                  <span className="formWarning">{ErrorMessage.lroContact}</span>
+                )}
               </Form.Group>
             </Col>
           </Row>
         </Form.Group>
-        <Form.Group className="mb-2" controlId="formLroEmail">
+        <Form.Group className="mb-3" controlId="formLroEmail">
           <Form.Label>Email / UserID</Form.Label>
           <Form.Control
             type="email"
@@ -149,8 +216,11 @@ export default function RegistrationForm({
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
+          {borderColor.lroEmail === "red" && (
+            <span className="formWarning">{ErrorMessage.lroEmail}</span>
+          )}
         </Form.Group>
-        <Form.Group className="mb-2" controlId="formLroPassword">
+        <Form.Group className="mb-3" controlId="formLroPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -160,8 +230,11 @@ export default function RegistrationForm({
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
+          {borderColor.lroPassword === "red" && (
+            <span className="formWarning">{ErrorMessage.lroPassword}</span>
+          )}
         </Form.Group>
-        <Form.Group className="mb-2" controlId="formLroCPassword">
+        <Form.Group className="mb-3" controlId="formLroCPassword">
           <Form.Label>Re-enter Password</Form.Label>
           <Form.Control
             type="password"
@@ -171,8 +244,11 @@ export default function RegistrationForm({
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
+          {borderColor.lroCPassword === "red" && (
+            <span className="formWarning">{ErrorMessage.lroCPassword}</span>
+          )}
         </Form.Group>
-        <Form.Group className="mb-2" controlId="formLroCaptcha">
+        <Form.Group className="mb-3" controlId="formLroCaptcha">
           <Form.Label>Captcha</Form.Label>
           <div style={{ display: "flex" }}>
             <div className="col mt-3">
