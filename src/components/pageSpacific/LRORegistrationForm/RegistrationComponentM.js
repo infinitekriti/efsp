@@ -1,7 +1,7 @@
 import React, { Fragment, useCallback, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import "./RegistrationComponentM.scss"
-import RegistrationForm from './RegistrationForm/RegistrationForm';
+import RegistrationForm from './registrationForm/RegistrationForm';
 import LroTopTitle from './lroTopTitle/LroTopTitle';
 const tabData = [
   {
@@ -35,7 +35,7 @@ export default function RegistrationComponentM() {
       return (
         <RegistrationForm
         newTabData={tabData}
-        activeTab={activeTab}
+        activeTab={activeTab.id}
         setActiveTab={setActiveTab}
         />
       );
