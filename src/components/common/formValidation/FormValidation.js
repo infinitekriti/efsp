@@ -36,6 +36,13 @@ export const formatEin = (value) => {
   return formatted;
 };
 
+export const validateSalute = (value) => {
+  while (value === "Select") {
+      return false;
+  }
+  return true;
+};
+
 export const formatePhoneNumber = (value) => {
   const cleaned = value.replace(/\D/g, "");
 
