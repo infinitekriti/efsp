@@ -1,7 +1,7 @@
 import React, { Fragment, useCallback, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import "./RegistrationComponentM.scss"
-import RegistrationForm from './RegistrationForm/RegistrationForm';
+import RegistrationForm from './registrationForm/RegistrationForm';
 import LroTopTitle from './lroTopTitle/LroTopTitle';
 import LroLeftTabContent from './lroLeftTabContent/LroLeftTabContent';
 import AddressForm from './AddressForm/AddressForm';
@@ -113,6 +113,3 @@ export default function RegistrationComponentM() {
        </Fragment>
   )
 }
-
-
-
