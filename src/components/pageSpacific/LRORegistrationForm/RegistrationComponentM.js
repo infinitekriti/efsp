@@ -1,6 +1,4 @@
 import React from 'react'
-// import RegistrationForm from './RegistrationForm/RegistrationForm'
-// import AddressForm from './AddressForm/AddressForm'
 
 export default function RegistrationComponentM() {
   const [activeTab, setActiveTab] = useState(tabData[0]);
@@ -37,8 +35,7 @@ export default function RegistrationComponentM() {
 
   return (
     <div>
-      {/* <RegistrationForm/> */}
-      {/* <AddressForm/> */}
+      
     </div>
   );
 }
