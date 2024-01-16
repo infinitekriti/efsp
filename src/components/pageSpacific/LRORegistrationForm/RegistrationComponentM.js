@@ -1,15 +1,15 @@
-import React from 'react'
-// import RegistrationForm from './RegistrationForm/RegistrationForm'
-// import AddressForm from './AddressForm/AddressForm'
+import React from "react";
+import AddressForm from "./addressForm/AddressForm";
+import Card from "react-bootstrap/Card";
 
 export default function RegistrationComponentM() {
   return (
     <div>
-      {/* <RegistrationForm/> */}
-      {/* <AddressForm/> */}
+      
+
+      <Card style={{ width: "80%", margin:"0% 7%", padding:"0% 3%" }}>
+        <AddressForm />
+      </Card>
     </div>
-  )
+  );
 }
-
-
-
