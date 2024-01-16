@@ -1,15 +1,44 @@
-import React from "react";
-import AddressForm from "./addressForm/AddressForm";
-import Card from "react-bootstrap/Card";
+import React from 'react'
+// import RegistrationForm from './RegistrationForm/RegistrationForm'
+// import AddressForm from './AddressForm/AddressForm'
 
 export default function RegistrationComponentM() {
+  const [activeTab, setActiveTab] = useState(tabData[0]);
+  const tabChangeHandler = (selectedTab) => {
+    setActiveTab(selectedTab);
+  };
+  const getProperComponent = useCallback(() => {
+    if (activeTab?.id === 1) {
+      return (
+        <RegistrationForm
+        newTabData={tabData}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        />
+      );
+    } else if (activeTab?.id === 2) {
+      return (
+        <p>44</p>
+      );
+    } else if (activeTab?.id === 3) {
+      return (
+        <p>fgdfg</p>
+      );
+    } else if (activeTab?.id === 4) {
+      return (
+        <p>fgdfg</p>
+      );
+    } else if (activeTab?.id === 5) {
+      return (
+        <p>fgdfg</p>
+      );
+    } 
+  }, [activeTab?.id]);
+
   return (
     <div>
-      
-
-      <Card style={{ width: "80%", margin:"0% 7%", padding:"0% 3%" }}>
-        <AddressForm />
-      </Card>
+      {/* <RegistrationForm/> */}
+      {/* <AddressForm/> */}
     </div>
   );
 }
