@@ -21,7 +21,10 @@ body {
     width: 100%;
     margin: 0 auto;
 }
-
+.formWarning {
+    color: var(--FormWarrining);
+    font-size: 0.6em;
+  }
 @media only screen and (max-width: 1192px) {
     body {
         font-size: var(--baseMideumSize) !important;

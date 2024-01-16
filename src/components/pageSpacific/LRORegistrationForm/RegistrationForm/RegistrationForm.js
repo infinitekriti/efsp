@@ -156,6 +156,7 @@ export default function RegistrationForm({
       <Form>
         <Form.Group className="mb-3" controlId="formLroName">
           <Form.Label>Local Recipient Organization Name</Form.Label>
+          <span className="requred">* </span>
           <Form.Control
             type="text"
             placeholder="LRO Name"
@@ -170,6 +171,7 @@ export default function RegistrationForm({
         </Form.Group>
         <Form.Group>
           <Form.Label>LRO Representative Name</Form.Label>
+          <span className="requred">* </span>
           <Row>
             <Col xs={3}>
               <Form.Group className="mb-3" controlId="formSalut">
@@ -208,6 +210,7 @@ export default function RegistrationForm({
         </Form.Group>
         <Form.Group className="mb-3" controlId="formLroEmail">
           <Form.Label>Email / UserID</Form.Label>
+          <span className="requred">* </span>
           <Form.Control
             type="email"
             placeholder="infinite@Alyx.com"
@@ -222,9 +225,10 @@ export default function RegistrationForm({
         </Form.Group>
         <Form.Group className="mb-3" controlId="formLroPassword">
           <Form.Label>Password</Form.Label>
+          <span className="requred">* </span>
           <Form.Control
             type="password"
-            placeholder=""
+            placeholder="xxxxxxxxx"
             name="lroPassword"
             style={{ borderColor: borderColor.lroPassword }}
             onChange={handleInputChange}
@@ -236,9 +240,10 @@ export default function RegistrationForm({
         </Form.Group>
         <Form.Group className="mb-3" controlId="formLroCPassword">
           <Form.Label>Re-enter Password</Form.Label>
+          <span className="requred">* </span>
           <Form.Control
             type="password"
-            placeholder=""
+            placeholder="xxxxxxxxx"
             name="lroCPassword"
             style={{ borderColor: borderColor.lroCPassword }}
             onChange={handleInputChange}
