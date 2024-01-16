@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import {
@@ -8,6 +8,12 @@ import {
   validatePassword,
 } from "../../../common/formValidation/FormValidation";
 
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
+
 export default function RegistrationForm({
   newTabData,
   activeTab,
@@ -16,6 +22,9 @@ export default function RegistrationForm({
   const [LRODetails, setLRODetails] = useState({});
   const [borderColor, setBorderColor] = useState({});
 
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
   const feildColour = (name, validate) => {
     setBorderColor((prevData) => ({
       ...prevData,
@@ -72,11 +81,16 @@ export default function RegistrationForm({
   };
 
   const handleNext = () => {
-    const currentTabIndex = newTabData.findIndex(
-      (tab) => tab.id === activeTab.id
-    );
-    if (currentTabIndex < newTabData.length - 1) {
-      setActiveTab(newTabData[currentTabIndex + 1]);
+    let userCaptcha = document.getElementById("user_captcha_input").value;
+    if (!validateCaptcha(userCaptcha)) {
+      alert("enter valid captcha");
+    } else {
+      const currentTabIndex = newTabData.findIndex(
+        (tab) => tab.id === activeTab.id
+      );
+      if (currentTabIndex < newTabData.length - 1) {
+        setActiveTab(newTabData[currentTabIndex + 1]);
+      }
     }
   };
   return (
@@ -161,17 +175,19 @@ export default function RegistrationForm({
         <Form.Group className="mb-2" controlId="formLroCaptcha">
           <Form.Label>Captcha</Form.Label>
           <div style={{ display: "flex" }}>
-            <div
-              style={{
-                // borderColor: borderColor.lroCaptcha,
-                width: "30%",
-                textAlign: "center",
-                marginRight: "10px",
-              }}
-            >
-              12 + 27
+            <div className="col mt-3">
+              <LoadCanvasTemplate />
             </div>
-            <Form.Control type="text" placeholder="" />
+            <div className="col mt-3">
+              <div>
+                <input
+                  placeholder="Enter Captcha Value"
+                  id="user_captcha_input"
+                  name="user_captcha_input"
+                  type="text"
+                />
+              </div>
+            </div>
           </div>
         </Form.Group>
         <Button className="mt-4 w-100" type="submit" onClick={handleNext}>
