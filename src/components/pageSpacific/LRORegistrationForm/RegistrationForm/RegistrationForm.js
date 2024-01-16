@@ -13,11 +13,10 @@ export default function RegistrationForm({newTabData,activeTab,setActiveTab}) {
   };
   return (
     <div className="registration-form">
-        <h5 className="mb-3 fw-bold">Registration Form</h5>
         <Form>
           <Form.Group className="mb-2" controlId="formLroName">
             <Form.Label>
-              Name of the Local Recipient Organization
+              Local Recipient Organization Name
             </Form.Label>
             <Form.Control type="text" placeholder="LRO Name" />
           </Form.Group>
@@ -41,20 +40,14 @@ export default function RegistrationForm({newTabData,activeTab,setActiveTab}) {
             <Form.Label>Email / UserID</Form.Label>
             <Form.Control type="email" placeholder="infinite@Alyx.com" />
           </Form.Group>
-          <Row>
-            <Col>
-                <Form.Group className="mb-2" controlId="formLroPassword">
+          <Form.Group className="mb-2" controlId="formLroPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" placeholder="" />
               </Form.Group>
-            </Col>
-            <Col>
-            <Form.Group className="mb-2" controlId="formLroCPassword">
+          <Form.Group className="mb-2" controlId="formLroCPassword">
             <Form.Label>Re-enter Password</Form.Label>
             <Form.Control type="password" placeholder="" />
           </Form.Group>
-            </Col>
-          </Row>
           <Form.Group className="mb-2" controlId="formLroCaptcha">
             <Form.Label>Captcha</Form.Label>
             <div style={{ display: "flex" }}>
@@ -71,14 +64,7 @@ export default function RegistrationForm({newTabData,activeTab,setActiveTab}) {
               <Form.Control type="text" placeholder="" />
             </div>
           </Form.Group>
-          <Row className="mt-4">
-            <Col>
-            <Button variant="secondary">Cancel</Button>
-            </Col>
-            <Col className="d-flex justify-content-end">
-              <Button type="submit" onClick={handleNext}>Next</Button>
-            </Col>
-          </Row>
+          <Button className="mt-4 w-100" type="submit" onClick={handleNext}>REGISTER</Button>
           
         </Form>
     </div>
