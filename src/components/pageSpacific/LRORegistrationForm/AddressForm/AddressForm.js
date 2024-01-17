@@ -58,7 +58,7 @@ export default function AddressForm() {
               </Form.Group>
               <Row>
                 <Col>
-                  <Form.Group className="mb-2" controlId="formCity">
+                  <Form.Group className="mb-3" controlId="formCity">
                     <Form.Label>Select City</Form.Label><span className="requred">* </span>
                     <Form.Select>
                       <option value="">select City</option>
@@ -66,7 +66,7 @@ export default function AddressForm() {
                   </Form.Group>
                 </Col>
                 <Col>
-                  <Form.Group className="mb-2" controlId="formState">
+                  <Form.Group className="mb-3" controlId="formState">
                     <Form.Label>Select State</Form.Label>
                     <span className="requred">* </span>
                     <Form.Select>
@@ -75,7 +75,7 @@ export default function AddressForm() {
                   </Form.Group>
                 </Col>
                 <Col>
-                  <Form.Group className="mb-2" controlId="formZip">
+                  <Form.Group className="mb-3" controlId="formZip">
                     <Form.Label>Zip</Form.Label><span className="requred">* </span>
                     <Form.Control
                       type="tel"
@@ -147,9 +147,10 @@ export default function AddressForm() {
                       // onBlur={handleInputChangeBlur}
                     />
                   </Form.Group>
-                  <Row >
+                  <div className="border-top mt-4"></div>
+                  <Row className="mt-4">
                   <Col>
-                    <Button className="btn-padding" variant="secondary">CANCEL</Button>
+                    <Button className="btn-padding" variant="secondary">CLEAR</Button>
                     </Col>
                     <Col className="d-flex justify-content-end">
                     <Button className="btn-padding btn-icon" variant="primary">NEXT <img src={arrowRight} alt="" /></Button>
