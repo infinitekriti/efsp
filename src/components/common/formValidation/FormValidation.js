@@ -38,9 +38,9 @@ export const formatEin = (value) => {
 
 export const validateSalute = (value) => {
   while (value === "Select") {
-      return false;
+      return "Select Salutation";
   }
-  return true;
+  return "";
 };
 
 export const formatePhoneNumber = (value) => {

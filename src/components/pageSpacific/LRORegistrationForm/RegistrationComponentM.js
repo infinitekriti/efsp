@@ -4,7 +4,7 @@ import "./RegistrationComponentM.scss"
 import RegistrationForm from './registrationForm/RegistrationForm';
 import LroTopTitle from './lroTopTitle/LroTopTitle';
 import LroLeftTabContent from './lroLeftTabContent/LroLeftTabContent';
-import AddressForm from './AddressForm/AddressForm';
+import AddressForm from './addressForm/AddressForm';
 const tabData = [
   {
     id: 1,
