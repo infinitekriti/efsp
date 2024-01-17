@@ -4,7 +4,7 @@ import "./RegistrationComponentM.scss"
 import RegistrationForm from './RegistrationForm/RegistrationForm';
 import LroTopTitle from './lroTopTitle/LroTopTitle';
 import LroLeftTabContent from './lroLeftTabContent/LroLeftTabContent';
-import AddressForm from './addressForm/AddressForm';
+import AddressForm from './AddressForm/AddressForm';
 import EmployeeIDForm from './EmployeeIDForm/EmployeeIDForm';
 import BankDetailsForm from './bankDetailsForm/BankDetailsForm';
 import AffiliationInformation from './affiliationInformation/AffiliationInformation';
