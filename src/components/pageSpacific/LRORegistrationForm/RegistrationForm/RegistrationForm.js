@@ -156,8 +156,8 @@ export default function RegistrationForm({
   const handleRegister = () => {
     let Message = "Enter the required feilds";
     if (LRORegisterDetails.lroName === "") {
-      feildColour("lroName", false);
       SErrorMessage("Register", Message);
+      feildColour("lroName", false);
     } else if (LRORegisterDetails.lroSalute === "Select") {
       feildColour("lroSalute", false);
       SErrorMessage("Register", Message);
@@ -317,10 +317,10 @@ export default function RegistrationForm({
               {ErrorMessage.user_captcha_input}
             </span>
           )}
-          {ErrorMessage.register !== "" && (
-            <span className="formWarning">{ErrorMessage.register}</span>
-          )}
         </Form.Group>
+        {ErrorMessage.Register !== "" && (
+          <span className="formWarning">{ErrorMessage.Register}</span>
+        )}
         <Button className="mt-4 w-100" onClick={handleRegister}>
           REGISTER
         </Button>
