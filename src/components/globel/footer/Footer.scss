@@ -61,10 +61,11 @@
                 margin-bottom: 1em;
 
                 .icon-name {
-                    width: 28px;
-                    height: 28px;
-                    background-color: #fff;
-                    border-radius: 50%;
+                    cursor: pointer;
+
+                    img {
+                        width: 2em;
+                    }
                 }
             }
         }
