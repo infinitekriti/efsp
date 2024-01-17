@@ -4,7 +4,10 @@ import "./RegistrationComponentM.scss"
 import RegistrationForm from './RegistrationForm/RegistrationForm';
 import LroTopTitle from './lroTopTitle/LroTopTitle';
 import LroLeftTabContent from './lroLeftTabContent/LroLeftTabContent';
-import AddressForm from './AddressForm/AddressForm';
+import AddressForm from './addressForm/AddressForm';
+import EmployeeIDForm from './EmployeeIDForm/EmployeeIDForm';
+import BankDetailsForm from './bankDetailsForm/BankDetailsForm';
+import AffiliationInformation from './affiliationInformation/AffiliationInformation';
 const tabData = [
   {
     id: 1,
@@ -30,28 +33,43 @@ const tabData = [
 export default function RegistrationComponentM() {
   const [activeTab, setActiveTab] = useState(tabData[0]);
   const tabChangeHandler = (selectedTab) => {
-    setActiveTab(selectedTab);
+    if (selectedTab?.id !== 1) {
+      setActiveTab(selectedTab);
+    }
+   
   };
   const getProperComponent = useCallback(() => {
-    if (activeTab?.id === 1) {
+    if (activeTab?.id === 2) {
       return (
-       <></>
-      );
-    } else if (activeTab?.id === 2) {
-      return (
-        <AddressForm />
+        <AddressForm
+        newTabData={tabData}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        />
       );
     } else if (activeTab?.id === 3) {
       return (
-        <p>fgdfg</p>
+      <EmployeeIDForm 
+      newTabData={tabData}
+      activeTab={activeTab}
+      setActiveTab={setActiveTab}
+      />
       );
     } else if (activeTab?.id === 4) {
       return (
-        <p>fgdfg</p>
+        <BankDetailsForm 
+        newTabData={tabData}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        />
       );
     } else if (activeTab?.id === 5) {
       return (
-        <p>fgdfg</p>
+        <AffiliationInformation
+        newTabData={tabData}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        />
       );
     } 
   }, [activeTab?.id]);

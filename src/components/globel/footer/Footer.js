@@ -2,6 +2,9 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import Button from '../../common/button/Button';
 import arrowRight from "../../../assets/images/svgIcons/arrow-right.svg"
+import facebook from "../../../assets/images/svgIcons/facebook.svg"
+import tweeter from "../../../assets/images/svgIcons/tweeter.svg"
+import instagram from "../../../assets/images/svgIcons/instagram.svg"
 import "./Footer.scss"
 const Footer = () => {
   return (
@@ -12,7 +15,7 @@ const Footer = () => {
             <Row>
                 <Col>
                     <div className="footer-volLeft">
-                        <h2>volunteer With Us</h2>
+                        <h2>Volunteer With Us</h2>
                         <p>Share yout love to make someone's life better</p>
                     </div>
                 </Col>
@@ -36,13 +39,13 @@ const Footer = () => {
                             increase your sales business</p>
                             <div className="footer-socialicon">
                                     <div className="icon-name">
-
+                                       <img src={facebook} alt="" />
                                     </div>
                                     <div className="icon-name">
-                                        
+                                        <img src={tweeter} alt="" />
                                     </div>
                                     <div className="icon-name">
-                                        
+                                        <img src={instagram} alt="" />
                                     </div>
                              </div>    
                     </div>
