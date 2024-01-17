@@ -1,61 +1,36 @@
 
+import Button  from "../../common/button/Button";
 import "./Header.scss";
 import { Fragment } from "react";
-import logo from "../../../assets/images/EFSPLogo.png";
-import arrowDown from "../../../assets/images/svgIcons/angledown.svg";
-import MenuList from "../header/MenuList"
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 const Header = () => {
   return (
     <Fragment>
-      <header className="headerMain">
-        <div className="headerWrap">
-            <div className="headerTop">
-                <div className="HeadTopIn pageContainer">
-                  <div className="hTopRight">
-                    <div className="hTopRightItem">
-                      <p>English</p>
-                    </div>
-                    <div className="hTopRightItem">
-                      <p>Notification</p>
-                    </div>
-                    <div className="hTopRightItem">
-                      <p>Volunteer</p>
-                    </div>
-                    <div className="hTopRightItem">
-                      <p>Careers</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          <div className="headerLogo pageContainer">
-            <div className="headerLogoIn">
-                    <div className="headerLogo">
-                        <img
-                          src={logo}
-                          alt="logo"
-                        />
-                        <div className="logoContent">
-                          <h1>EFSP</h1>
-                          <p>Emergency Food and Shelter Program</p>
-                        </div>
-                    </div>
-                    <div className="headerLogoRight">
-                        <div className="headerLogoRightContent">
-                              <h1>Arneeya Deerings </h1>
-                              <p>Contact</p>
-                        </div>
-                        <div className="headerLogoIcon">
-                          <img src={arrowDown} alt="arrow down" />
-                        </div>
-                    </div>
-            </div>
-          </div>
-          <div className="headerNav">
-              <div className="headerNavigation pageContainer">
-                  <MenuList />
-              </div>
-          </div>
-        </div> 
+      <header className="header-main">
+      <Navbar expand="lg" className="">
+        <Container className="d-flex">
+          <Navbar.Brand className="logo-text">EFSP</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+            <Nav.Link>Features</Nav.Link>
+              <Nav.Link>Funding Information</Nav.Link>
+              <Nav.Link>Humanitarian</Nav.Link>
+              <Nav.Link>FAQ</Nav.Link>
+              <Nav.Link>About</Nav.Link>
+              <Nav.Link>Contact</Nav.Link>
+              <Nav.Link>News</Nav.Link>
+              <div className="border"></div>
+              <Nav.Link>Sign Up</Nav.Link>
+              <Nav.Link>
+                <Button title="Log In" />
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
       </header>
     </Fragment>
   );

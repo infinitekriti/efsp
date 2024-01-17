@@ -1,11 +1,13 @@
 import React, { Suspense, lazy } from "react";
 import BaseLayout from "../layouts/baseLayout/BaseLayout";
 import Header from "../components/globel/header/Header";
-import Footer from '../components/globel/footer/Footer'
+import Footer from "../components/globel/footer/Footer";
 const LazyLro = lazy(() =>
-  import("../components/pageSpacific/lroForm/LroForm")
+  import(
+    "../components/pageSpacific/LRORegistrationForm/RegistrationComponentM"
+  )
 );
-const LroPage = () => {
+const LRORegistrationPage = () => {
   return (
     <Suspense fallback="">
       <BaseLayout>
@@ -17,4 +19,4 @@ const LroPage = () => {
   );
 };
 
-export default LroPage;
+export default LRORegistrationPage;

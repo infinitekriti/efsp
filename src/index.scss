@@ -1,8 +1,7 @@
-@import "./assets/scss/breakpoints.scss";
-@import url("./assets/scss/normalize.scss");
 @import url("./assets/scss/font.scss");
 @import url("./assets/scss/variable.scss");
 @import url("./assets/scss/common.scss");
+@import "./custom.scss";
 
 * {
     margin: 0;
@@ -12,7 +11,7 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'metropoils', sans-serif !important;
     font-weight: 400;
     color: var(--bodyTextColor);
 }
@@ -22,11 +21,13 @@ body {
     width: 100%;
     margin: 0 auto;
 }
-
-
-@media only screen and (max-width: $desktopViewWidth) {
+.formWarning {
+    color: var(--FormWarrining);
+    font-size: 0.6em;
+  }
+@media only screen and (max-width: 1192px) {
     body {
-        font-size: var(--baseMideumSize);
+        font-size: var(--baseMideumSize) !important;
     }
 
     .pageContainer {
@@ -36,9 +37,9 @@ body {
     }
 }
 
-@media only screen and (max-width: $tabletViewWidth) {
+@media only screen and (max-width: 768px) {
     body {
-        font-size: var(--baseSmallSize);
+        font-size: var(--baseSmallSize) !important;
     }
 
     .pageContainer {

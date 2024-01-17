@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from "react";
 import Button from "../../../common/button/Button";
 import UserDetails from "../userDetails/UserDetails";
+import { toast } from "react-toastify";
 import "./RegistrationForm.scss";
+// import {validateName} from "../../../common/formValidation/FormValidation"
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -169,6 +171,7 @@ const RegistrationForm = () => {
         password: "",
         confirmPassword: "",
       });
+      toast.success("Form Saved Successfully");
     }
   };
 
@@ -179,6 +182,7 @@ const RegistrationForm = () => {
           <div className="registTitle">
             <h1>Registration Form</h1>
           </div>
+          
           <div className="registWrap">
             <div className="form">
               <div className="formWrapIn">
