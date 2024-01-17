@@ -37,10 +37,10 @@ export const formatEin = (value) => {
 };
 
 export const validateSalute = (value) => {
-  while (value === "Select") {
-      return "Select Salutation";
+  if (value === "") {
+      return false;
   }
-  return "";
+  return true;
 };
 
 export const formatePhoneNumber = (value) => {

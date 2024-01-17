@@ -33,31 +33,31 @@ export default function RegistrationForm({
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
-  const SErrorMessage = (name, Message) => {
+  const SErrorMessage = (name, Message, validate) => {
     setErrorMessage((prevData) => ({
       ...prevData,
-      [name]: Message,
+      [name]: validate ? "" : Message,
     }));
   };
   const feildColour = (name, validate) => {
     switch (name) {
       case "lroName":
-        SErrorMessage(name, "Enter Valid Name");
+        SErrorMessage(name, "Enter Valid Name", validate);
         break;
       case "lroSalute":
-        SErrorMessage(name, "Select valid Value");
+        SErrorMessage(name, "Select valid Value", validate);
         break;
       case "lroContact":
-        SErrorMessage(name, "Enter Valid Name");
+        SErrorMessage(name, "Enter Valid Name", validate);
         break;
       case "lroEmail":
-        SErrorMessage(name, "Enter Valid Email formate");
+        SErrorMessage(name, "Enter Valid Email formate", validate);
         break;
       case "lroPassword":
-        SErrorMessage(name, "Match the Password Pattern");
+        SErrorMessage(name, "Match the Password Pattern", validate);
         break;
       case "lroCPassword":
-        SErrorMessage(name, "Match the Password");
+        SErrorMessage(name, "Match the Password", validate);
         break;
       default:
         break;
@@ -78,15 +78,6 @@ export default function RegistrationForm({
 
   const handleInputChangeBlur = (event) => {
     const { name, value } = event.target;
-    if (name === "lroSalute") {
-      if (value === "Select") {
-        SErrorMessage(name, "Select the Salutation");
-        setBorderColor((prevData) => ({
-          ...prevData,
-          [name]: "red",
-        }));
-      }
-    }
     if (value.length === 0 || value === "+1") {
       switch (name) {
         case "lroName":
@@ -124,29 +115,29 @@ export default function RegistrationForm({
     const { name, value } = event.target;
     switch (name) {
       case "lroName":
-        feildColour(name, validateText(value, 3, 100), value);
         SetLRODetails(name, value);
+        feildColour(name, validateText(value, 3, 100), value);
         break;
       case "lroSalute":
-        feildColour(name, validateSalute(value));
         SetLRODetails(name, value);
+        feildColour(name, validateSalute(value));
         break;
       case "lroContact":
-        feildColour(name, validateText(value, 3, 50), value);
         SetLRODetails(name, value);
+        feildColour(name, validateText(value, 3, 50), value);
         break;
       case "lroEmail":
-        feildColour(name, validateEmail(value), value);
         SetLRODetails(name, value);
+        feildColour(name, validateEmail(value), value);
         break;
       case "lroPassword":
-        feildColour(name, validatePassword(value, 8, 50), value);
         SetLRODetails(name, value);
+        feildColour(name, validatePassword(value, 8, 50), value);
         break;
       case "lroCPassword":
         const password = LRORegisterDetails.lroPassword;
-        feildColour(name, validateCPassword(value, password));
         SetLRODetails(name, value);
+        feildColour(name, validateCPassword(value, password));
         break;
       default:
         break;
@@ -219,7 +210,7 @@ export default function RegistrationForm({
                   onChange={handleInputChange}
                   onBlur={handleInputChangeBlur}
                 >
-                  <option value="Select">Select</option>
+                  <option value="">Select</option>
                   <option value="Mr">Mr</option>
                   <option value="Mrs">Mrs</option>
                   <option value="Miss">Miss</option>
