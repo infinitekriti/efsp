@@ -82,7 +82,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
           SErrorMessage(name, "Select the State");
           break;
         case "lroCity":
-          SErrorMessage(name, "Select the State");
+          SErrorMessage(name, "Select the City");
           break;
         case "lroZip":
           SErrorMessage(name, "Enter the Zip code");

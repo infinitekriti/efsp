@@ -97,14 +97,14 @@ export const formateFaxNumber = (value) => {
   let formatted = "+1";
 
   if (cleaned.length >= 2) {
-    formatted += `(${cleaned.substring(1, 4)}`;
+    formatted += ` (${cleaned.substring(1, 4)}`;
   }
 
-  if (cleaned.length >= 4) {
+  if (cleaned.length >= 5) {
     formatted += `) ${cleaned.substring(4, 7)}`;
   }
 
-  if (cleaned.length >= 7) {
+  if (cleaned.length >= 8) {
     formatted += `-${cleaned.substring(7, 11)}`;
   }
   return formatted;

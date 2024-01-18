@@ -74,7 +74,7 @@ export default function RegistrationComponentM() {
         />
       );
     } 
-  }, [activeTab?.id]);
+  }, [activeTab]);
 
   return (
        <Fragment>

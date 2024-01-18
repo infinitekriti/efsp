@@ -17,7 +17,7 @@ export default function EmployeeIDForm({
 }) {
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
-  const [lroeinextention, setlroeinextention] = useState();
+  const [lroeinextention, setlroeinextention] = useState("");
   const [lroEni, setlroEni] = useState("");
   const [lroSubOrdinateEin, setlroSubOrdinateEin] = useState("");
 
@@ -64,7 +64,6 @@ export default function EmployeeIDForm({
         default:
           break;
       }
-      SErrorMessage(name, "Enter the Eni", false);
       setBorderColor((prevData) => ({
         ...prevData,
         [name]: "#A30000",
