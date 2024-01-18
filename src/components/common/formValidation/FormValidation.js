@@ -5,7 +5,29 @@ export const validateEmail = (value) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(value);
 };
+export const formateZip = (value) => {
+  const cleaned = value.replace(/\D/g, "");
 
+  let formatted = "";
+
+  if (cleaned.length >= 0) {
+    formatted += `${cleaned.substring(0, 5)}`;
+  }
+
+  if (cleaned.length >= 5) {
+    formatted += `-${cleaned.substring(5, 9)}`;
+  }
+
+  return formatted;
+};
+export const validateZip = (value) => {
+  const pattern = /^\d+-\d{1,4}$/;
+  return pattern.test(value);
+};
+export const formatExt = (value) => {
+  const cleaned = value.replace(/\D/g, "");
+  return cleaned;
+};
 export const validateEni = (value) => {
   const EniRegex = /^\d{2} - \d{7}$/;
   return EniRegex.test(value);

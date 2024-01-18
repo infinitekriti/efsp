@@ -6,6 +6,8 @@ import arrowRight from "../../../../assets/images/svgIcons/arrow-right.svg";
 import {
   validateEni,
   formatEin,
+  formatExt,
+  validateText,
 } from "../../../common/formValidation/FormValidation";
 
 export default function EmployeeIDForm({
@@ -15,6 +17,7 @@ export default function EmployeeIDForm({
 }) {
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
+  const [lroeinextention, setlroeinextention] = useState();
   const [lroEni, setlroEni] = useState("");
   const [lroSubOrdinateEin, setlroSubOrdinateEin] = useState("");
 
@@ -26,7 +29,14 @@ export default function EmployeeIDForm({
   };
   const feildColour = (name, validate) => {
     switch (name) {
-      case "":
+      case "lroEni":
+        SErrorMessage(name, "Enter Valid Eni", false);
+        break;
+      case "lroSubOrdinateEin":
+        SErrorMessage(name, "Enter Valid Eni", false);
+        break;
+      case "lroeinextention":
+        SErrorMessage(name, "Enter Valid Extention", false);
         break;
       default:
         break;
@@ -41,7 +51,20 @@ export default function EmployeeIDForm({
     const { name, value } = event.target;
 
     if (value.length === 0) {
-      SErrorMessage(name,"Enter the Eni", false)
+      switch (name) {
+        case "lroEni":
+          SErrorMessage(name, "Enter the Eni", false);
+          break;
+        case "lroSubOrdinateEin":
+          SErrorMessage(name, "Enter the Eni", false);
+          break;
+        case "lroeinextention":
+          SErrorMessage(name, "Enter the Extention", false);
+          break;
+        default:
+          break;
+      }
+      SErrorMessage(name, "Enter the Eni", false);
       setBorderColor((prevData) => ({
         ...prevData,
         [name]: "#A30000",
@@ -56,14 +79,20 @@ export default function EmployeeIDForm({
         const Eni1 = formatEin(value);
         setlroEni(Eni1);
         feildColour(name, validateEni(Eni1), Eni1);
-        SErrorMessage(name,"ENter valid Eni",validateEni(Eni1))
+        SErrorMessage(name, "ENter valid Eni", validateEni(Eni1));
         break;
       case "lroSubOrdinateEin":
         const Eni2 = formatEin(value);
         setlroSubOrdinateEin(Eni2);
         feildColour(name, validateEni(Eni2), Eni2);
-        SErrorMessage(name,"ENter valid Eni",validateEni(Eni2))
+        SErrorMessage(name, "ENter valid Eni", validateEni(Eni2));
         break;
+      case "lroeinextention":
+        const Ext = formatExt(value);
+        setlroeinextention(Ext);
+        feildColour(name, validateText(Ext, 5, 5), Ext);
+        break;
+
       default:
         break;
     }
@@ -133,6 +162,7 @@ export default function EmployeeIDForm({
             id="name"
             placeholder="Enter EIN Extension"
             name="lroeinextention"
+            value={lroeinextention}
             style={{ border: borderColor.lroeinextention }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}

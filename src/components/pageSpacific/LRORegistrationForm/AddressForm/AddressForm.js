@@ -11,6 +11,8 @@ import {
   formatePhoneNumber,
   validateFaxNumber,
   formateFaxNumber,
+  formateZip,
+  validateZip,
 } from "../../../common/formValidation/FormValidation";
 
 export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
@@ -18,6 +20,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
   const [ErrorMessage, setErrorMessage] = useState({});
   const [lroFaxNumber, setlroFaxNumber] = useState("+1");
   const [lroPhoneNumber, setlroPhoneNumber] = useState("");
+  const [lroZip , setlroZip]=useState("");
   const [lroUID, setlroUID] = useState("+1");
 
   const SErrorMessage = (name, Message, validate) => {
@@ -115,8 +118,10 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
       case "lroAddress2":
         feildColour(name, validateText(value, 3, 40), value);
         break;
-      case "lroZip1":
-        feildColour(name, /^\d{5}$/.test(value), value);
+      case "lroZip":
+        const zip = formateZip(value);
+        setlroZip(zip)
+        feildColour(name, validateZip(zip), zip);
         break;
       case "lroExt":
         break;
@@ -200,6 +205,24 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
           </Form.Group>
           <Row>
             <Col>
+              <Form.Group className="mb-3" controlId="formZip">
+                <Form.Label>Zip</Form.Label>
+                <span className="requred">* </span>
+                <Form.Control
+                  type="tel"
+                  placeholder="Enter Zip"
+                  name="lroZip"
+                  value={lroZip}
+                  style={{ borderColor: borderColor.lroZip }}
+                  onChange={handleInputChange}
+                  onBlur={handleInputChangeBlur}
+                />
+                {borderColor.lroZip === "red" && (
+                  <span className="formWarning">{ErrorMessage.lroZip}</span>
+                )}
+              </Form.Group>
+            </Col>
+            <Col>
               <Form.Group className="mb-3" controlId="formCity">
                 <Form.Label>Select City</Form.Label>
                 <span className="requred">* </span>
@@ -230,23 +253,6 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
                 </Form.Select>
                 {borderColor.lroState === "red" && (
                   <span className="formWarning">{ErrorMessage.lroState}</span>
-                )}
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3" controlId="formZip">
-                <Form.Label>Zip</Form.Label>
-                <span className="requred">* </span>
-                <Form.Control
-                  type="tel"
-                  placeholder="Enter Zip"
-                  name="lroZip"
-                  style={{ borderColor: borderColor.lroZip }}
-                  onChange={handleInputChange}
-                  onBlur={handleInputChangeBlur}
-                />
-                {borderColor.lroZip === "red" && (
-                  <span className="formWarning">{ErrorMessage.lroZip}</span>
                 )}
               </Form.Group>
             </Col>
