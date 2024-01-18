@@ -6,11 +6,6 @@ export const validateEmail = (value) => {
   return emailRegex.test(value);
 };
 
-export const validatePhoneNumber = (value) => {
-  const usPhoneNumberRegex =
-    /^(\+\d{1,2}\s?)?(\(\d{3}\)|\d{3})([-\s])?\d{3}([-|\s])?\d{4}$/;
-  return usPhoneNumberRegex.test(value);
-};
 export const validateEni = (value) => {
   const EniRegex = /^\d{2} - \d{7}$/;
   return EniRegex.test(value);
@@ -38,12 +33,39 @@ export const formatEin = (value) => {
 
 export const validateSalute = (value) => {
   if (value === "") {
-      return false;
+    return false;
   }
   return true;
 };
+export const validatePhoneNumber = (value) => {
+  const usPhoneNumberRegex = /^\(\d{3}\) \d{2}-\d{4}$/;
+  return usPhoneNumberRegex.test(value);
+};
 
 export const formatePhoneNumber = (value) => {
+  const cleaned = value.replace(/\D/g, "");
+
+  let formatted = "";
+
+  if (cleaned.length >= 0) {
+    formatted += `(${cleaned.substring(0, 3)}`;
+  }
+
+  if (cleaned.length >= 3) {
+    formatted += `) ${cleaned.substring(3, 5)}`;
+  }
+
+  if (cleaned.length >= 5) {
+    formatted += `-${cleaned.substring(5, 9)}`;
+  }
+  return formatted;
+};
+export const validateFaxNumber = (value) => {
+  const usPhoneNumberRegex =
+    /^(\+\d{1,2}\s?)?(\(\d{3}\)|\d{3})([-\s])?\d{3}([-|\s])?\d{4}$/;
+  return usPhoneNumberRegex.test(value);
+};
+export const formateFaxNumber = (value) => {
   const cleaned = value.replace(/\D/g, "");
 
   let formatted = "+1";

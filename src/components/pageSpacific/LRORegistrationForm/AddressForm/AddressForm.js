@@ -1,163 +1,347 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import saveIcon from "../../../../assets/images/svgIcons/save-icon.svg"
-import arrowRight from "../../../../assets/images/svgIcons/arrow-right.svg"
+import saveIcon from "../../../../assets/images/svgIcons/save-icon.svg";
+import arrowRight from "../../../../assets/images/svgIcons/arrow-right.svg";
 import { Button } from "react-bootstrap";
+import {
+  validateText,
+  validatePhoneNumber,
+  formatePhoneNumber,
+  validateFaxNumber,
+  formateFaxNumber,
+} from "../../../common/formValidation/FormValidation";
 
-export default function AddressForm() {
+export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
+  const [borderColor, setBorderColor] = useState({});
+  const [ErrorMessage, setErrorMessage] = useState({});
+  const [lroFaxNumber, setlroFaxNumber] = useState("+1");
+  const [lroPhoneNumber, setlroPhoneNumber] = useState("");
+  const [lroUID, setlroUID] = useState("+1");
+
+  const SErrorMessage = (name, Message, validate) => {
+    setErrorMessage((prevData) => ({
+      ...prevData,
+      [name]: validate ? "" : Message,
+    }));
+  };
+
+  const feildColour = (name, validate) => {
+    switch (name) {
+      case "lroAddress1":
+        SErrorMessage(name, "Enter the valid Address", validate);
+        break;
+      case "lroAddress2":
+        SErrorMessage(name, "Enter the valid Address", validate);
+        break;
+      case "lroState":
+        SErrorMessage(name, "Select the State", validate);
+        break;
+      case "lroCity":
+        SErrorMessage(name, "Select the State", validate);
+        break;
+      case "lroZip":
+        SErrorMessage(name, "Enter the Zip code", validate);
+        break;
+      case "lroExt":
+        SErrorMessage(name, "Enter the Extention", validate);
+        break;
+      case "lroPhoneNumber":
+        SErrorMessage(name, "Enter the Phone Number", validate);
+        break;
+      case "lroFaxNumber":
+        SErrorMessage(name, "Enter the Fax Number", validate);
+        break;
+      case "lroUID":
+        SErrorMessage(name, "Enter the UID", validate);
+        break;
+      default:
+        break;
+    }
+    setBorderColor((prevData) => ({
+      ...prevData,
+      [name]: validate ? "#dee2e6" : "red",
+    }));
+  };
+
+  const handleInputChangeBlur = (event) => {
+    const { name, value } = event.target;
+    if (value.length === 0 || value === "+1") {
+      switch (name) {
+        case "lroAddress1":
+          SErrorMessage(name, "Enter the Address");
+          break;
+        case "lroAddress2":
+          SErrorMessage(name, "Enter the Address");
+          break;
+        case "lroState":
+          SErrorMessage(name, "Select the State");
+          break;
+        case "lroCity":
+          SErrorMessage(name, "Select the State");
+          break;
+        case "lroZip":
+          SErrorMessage(name, "Enter the Zip code");
+          break;
+        case "lroExt":
+          SErrorMessage(name, "Enter the Extention");
+          break;
+        case "lroPhoneNumber":
+          SErrorMessage(name, "Enter the Phone Number");
+          break;
+        case "lroFaxNumber":
+          SErrorMessage(name, "Enter the Fax Number");
+          break;
+        case "lroUID":
+          SErrorMessage(name, "Enter the UID");
+          break;
+        default:
+          break;
+      }
+      setBorderColor((prevData) => ({
+        ...prevData,
+        [name]: "red",
+      }));
+    }
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    switch (name) {
+      case "lroAddress1":
+        feildColour(name, validateText(value, 3, 40), value);
+        break;
+      case "lroAddress2":
+        feildColour(name, validateText(value, 3, 40), value);
+        break;
+      case "lroZip1":
+        feildColour(name, /^\d{5}$/.test(value), value);
+        break;
+      case "lroExt":
+        break;
+      case "lroPhoneNumber":
+        const PhoneNumber = formatePhoneNumber(value);
+        setlroPhoneNumber(PhoneNumber);
+        feildColour(name, validatePhoneNumber(PhoneNumber), PhoneNumber);
+        break;
+      case "lroFaxNumber":
+        const FaxNumber = formateFaxNumber(value);
+        setlroFaxNumber(FaxNumber);
+        feildColour(name, validateFaxNumber(FaxNumber), FaxNumber);
+        break;
+      case "lroUID":
+        const UID = formateFaxNumber(value);
+        setlroUID(UID);
+        feildColour(name, validateFaxNumber(UID), UID);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleNext = () => {
+    const currentTabIndex = newTabData.findIndex(
+      (tab) => tab.id === activeTab.id
+    );
+    if (currentTabIndex < newTabData.length - 1) {
+      setActiveTab(newTabData[currentTabIndex + 1]);
+    }
+  };
   return (
     <Fragment>
-        <div className="address-info-main">
-          <div className="address-step-title d-flex justify-content-between mb-3">
-             <h6>Step 2. Address Information</h6>
-             <div className="address-step-save ">
-                <img src={saveIcon} alt="" /> 
-             </div>
+      <div className="address-info-main">
+        <div className="address-step-title d-flex justify-content-between mb-3">
+          <h6>Step 2. Address Information</h6>
+          <div className="address-step-save ">
+            <img src={saveIcon} alt="" />
           </div>
-          <div className="lro-name mb-3">
-             <label>Local Recipient Organization Name:</label> <b>Name</b>
-          </div>
-        <Form>
-              <Form.Group className="mb-3" controlId="lroAddress1">
-                <Form.Label>Address</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Building, Apartment, Complex"
-                  name="lroAddress1"
-                  // style={{ borderColor: borderColor.lroAddress1 }}
-                  // onChange={handleInputChange}
-                  // onFocus={handleInputChangeFocus}
-                  // onBlur={handleInputChangeBlur}
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3" controlId="lroAddress2">
-                <Form.Control
-                  type="text"
-                  placeholder="Flat no., Room, Office"
-                  name="lroAddress2"
-                  // style={{ borderColor: borderColor.lroAddress2 }}
-                  // onChange={handleInputChange}
-                  // onFocus={handleInputChangeFocus}
-                  // onBlur={handleInputChangeBlur}
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3" controlId="lroAddress3">
-                <Form.Control
-                  type="text"
-                  placeholder="More Details"
-                  name="lroAddress3"
-                  // style={{ borderColor: borderColor.lroAddress3 }}
-                  // onChange={handleInputChange}
-                  // onFocus={handleInputChangeFocus}
-                  // onBlur={handleInputChangeBlur}
-                />
-              </Form.Group>
-              <Row>
-                <Col>
-                  <Form.Group className="mb-3" controlId="formCity">
-                    <Form.Label>Select City</Form.Label><span className="requred">* </span>
-                    <Form.Select>
-                      <option value="">select City</option>
-                    </Form.Select>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group className="mb-3" controlId="formState">
-                    <Form.Label>Select State</Form.Label>
-                    <span className="requred">* </span>
-                    <Form.Select>
-                      <option value="">select State</option>
-                    </Form.Select>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group className="mb-3" controlId="formZip">
-                    <Form.Label>Zip</Form.Label><span className="requred">* </span>
-                    <Form.Control
-                      type="tel"
-                      placeholder="Enter Zip"
-                      name="lroZip1"
-                      // style={{ borderColor: borderColor.lroZip1 }}
-                      // onChange={handleInputChange}
-                      // onFocus={handleInputChangeFocus}
-                      // onBlur={handleInputChangeBlur}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-
-              <Row>
-                <Col>
-                  <Form.Group className="mb-3" controlId="ext">
-                    <Form.Label>Ext</Form.Label><span className="requred">* </span>
-                    <Form.Control
-                      type="number"
-                      placeholder="Enter Ext"
-                      name="lroExt"
-                      // style={{ borderColor: borderColor.lroExt }}
-                      // onChange={handleInputChange}
-                      // onFocus={handleInputChangeFocus}
-                      // onBlur={handleInputChangeBlur}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group className="mb-3" controlId="phoneNumber">
-                    <Form.Label>Phone No.</Form.Label><span className="requred">* </span>
-                    <Form.Control
-                      type="tel"
-                      name="lroPhoneNumber"
-                      placeholder="Enter Phone No."
-                      // value={lroPhoneNumber}
-                      // style={{ borderColor: borderColor.lroPhoneNumber }}
-                      // onChange={handleInputChange}
-                      // onFocus={handleInputChangeFocus}
-                      // onBlur={handleInputChangeBlur}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Form.Group className="mb-3" controlId="faxNumber">
-                    <Form.Label>Fax</Form.Label><span className="requred">* </span>
-                    <Form.Control
-                      type="tel"
-                      name="lroFaxNumber"
-                      placeholder="Enter Fax"
-                      // value={lroFaxNumber}
-                      // style={{ borderColor: borderColor.lroFaxNumber }}
-                      // onChange={handleInputChange}
-                      // onFocus={handleInputChangeFocus}
-                      // onBlur={handleInputChangeBlur}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="uid">
-                    <Form.Label>UID</Form.Label><span className="requred">* </span>
-                    <Form.Control
-                      type="tel"
-                      name="lroFaxNumber"
-                      placeholder="Enter UID"
-                      // value={lroFaxNumber}
-                      // style={{ borderColor: borderColor.lroFaxNumber }}
-                      // onChange={handleInputChange}
-                      // onFocus={handleInputChangeFocus}
-                      // onBlur={handleInputChangeBlur}
-                    />
-                  </Form.Group>
-                  <div className="border-top mt-4"></div>
-                  <Row className="mt-4">
-                  <Col>
-                    <Button className="btn-padding" variant="secondary">CLEAR</Button>
-                    </Col>
-                    <Col className="d-flex justify-content-end">
-                    <Button className="btn-padding btn-icon" variant="primary">NEXT <img src={arrowRight} alt="" /></Button>
-                    </Col>
-                  </Row>
-            </Form>
         </div>
+        <div className="lro-name mb-3">
+          <label>Local Recipient Organization Name:</label> <b>Name</b>
+        </div>
+        <Form>
+          <Form.Group className="mb-3" controlId="lroAddress1">
+            <Form.Label>Address</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Building, Apartment, Complex"
+              name="lroAddress1"
+              style={{ borderColor: borderColor.lroAddress1 }}
+              onChange={handleInputChange}
+              onBlur={handleInputChangeBlur}
+            />
+            {borderColor.lroAddress1 === "red" && (
+              <span className="formWarning">{ErrorMessage.lroAddress1}</span>
+            )}
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="lroAddress2">
+            <Form.Control
+              type="text"
+              placeholder="Flat no., Room, Office"
+              name="lroAddress2"
+              style={{ borderColor: borderColor.lroAddress2 }}
+              onChange={handleInputChange}
+              onBlur={handleInputChangeBlur}
+            />
+            {borderColor.lroAddress2 === "red" && (
+              <span className="formWarning">{ErrorMessage.lroAddress2}</span>
+            )}
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="lroAddress3">
+            <Form.Control
+              type="text"
+              placeholder="More Details"
+              name="lroAddress3"
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+          <Row>
+            <Col>
+              <Form.Group className="mb-3" controlId="formCity">
+                <Form.Label>Select City</Form.Label>
+                <span className="requred">* </span>
+                <Form.Select
+                  name="lroCity"
+                  style={{ borderColor: borderColor.lroCity }}
+                  onChange={handleInputChange}
+                  onBlur={handleInputChangeBlur}
+                >
+                  <option value="">select City</option>
+                </Form.Select>
+                {borderColor.lroCity === "red" && (
+                  <span className="formWarning">{ErrorMessage.lroCity}</span>
+                )}
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group className="mb-3" controlId="formState">
+                <Form.Label>Select State</Form.Label>
+                <span className="requred">* </span>
+                <Form.Select
+                  name="lroState"
+                  style={{ borderColor: borderColor.lroState }}
+                  onChange={handleInputChange}
+                  onBlur={handleInputChangeBlur}
+                >
+                  <option value="">select State</option>
+                </Form.Select>
+                {borderColor.lroState === "red" && (
+                  <span className="formWarning">{ErrorMessage.lroState}</span>
+                )}
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group className="mb-3" controlId="formZip">
+                <Form.Label>Zip</Form.Label>
+                <span className="requred">* </span>
+                <Form.Control
+                  type="tel"
+                  placeholder="Enter Zip"
+                  name="lroZip"
+                  style={{ borderColor: borderColor.lroZip }}
+                  onChange={handleInputChange}
+                  onBlur={handleInputChangeBlur}
+                />
+                {borderColor.lroZip === "red" && (
+                  <span className="formWarning">{ErrorMessage.lroZip}</span>
+                )}
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <Form.Group className="mb-3" controlId="ext">
+                <Form.Label>Ext</Form.Label>
+                <span className="requred">* </span>
+                <Form.Control
+                  type="number"
+                  placeholder="Enter Ext"
+                  name="lroExt"
+                  style={{ borderColor: borderColor.lroExt }}
+                  onChange={handleInputChange}
+                  onBlur={handleInputChangeBlur}
+                />
+                {borderColor.lroExt === "red" && (
+                  <span className="formWarning">{ErrorMessage.lroExt}</span>
+                )}
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group className="mb-3" controlId="phoneNumber">
+                <Form.Label>Phone No.</Form.Label>
+                <span className="requred">* </span>
+                <Form.Control
+                  type="tel"
+                  name="lroPhoneNumber"
+                  placeholder="Enter Phone No."
+                  value={lroPhoneNumber}
+                  style={{ borderColor: borderColor.lroPhoneNumber }}
+                  onChange={handleInputChange}
+                  onBlur={handleInputChangeBlur}
+                />
+                {borderColor.lroPhoneNumber === "red" && (
+                  <span className="formWarning">
+                    {ErrorMessage.lroPhoneNumber}
+                  </span>
+                )}
+              </Form.Group>
+            </Col>
+          </Row>
+          <Form.Group className="mb-3" controlId="faxNumber">
+            <Form.Label>Fax</Form.Label>
+            <span className="requred">* </span>
+            <Form.Control
+              type="tel"
+              name="lroFaxNumber"
+              placeholder="Enter Fax"
+              value={lroFaxNumber}
+              style={{ borderColor: borderColor.lroFaxNumber }}
+              onChange={handleInputChange}
+              onBlur={handleInputChangeBlur}
+            />
+            {borderColor.lroFaxNumber === "red" && (
+              <span className="formWarning">{ErrorMessage.lroFaxNumber}</span>
+            )}
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="uid">
+            <Form.Label>UID</Form.Label>
+            <span className="requred">* </span>
+            <Form.Control
+              type="tel"
+              name="lroUID"
+              placeholder="Enter UID"
+              value={lroUID}
+              style={{ borderColor: borderColor.lroUID }}
+              onChange={handleInputChange}
+              onBlur={handleInputChangeBlur}
+            />
+            {borderColor.lroUID === "red" && (
+              <span className="formWarning">{ErrorMessage.lroUID}</span>
+            )}
+          </Form.Group>
+          <div className="border-top mt-4"></div>
+          <Row className="mt-4">
+            <Col>
+              <Button className="btn-padding" variant="secondary" type="reset">
+                CLEAR
+              </Button>
+            </Col>
+            <Col className="d-flex justify-content-end">
+              <Button
+                className="btn-padding btn-icon"
+                variant="primary"
+                onClick={handleNext}
+              >
+                NEXT <img src={arrowRight} alt="" />
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </div>
     </Fragment>
   );
 }

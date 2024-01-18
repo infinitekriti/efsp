@@ -4,10 +4,7 @@ import "./RegistrationComponentM.scss"
 import RegistrationForm from './RegistrationForm/RegistrationForm';
 import LroTopTitle from './lroTopTitle/LroTopTitle';
 import LroLeftTabContent from './lroLeftTabContent/LroLeftTabContent';
-<<<<<<<<< Temporary merge branch 1
 import AddressForm from './AddressForm/AddressForm';
-=========
-import AddressForm from './addressForm/AddressForm';
 import EmployeeIDForm from './EmployeeIDForm/EmployeeIDForm';
 import BankDetailsForm from './bankDetailsForm/BankDetailsForm';
 import AffiliationInformation from './affiliationInformation/AffiliationInformation';
