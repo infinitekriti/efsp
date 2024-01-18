@@ -10,7 +10,7 @@ import {
 
 import {
   loadCaptchaEnginge,
-  LoadCanvasTemplate,
+  LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
 
@@ -19,9 +19,16 @@ export default function RegistrationForm({
   activeTab,
   setActiveTab,
 }) {
-  const [LRODetails, setLRODetails] = useState({});
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
+  const [LRORegisterDetails, setLRORegisterDetails] = useState({
+    lroName: "",
+    lroSalute: "Select",
+    lroContact: "",
+    lroEmail: "",
+    lroPassword: "",
+    lroCPassword: "",
+  });
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -72,8 +79,8 @@ export default function RegistrationForm({
   const handleInputChangeBlur = (event) => {
     const { name, value } = event.target;
     if (name === "lroSalute") {
-      SErrorMessage(name, "Select the Salutation");
       if (value === "Select") {
+        SErrorMessage(name, "Select the Salutation");
         setBorderColor((prevData) => ({
           ...prevData,
           [name]: "red",
@@ -106,48 +113,77 @@ export default function RegistrationForm({
       }));
     }
   };
+  const SetLRODetails = (name, value) => {
+    setLRORegisterDetails((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     switch (name) {
       case "lroName":
         feildColour(name, validateText(value, 3, 100), value);
+        SetLRODetails(name, value);
         break;
       case "lroSalute":
         feildColour(name, validateSalute(value));
+        SetLRODetails(name, value);
         break;
       case "lroContact":
         feildColour(name, validateText(value, 3, 50), value);
+        SetLRODetails(name, value);
         break;
       case "lroEmail":
         feildColour(name, validateEmail(value), value);
+        SetLRODetails(name, value);
         break;
       case "lroPassword":
         feildColour(name, validatePassword(value, 8, 50), value);
-        setLRODetails((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
+        SetLRODetails(name, value);
         break;
       case "lroCPassword":
-        const password = LRODetails.lroPassword;
+        const password = LRORegisterDetails.lroPassword;
         feildColour(name, validateCPassword(value, password));
+        SetLRODetails(name, value);
         break;
       default:
         break;
     }
   };
 
-  const handleNext = () => {
-    let userCaptcha = document.getElementById("user_captcha_input").value;
-    if (!validateCaptcha(userCaptcha)) {
-      alert("Enter valid captcha");
+  const handleRegister = () => {
+    let Message = "Enter the required feilds";
+    if (LRORegisterDetails.lroName === "") {
+      SErrorMessage("Register", Message);
+      feildColour("lroName", false);
+    } else if (LRORegisterDetails.lroSalute === "Select") {
+      feildColour("lroSalute", false);
+      SErrorMessage("Register", Message);
+    } else if (LRORegisterDetails.lroContact === "") {
+      feildColour("lroContact", false);
+      SErrorMessage("Register", Message);
+    } else if (LRORegisterDetails.lroEmail === "") {
+      feildColour("lroEmail", false);
+      SErrorMessage("Register", Message);
+    } else if (LRORegisterDetails.lroPassword === "") {
+      feildColour("lroPassword", false);
+      SErrorMessage("Register", Message);
+    } else if (LRORegisterDetails.lroCPassword === "") {
+      feildColour("lroCPassword", false);
+      SErrorMessage("Register", Message);
     } else {
-      const currentTabIndex = newTabData.findIndex(
-        (tab) => tab.id === activeTab.id
-      );
-      if (currentTabIndex < newTabData.length - 1) {
-        setActiveTab(newTabData[currentTabIndex + 1]);
+      let userCaptcha = document.getElementById("user_captcha_input").value;
+      if (!validateCaptcha(userCaptcha)) {
+        SErrorMessage("user_captcha_input", "Enter the Vaild Captcha");
+      } else {
+        const currentTabIndex = newTabData.findIndex(
+          (tab) => tab.id === activeTab.id
+        );
+        if (currentTabIndex < newTabData.length - 1) {
+          setActiveTab(newTabData[currentTabIndex + 1]);
+        }
       }
     }
   };
@@ -161,6 +197,7 @@ export default function RegistrationForm({
             type="text"
             placeholder="LRO Name"
             name="lroName"
+            value={LRORegisterDetails.lroName}
             style={{ borderColor: borderColor.lroName }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
@@ -177,6 +214,7 @@ export default function RegistrationForm({
               <Form.Group className="mb-3" controlId="formSalut">
                 <Form.Select
                   name="lroSalute"
+                  value={LRORegisterDetails.lroSalute}
                   style={{ borderColor: borderColor.lroSalute }}
                   onChange={handleInputChange}
                   onBlur={handleInputChangeBlur}
@@ -197,6 +235,7 @@ export default function RegistrationForm({
                   type="text"
                   placeholder="contact"
                   name="lroContact"
+                  value={LRORegisterDetails.lroContact}
                   style={{ borderColor: borderColor.lroContact }}
                   onChange={handleInputChange}
                   onBlur={handleInputChangeBlur}
@@ -215,6 +254,7 @@ export default function RegistrationForm({
             type="email"
             placeholder="infinite@Alyx.com"
             name="lroEmail"
+            value={LRORegisterDetails.lroEmail}
             style={{ borderColor: borderColor.lroEmail }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
@@ -230,6 +270,7 @@ export default function RegistrationForm({
             type="password"
             placeholder="xxxxxxxxx"
             name="lroPassword"
+            value={LRORegisterDetails.lroPassword}
             style={{ borderColor: borderColor.lroPassword }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
@@ -245,6 +286,7 @@ export default function RegistrationForm({
             type="password"
             placeholder="xxxxxxxxx"
             name="lroCPassword"
+            value={LRORegisterDetails.lroCPassword}
             style={{ borderColor: borderColor.lroCPassword }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
@@ -257,7 +299,7 @@ export default function RegistrationForm({
           <Form.Label>Captcha</Form.Label>
           <div style={{ display: "flex" }}>
             <div className="col mt-3">
-              <LoadCanvasTemplate />
+              <LoadCanvasTemplateNoReload />
             </div>
             <div className="col mt-3">
               <div>
@@ -270,8 +312,16 @@ export default function RegistrationForm({
               </div>
             </div>
           </div>
+          {ErrorMessage.user_captcha_input !== "" && (
+            <span className="formWarning">
+              {ErrorMessage.user_captcha_input}
+            </span>
+          )}
         </Form.Group>
-        <Button className="mt-4 w-100" type="submit" onClick={handleNext}>
+        {ErrorMessage.Register !== "" && (
+          <span className="formWarning">{ErrorMessage.Register}</span>
+        )}
+        <Button className="mt-4 w-100" onClick={handleRegister}>
           REGISTER
         </Button>
       </Form>
