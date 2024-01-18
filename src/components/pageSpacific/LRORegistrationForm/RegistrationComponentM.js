@@ -8,6 +8,7 @@ import AddressForm from './addressForm/AddressForm';
 import EmployeeIDForm from './EmployeeIDForm/EmployeeIDForm';
 import BankDetailsForm from './bankDetailsForm/BankDetailsForm';
 import AffiliationInformation from './affiliationInformation/AffiliationInformation';
+import LroSuccessInfo from './lroSuccessInfo.js/LroSuccessInfo';
 const tabData = [
   {
     id: 1,
@@ -32,6 +33,7 @@ const tabData = [
 ]
 export default function RegistrationComponentM() {
   const [activeTab, setActiveTab] = useState(tabData[0]);
+  const [modalShow, setModalShow] = useState(false);
   const tabChangeHandler = (selectedTab) => {
     if (selectedTab?.id !== 1) {
       setActiveTab(selectedTab);
@@ -112,6 +114,7 @@ export default function RegistrationComponentM() {
                   newTabData={tabData}
                   activeTab={activeTab}
                   setActiveTab={setActiveTab}
+                  setModalShow={setModalShow}
                   />
                   </div>:
                   <Row>
@@ -127,6 +130,14 @@ export default function RegistrationComponentM() {
                   }
                   </Container>
               </Fragment>
+                  <LroSuccessInfo 
+                  show={modalShow}
+                  newTabData={tabData}
+                  activeTab={activeTab}
+                  setActiveTab={setActiveTab}
+                  setModalShow={setModalShow}
+                  onHide={() => setModalShow(false)}
+                  />
          </div>
        </Fragment>
   )

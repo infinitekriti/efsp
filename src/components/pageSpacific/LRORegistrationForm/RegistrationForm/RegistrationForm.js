@@ -15,9 +15,7 @@ import {
 } from "react-simple-captcha";
 
 export default function RegistrationForm({
-  newTabData,
-  activeTab,
-  setActiveTab,
+  setModalShow
 }) {
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
@@ -31,7 +29,7 @@ export default function RegistrationForm({
   });
 
   useEffect(() => {
-    loadCaptchaEnginge(6);
+    loadCaptchaEnginge(6,"#F0F0E44D");
   }, []);
   const SErrorMessage = (name, Message) => {
     setErrorMessage((prevData) => ({
@@ -64,7 +62,7 @@ export default function RegistrationForm({
     }
     setBorderColor((prevData) => ({
       ...prevData,
-      [name]: validate ? "#dee2e6" : "red",
+      [name]: validate ? "#dee2e6" : "#A30000",
     }));
   };
 
@@ -83,7 +81,7 @@ export default function RegistrationForm({
         SErrorMessage(name, "Select the Salutation");
         setBorderColor((prevData) => ({
           ...prevData,
-          [name]: "red",
+          [name]: "#A30000",
         }));
       }
     }
@@ -109,7 +107,7 @@ export default function RegistrationForm({
       }
       setBorderColor((prevData) => ({
         ...prevData,
-        [name]: "red",
+        [name]: "#A30000",
       }));
     }
   };
@@ -178,12 +176,8 @@ export default function RegistrationForm({
       if (!validateCaptcha(userCaptcha)) {
         SErrorMessage("user_captcha_input", "Enter the Vaild Captcha");
       } else {
-        const currentTabIndex = newTabData.findIndex(
-          (tab) => tab.id === activeTab.id
-        );
-        if (currentTabIndex < newTabData.length - 1) {
-          setActiveTab(newTabData[currentTabIndex + 1]);
-        }
+       
+        setModalShow(true)
       }
     }
   };
@@ -195,7 +189,7 @@ export default function RegistrationForm({
           <span className="requred">* </span>
           <Form.Control
             type="text"
-            placeholder="LRO Name"
+            placeholder="Enter Local Recipient Organization Name"
             name="lroName"
             value={LRORegisterDetails.lroName}
             style={{ borderColor: borderColor.lroName }}
@@ -233,7 +227,7 @@ export default function RegistrationForm({
               <Form.Group className="mb-3" controlId="formLroContact">
                 <Form.Control
                   type="text"
-                  placeholder="contact"
+                  placeholder="Enter LRO Representative Name"
                   name="lroContact"
                   value={LRORegisterDetails.lroContact}
                   style={{ borderColor: borderColor.lroContact }}
@@ -297,21 +291,21 @@ export default function RegistrationForm({
         </Form.Group>
         <Form.Group className="mb-3" controlId="formLroCaptcha">
           <Form.Label>Captcha</Form.Label>
-          <div style={{ display: "flex" }}>
-            <div className="col mt-3">
-              <LoadCanvasTemplateNoReload />
-            </div>
-            <div className="col mt-3">
-              <div>
-                <input
+          <Row>
+            <Col xs={4} className="captcha">
+              <LoadCanvasTemplateNoReload
+              />
+            </Col>
+            <Col xs={5}>
+                <Form.Control
                   placeholder="Enter Captcha Value"
                   id="user_captcha_input"
                   name="user_captcha_input"
                   type="text"
                 />
-              </div>
-            </div>
-          </div>
+              
+            </Col>
+          </Row>
           {ErrorMessage.user_captcha_input !== "" && (
             <span className="formWarning">
               {ErrorMessage.user_captcha_input}
