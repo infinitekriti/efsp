@@ -77,7 +77,7 @@ export default function RegistrationForm({
   const handleInputChangeBlur = (event) => {
     const { name, value } = event.target;
     if (name === "lroSalute") {
-      if (value === "Select") {
+      if (value === "") {
         SErrorMessage(name, "Select the Salutation");
         setBorderColor((prevData) => ({
           ...prevData,
@@ -124,27 +124,33 @@ export default function RegistrationForm({
       case "lroName":
         SetLRODetails(name, value);
         feildColour(name, validateText(value, 3, 100), value);
+        SErrorMessage(name, "Enter valid name");
         break;
       case "lroSalute":
         SetLRODetails(name, value);
         feildColour(name, validateSalute(value));
+        SErrorMessage(name, "Select the salutation");
         break;
       case "lroContact":
         SetLRODetails(name, value);
         feildColour(name, validateText(value, 3, 50), value);
+        SErrorMessage(name, "Enter the name");
         break;
       case "lroEmail":
         SetLRODetails(name, value);
         feildColour(name, validateEmail(value), value);
+        SErrorMessage(name, "Enter Valid Email");
         break;
       case "lroPassword":
         SetLRODetails(name, value);
         feildColour(name, validatePassword(value, 8, 50), value);
+        SErrorMessage(name, "Enter the correct password pattern");
         break;
       case "lroCPassword":
         const password = LRORegisterDetails.lroPassword;
         SetLRODetails(name, value);
         feildColour(name, validateCPassword(value, password));
+        SErrorMessage(name, "password and Re-enter password must be same");
         break;
       default:
         break;
@@ -196,7 +202,7 @@ export default function RegistrationForm({
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
-          {borderColor.lroName === "red" && (
+          {borderColor.lroName === "#A30000" && (
             <span className="formWarning">{ErrorMessage.lroName}</span>
           )}
         </Form.Group>
@@ -218,7 +224,7 @@ export default function RegistrationForm({
                   <option value="Mrs">Mrs</option>
                   <option value="Miss">Miss</option>
                 </Form.Select>
-                {borderColor.lroSalute === "red" && (
+                {borderColor.lroSalute === "#A30000" && (
                   <span className="formWarning">{ErrorMessage.lroSalute}</span>
                 )}
               </Form.Group>
@@ -234,7 +240,7 @@ export default function RegistrationForm({
                   onChange={handleInputChange}
                   onBlur={handleInputChangeBlur}
                 />
-                {borderColor.lroContact === "red" && (
+                {borderColor.lroContact === "#A30000" && (
                   <span className="formWarning">{ErrorMessage.lroContact}</span>
                 )}
               </Form.Group>
@@ -253,7 +259,7 @@ export default function RegistrationForm({
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
-          {borderColor.lroEmail === "red" && (
+          {borderColor.lroEmail === "#A30000" && (
             <span className="formWarning">{ErrorMessage.lroEmail}</span>
           )}
         </Form.Group>
@@ -269,7 +275,7 @@ export default function RegistrationForm({
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
-          {borderColor.lroPassword === "red" && (
+          {borderColor.lroPassword === "#A30000" && (
             <span className="formWarning">{ErrorMessage.lroPassword}</span>
           )}
         </Form.Group>
@@ -285,7 +291,7 @@ export default function RegistrationForm({
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
-          {borderColor.lroCPassword === "red" && (
+          {borderColor.lroCPassword === "#A30000" && (
             <span className="formWarning">{ErrorMessage.lroCPassword}</span>
           )}
         </Form.Group>
