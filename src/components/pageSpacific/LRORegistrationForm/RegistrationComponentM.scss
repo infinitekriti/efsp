@@ -258,6 +258,12 @@
             .address-step-save {
                 cursor: pointer;
             }
+            
         }
+        .captcha{
+            >div{
+                background-color: rgb(247 247 241);
+            }
+           }
     }
 }
