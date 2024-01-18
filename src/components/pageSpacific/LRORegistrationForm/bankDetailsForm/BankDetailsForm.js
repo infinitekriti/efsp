@@ -41,22 +41,22 @@ export default function BankDetailsForm(
           <Form.Label>Name of the Bank</Form.Label>
           <Form.Control type="text" placeholder="Enter Name of the Bank" />
         </Form.Group>
-        <Form.Group className="mb-3">
-            <Form.Label>Account Type</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Account Type"
-              name="lroAccountType"
-              // style={{ borderColor: borderColor.lroAccountType }}
-              // onChange={handleInputChange}
-              // onFocus={handleInputChangeFocus}
-              // onBlur={handleInputChangeBlur}
-            />
+        <Row>
+           <Col>
+          <Form.Group className="fromInput  mb-3">
+          <Form.Label>Account Type</Form.Label>
+           <Form.Select as="select">
+              <option value="">Select Account Type</option>
+            </Form.Select>
           </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Account Number</Form.Label>
-          <Form.Control type="text" placeholder="Enter Account Number" />
-        </Form.Group>
+           </Col>
+           <Col>
+                <Form.Group className="mb-3">
+                <Form.Label>Account Number</Form.Label>
+                <Form.Control type="text" placeholder="Enter Account Number" />
+              </Form.Group>
+           </Col>
+        </Row>
         <Form.Group className="mb-3">
           <Form.Label>ABA Number</Form.Label>
           <Form.Control type="text" placeholder="Enter ABA Number" />
@@ -64,7 +64,7 @@ export default function BankDetailsForm(
         <div className="border-top mt-4"></div>
             <Row className="mt-4">
             <Col>
-              <Button className="btn-padding" variant="secondary">PREVIOUS</Button>
+              <Button className="btn-padding" variant="secondary">CLEAR</Button>
               </Col>
               <Col className="d-flex justify-content-end">
               <Button onClick={handleNext} className="btn-padding btn-icon" variant="primary">NEXT <img src={arrowRight} alt="" /></Button>

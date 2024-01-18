@@ -6,13 +6,7 @@ import { Button } from "react-bootstrap";
 import arrowRight from "../../../../assets/images/svgIcons/arrow-right.svg"
 import saveIcon from "../../../../assets/images/svgIcons/save-icon.svg"
 
-export default function AffiliationInformation(
-  {
-    newTabData,
-    activeTab,
-    setActiveTab,
-  }
-) {
+export default function AffiliationInformation() {
  
   return (
     <div className="affliation-main">
@@ -28,28 +22,27 @@ export default function AffiliationInformation(
           <Form>    
       <Form.Group className="fromInput mb-3">
         <Form.Label>Affiliation</Form.Label>
-        <Form.Control
-            type="text"
-            placeholder="Enter Name as per/in Bank Records"
-          />
+        <Form.Select as="select">
+          <option value="">Select Name as per/in Bank Records</option>
+        </Form.Select>
       </Form.Group>
       <Form.Group className="fromInput  mb-3">
         <Form.Label>Target 1 </Form.Label><span className="requred">* </span>
-        <Form.Control as="select">
+        <Form.Select as="select">
           <option value="">Select Target</option>
-        </Form.Control>
+        </Form.Select>
       </Form.Group>
       <Form.Group className="fromInput  mb-3">
         <Form.Label>Target 2</Form.Label><span className="requred">* </span>
-        <Form.Control as="select">
+        <Form.Select as="select">
           <option value="">Select Target</option>
-        </Form.Control>
+        </Form.Select>
       </Form.Group>
       <Form.Group className="fromInput  mb-3">
         <Form.Label>Target 3</Form.Label><span className="requred">* </span>
-        <Form.Control as="select">
+        <Form.Select as="select">
           <option value="">Select Target</option>
-        </Form.Control>
+        </Form.Select>
       </Form.Group>
       <div className="border-top mt-4"></div>
           <Row className="mt-4">
