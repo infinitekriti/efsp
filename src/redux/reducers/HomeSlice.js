@@ -19,6 +19,11 @@ const initialState = {
     lroBank: "",
     lroNameAsPerBank: "",
   },
+  EmployerId: {
+    lroEni:"",
+    lroSubOrdinateEin:"",
+    lroeinextention:""
+  },
 };
 export const homeSlice = createSlice({
   name: HOME_REDUCER,
