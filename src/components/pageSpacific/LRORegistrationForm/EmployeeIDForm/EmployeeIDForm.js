@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import saveIcon from "../../../../assets/images/svgIcons/save-icon.svg";
 import { Button, Col, Row } from "react-bootstrap";
@@ -9,6 +9,11 @@ import {
   formatExt,
   validateText,
 } from "../../../common/formValidation/FormValidation";
+import {
+  clearFormData,
+  updateFormData,
+} from "../../../../redux/reducers/HomeSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function EmployeeIDForm({
   newTabData,
@@ -17,10 +22,13 @@ export default function EmployeeIDForm({
 }) {
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
-  const [lroeinextention, setlroeinextention] = useState("");
-  const [lroEni, setlroEni] = useState("");
-  const [lroSubOrdinateEin, setlroSubOrdinateEin] = useState("");
-
+  const { EmployerId } = useSelector((state) => state.HomeReducer);
+  const [formData, setFormData] = useState(EmployerId);
+ console.log(EmployerId)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    setFormData(EmployerId);
+  }, [EmployerId]);
   const SErrorMessage = (name, Message, validate) => {
     setErrorMessage((prevData) => ({
       ...prevData,
@@ -53,10 +61,10 @@ export default function EmployeeIDForm({
     if (value.length === 0) {
       switch (name) {
         case "lroEni":
-          SErrorMessage(name, "Enter the Eni", false);
+          SErrorMessage(name, "Enter the EIN", false);
           break;
         case "lroSubOrdinateEin":
-          SErrorMessage(name, "Enter the Eni", false);
+          SErrorMessage(name, "Enter the Subordinate", false);
           break;
         case "lroeinextention":
           SErrorMessage(name, "Enter the Extention", false);
@@ -72,23 +80,23 @@ export default function EmployeeIDForm({
   };
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
     switch (name) {
       case "lroEni":
         const Eni1 = formatEin(value);
-        setlroEni(Eni1);
         feildColour(name, validateEni(Eni1), Eni1);
-        SErrorMessage(name, "ENter valid Eni", validateEni(Eni1));
+        SErrorMessage(name, "Enter valid Ein", validateEni(Eni1));
         break;
       case "lroSubOrdinateEin":
         const Eni2 = formatEin(value);
-        setlroSubOrdinateEin(Eni2);
         feildColour(name, validateEni(Eni2), Eni2);
-        SErrorMessage(name, "ENter valid Eni", validateEni(Eni2));
+        SErrorMessage(name, "Enter valid Subordinate", validateEni(Eni2));
         break;
       case "lroeinextention":
         const Ext = formatExt(value);
-        setlroeinextention(Ext);
         feildColour(name, validateText(Ext, 5, 5), Ext);
         break;
 
@@ -105,11 +113,22 @@ export default function EmployeeIDForm({
       setActiveTab(newTabData[currentTabIndex + 1]);
     }
   };
+  const onSaveHandler = () => {
+    dispatch(updateFormData({ payload: formData, name: "EmployerId" }));
+  };
+  const onClearData = () => {
+    dispatch(clearFormData({ name: "EmployerId" }));
+  };
+  const {
+    lroEni,
+    lroSubOrdinateEin,
+    lroeinextention
+  } = formData;
   return (
     <div className="employee-id-form">
       <div className="address-step-title d-flex justify-content-between mb-3">
         <h6>Step 3. Employer Identification Information</h6>
-        <div className="address-step-save ">
+        <div className="address-step-save " onClick={onSaveHandler}>
           <img src={saveIcon} alt="" />
         </div>
       </div>
@@ -122,11 +141,10 @@ export default function EmployeeIDForm({
           <Form.Control
             type="text"
             className="InputFeild"
-            id="name"
-            placeholder="Enter user ID"
+            placeholder="Enter EIN"
             name="lroEni"
             value={lroEni}
-            style={{ border: borderColor.lroEni }}
+            style={{ borderColor: borderColor.lroEni }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
@@ -139,11 +157,10 @@ export default function EmployeeIDForm({
           <Form.Control
             type="text"
             className="InputFeild"
-            id="name"
             placeholder="Enter Subordinate"
             name="lroSubOrdinateEin"
             value={lroSubOrdinateEin}
-            style={{ border: borderColor.lroSubOrdinateEin }}
+            style={{ borderColor: borderColor.lroSubOrdinateEin }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
@@ -158,11 +175,10 @@ export default function EmployeeIDForm({
           <Form.Control
             type="text"
             className="InputFeild"
-            id="name"
             placeholder="Enter EIN Extension"
             name="lroeinextention"
             value={lroeinextention}
-            style={{ border: borderColor.lroeinextention }}
+            style={{ borderColor: borderColor.lroeinextention }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
@@ -173,7 +189,7 @@ export default function EmployeeIDForm({
         <div className="border-top mt-4"></div>
         <Row className="mt-4">
           <Col>
-            <Button className="btn-padding" variant="secondary">
+            <Button className="btn-padding" variant="secondary" onClick={onClearData}>
               CLEAR
             </Button>
           </Col>
