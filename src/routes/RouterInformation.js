@@ -10,8 +10,8 @@ const RouterInformation = () =>{
   return (
         <Routes>
             <Route path="/home" element={<HomePage />} exact/>
-            <Route path="/registration" element={<LRORegistrationPage/>} exact/>
-            <Route path="/" element={<LroPage />} exact/>
+            <Route path="/" element={<LRORegistrationPage/>} exact/>
+            <Route path="/registration" element={<LroPage />} exact/>
         </Routes>
   )
 }

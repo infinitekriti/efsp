@@ -3,6 +3,7 @@
     content: counters(li, "") " ";
     width: 20px;
     height: 20px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,6 +15,7 @@
     content: counters(li, "") " ";
     width: 12px;
     display: flex;
+    cursor: pointer;
     align-items: center;
     justify-content: center;
     color: #fff;

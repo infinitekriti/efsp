@@ -32,6 +32,7 @@ const {newTabData,setActiveTab,activeTab,setModalShow}=props
               later time and complete the registration.
             </p>
           </div>
+          <div className="border-top mt-4 mb-4"></div>
           <Row>
             <Col>
               <Button className="btn-padding" onClick={props.onHide} variant="secondary">
