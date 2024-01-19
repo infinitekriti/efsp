@@ -1,0 +1,5 @@
+export const GLOBAL_REDUCER="GlobalReducer"
+export const HOME_REDUCER="HomeReducer"
+export const TEST_REDUCER="TestReducer"
+export const GET_HOME_DATA="data/getHomeData"
+export const GET_TEST_DATA="data/getTestData"
