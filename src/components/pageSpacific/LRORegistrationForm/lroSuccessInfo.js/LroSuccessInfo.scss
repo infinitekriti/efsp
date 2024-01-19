@@ -1,0 +1,31 @@
+.lro-success-modal{
+    .modal-content{
+        border-radius: 4px;
+    }
+    .modal-header{
+        border-bottom: 0;
+        padding: 0.5em 0.5em 0.3em;
+    }
+    p{
+        font-size: 0.8em;
+    }
+    .btn-padding {
+        padding: 0.6em 3.5em !important;
+        text-transform: capitalize;
+    }
+
+    .btn-icon {
+        display: flex;
+        gap: 0.8em;
+        color: #fff;
+
+        img {
+            width: 1.4em;
+        }
+    }
+    .btn-secondary {
+        border: 1px solid #D9DBE3;
+        background-color: #D9DBE3;
+        color: #000;
+    }
+}

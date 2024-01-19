@@ -15,9 +15,7 @@ import {
 } from "react-simple-captcha";
 
 export default function RegistrationForm({
-  newTabData,
-  activeTab,
-  setActiveTab,
+  setModalShow
 }) {
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
@@ -31,40 +29,40 @@ export default function RegistrationForm({
   });
 
   useEffect(() => {
-    loadCaptchaEnginge(6);
+    loadCaptchaEnginge(6,"#F0F0E44D");
   }, []);
-  const SErrorMessage = (name, Message) => {
+  const SErrorMessage = (name, Message, validate) => {
     setErrorMessage((prevData) => ({
       ...prevData,
-      [name]: Message,
+      [name]: validate ? "" : Message,
     }));
   };
   const feildColour = (name, validate) => {
     switch (name) {
       case "lroName":
-        SErrorMessage(name, "Enter Valid Name");
+        SErrorMessage(name, "Enter Valid Name", validate);
         break;
       case "lroSalute":
-        SErrorMessage(name, "Select valid Value");
+        SErrorMessage(name, "Select valid Value", validate);
         break;
       case "lroContact":
-        SErrorMessage(name, "Enter Valid Name");
+        SErrorMessage(name, "Enter Valid Name", validate);
         break;
       case "lroEmail":
-        SErrorMessage(name, "Enter Valid Email formate");
+        SErrorMessage(name, "Enter Valid Email formate", validate);
         break;
       case "lroPassword":
-        SErrorMessage(name, "Match the Password Pattern");
+        SErrorMessage(name, "Match the Password Pattern", validate);
         break;
       case "lroCPassword":
-        SErrorMessage(name, "Match the Password");
+        SErrorMessage(name, "Match the Password", validate);
         break;
       default:
         break;
     }
     setBorderColor((prevData) => ({
       ...prevData,
-      [name]: validate ? "#dee2e6" : "red",
+      [name]: validate ? "#dee2e6" : "#A30000",
     }));
   };
 
@@ -79,11 +77,11 @@ export default function RegistrationForm({
   const handleInputChangeBlur = (event) => {
     const { name, value } = event.target;
     if (name === "lroSalute") {
-      if (value === "Select") {
+      if (value === "") {
         SErrorMessage(name, "Select the Salutation");
         setBorderColor((prevData) => ({
           ...prevData,
-          [name]: "red",
+          [name]: "#A30000",
         }));
       }
     }
@@ -109,7 +107,7 @@ export default function RegistrationForm({
       }
       setBorderColor((prevData) => ({
         ...prevData,
-        [name]: "red",
+        [name]: "#A30000",
       }));
     }
   };
@@ -124,29 +122,35 @@ export default function RegistrationForm({
     const { name, value } = event.target;
     switch (name) {
       case "lroName":
-        feildColour(name, validateText(value, 3, 100), value);
         SetLRODetails(name, value);
+        feildColour(name, validateText(value, 3, 100), value);
+        SErrorMessage(name, "Enter valid name");
         break;
       case "lroSalute":
-        feildColour(name, validateSalute(value));
         SetLRODetails(name, value);
+        feildColour(name, validateSalute(value));
+        SErrorMessage(name, "Select the salutation");
         break;
       case "lroContact":
-        feildColour(name, validateText(value, 3, 50), value);
         SetLRODetails(name, value);
+        feildColour(name, validateText(value, 3, 50), value);
+        SErrorMessage(name, "Enter the name");
         break;
       case "lroEmail":
-        feildColour(name, validateEmail(value), value);
         SetLRODetails(name, value);
+        feildColour(name, validateEmail(value), value);
+        SErrorMessage(name, "Enter Valid Email");
         break;
       case "lroPassword":
-        feildColour(name, validatePassword(value, 8, 50), value);
         SetLRODetails(name, value);
+        feildColour(name, validatePassword(value, 8, 50), value);
+        SErrorMessage(name, "Enter the correct password pattern");
         break;
       case "lroCPassword":
         const password = LRORegisterDetails.lroPassword;
-        feildColour(name, validateCPassword(value, password));
         SetLRODetails(name, value);
+        feildColour(name, validateCPassword(value, password));
+        SErrorMessage(name, "password and Re-enter password must be same");
         break;
       default:
         break;
@@ -178,12 +182,8 @@ export default function RegistrationForm({
       if (!validateCaptcha(userCaptcha)) {
         SErrorMessage("user_captcha_input", "Enter the Vaild Captcha");
       } else {
-        const currentTabIndex = newTabData.findIndex(
-          (tab) => tab.id === activeTab.id
-        );
-        if (currentTabIndex < newTabData.length - 1) {
-          setActiveTab(newTabData[currentTabIndex + 1]);
-        }
+       
+        setModalShow(true)
       }
     }
   };
@@ -195,14 +195,14 @@ export default function RegistrationForm({
           <span className="requred">* </span>
           <Form.Control
             type="text"
-            placeholder="LRO Name"
+            placeholder="Enter Local Recipient Organization Name"
             name="lroName"
             value={LRORegisterDetails.lroName}
             style={{ borderColor: borderColor.lroName }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
-          {borderColor.lroName === "red" && (
+          {borderColor.lroName === "#A30000" && (
             <span className="formWarning">{ErrorMessage.lroName}</span>
           )}
         </Form.Group>
@@ -219,12 +219,12 @@ export default function RegistrationForm({
                   onChange={handleInputChange}
                   onBlur={handleInputChangeBlur}
                 >
-                  <option value="Select">Select</option>
+                  <option value="">Select</option>
                   <option value="Mr">Mr</option>
                   <option value="Mrs">Mrs</option>
                   <option value="Miss">Miss</option>
                 </Form.Select>
-                {borderColor.lroSalute === "red" && (
+                {borderColor.lroSalute === "#A30000" && (
                   <span className="formWarning">{ErrorMessage.lroSalute}</span>
                 )}
               </Form.Group>
@@ -233,14 +233,14 @@ export default function RegistrationForm({
               <Form.Group className="mb-3" controlId="formLroContact">
                 <Form.Control
                   type="text"
-                  placeholder="contact"
+                  placeholder="Enter LRO Representative Name"
                   name="lroContact"
                   value={LRORegisterDetails.lroContact}
                   style={{ borderColor: borderColor.lroContact }}
                   onChange={handleInputChange}
                   onBlur={handleInputChangeBlur}
                 />
-                {borderColor.lroContact === "red" && (
+                {borderColor.lroContact === "#A30000" && (
                   <span className="formWarning">{ErrorMessage.lroContact}</span>
                 )}
               </Form.Group>
@@ -259,7 +259,7 @@ export default function RegistrationForm({
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
-          {borderColor.lroEmail === "red" && (
+          {borderColor.lroEmail === "#A30000" && (
             <span className="formWarning">{ErrorMessage.lroEmail}</span>
           )}
         </Form.Group>
@@ -275,7 +275,7 @@ export default function RegistrationForm({
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
-          {borderColor.lroPassword === "red" && (
+          {borderColor.lroPassword === "#A30000" && (
             <span className="formWarning">{ErrorMessage.lroPassword}</span>
           )}
         </Form.Group>
@@ -291,27 +291,27 @@ export default function RegistrationForm({
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
           />
-          {borderColor.lroCPassword === "red" && (
+          {borderColor.lroCPassword === "#A30000" && (
             <span className="formWarning">{ErrorMessage.lroCPassword}</span>
           )}
         </Form.Group>
         <Form.Group className="mb-3" controlId="formLroCaptcha">
           <Form.Label>Captcha</Form.Label>
-          <div style={{ display: "flex" }}>
-            <div className="col mt-3">
-              <LoadCanvasTemplateNoReload />
-            </div>
-            <div className="col mt-3">
-              <div>
-                <input
+          <Row>
+            <Col xs={4} className="captcha">
+              <LoadCanvasTemplateNoReload
+              />
+            </Col>
+            <Col xs={5}>
+                <Form.Control
                   placeholder="Enter Captcha Value"
                   id="user_captcha_input"
                   name="user_captcha_input"
                   type="text"
                 />
-              </div>
-            </div>
-          </div>
+              
+            </Col>
+          </Row>
           {ErrorMessage.user_captcha_input !== "" && (
             <span className="formWarning">
               {ErrorMessage.user_captcha_input}

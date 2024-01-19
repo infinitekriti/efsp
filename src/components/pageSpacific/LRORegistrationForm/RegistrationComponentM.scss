@@ -180,7 +180,7 @@
 
     .lro-components {
         position: relative;
-        width: 650px;
+        max-width: 650px;
         margin: auto;
         box-shadow: 0px 8px 22px 0px rgba(57, 47, 90, 0.10);
         -webkit-box-shadow: 0px 8px 22px 0px rgba(57, 47, 90, 0.10);
@@ -258,6 +258,12 @@
             .address-step-save {
                 cursor: pointer;
             }
+            
         }
+        .captcha{
+            >div{
+                background-color: rgb(247 247 241);
+            }
+           }
     }
 }
