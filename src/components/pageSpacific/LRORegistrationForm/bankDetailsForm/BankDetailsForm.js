@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -6,14 +6,26 @@ import { Button } from "react-bootstrap";
 import arrowRight from "../../../../assets/images/svgIcons/arrow-right.svg";
 import saveIcon from "../../../../assets/images/svgIcons/save-icon.svg";
 import { validateText } from "../../../common/formValidation/FormValidation";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  clearFormData,
+  updateFormData,
+} from "../../../../redux/reducers/HomeSlice";
 
 export default function BankDetailsForm({
   newTabData,
   activeTab,
   setActiveTab,
 }) {
+  const { bankDetails } = useSelector((state) => state.HomeReducer);
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
+  const [formData, setFormData] = useState(bankDetails);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setFormData(bankDetails);
+  }, [bankDetails]);
 
   const SErrorMessage = (name, Message, validate) => {
     setErrorMessage((prevData) => ({
@@ -79,7 +91,10 @@ export default function BankDetailsForm({
   };
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
     switch (name) {
       case "lroNameAsPerBank":
         feildColour(name, validateText(value, 5, 50));
@@ -107,6 +122,7 @@ export default function BankDetailsForm({
   };
 
   const handleNext = () => {
+    onSaveHandler();
     const currentTabIndex = newTabData.findIndex(
       (tab) => tab.id === activeTab.id
     );
@@ -114,11 +130,24 @@ export default function BankDetailsForm({
       setActiveTab(newTabData[currentTabIndex + 1]);
     }
   };
+  const onSaveHandler = () => {
+    dispatch(updateFormData({ payload: formData, name: "bankDetails" }));
+  };
+  const onClearData = () => {
+    dispatch(clearFormData({ name: "bankDetails" }));
+  };
+  const {
+    lroABANumber,
+    lroAccountNumber,
+    lroAccountType,
+    lroBank,
+    lroNameAsPerBank,
+  } = formData;
   return (
     <div className="bank-detail-main">
       <div className="address-step-title d-flex justify-content-between mb-3">
         <h6>Step 4. Bank Details</h6>
-        <div className="address-step-save ">
+        <div className="address-step-save" onClick={onSaveHandler}>
           <img src={saveIcon} alt="" />
         </div>
       </div>
@@ -132,6 +161,7 @@ export default function BankDetailsForm({
             type="text"
             placeholder="Enter Name as per/in Bank Records"
             name="lroNameAsPerBank"
+            value={lroNameAsPerBank}
             style={{ borderColor: borderColor.lroNameAsPerBank }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
@@ -146,6 +176,7 @@ export default function BankDetailsForm({
             type="text"
             placeholder="Enter Name of the Bank"
             name="lroBank"
+            value={lroBank}
             style={{ borderColor: borderColor.lroBank }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
@@ -161,6 +192,7 @@ export default function BankDetailsForm({
               <Form.Select
                 as="select"
                 name="lroAccountType"
+                value={lroAccountType}
                 style={{ borderColor: borderColor.lroAccountType }}
                 onChange={handleInputChange}
                 onBlur={handleInputChangeBlur}
@@ -184,6 +216,7 @@ export default function BankDetailsForm({
                 type="text"
                 placeholder="Enter Account Number"
                 name="lroAccountNumber"
+                value={lroAccountNumber}
                 style={{ borderColor: borderColor.lroAccountNumber }}
                 onChange={handleInputChange}
                 onBlur={handleInputChangeBlur}
@@ -202,6 +235,7 @@ export default function BankDetailsForm({
             type="text"
             placeholder="Enter ABA Number"
             name="lroABANumber"
+            value={lroABANumber}
             style={{ borderColor: borderColor.lroABANumber }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
@@ -213,7 +247,11 @@ export default function BankDetailsForm({
         <div className="border-top mt-4"></div>
         <Row className="mt-4">
           <Col>
-            <Button className="btn-padding" variant="secondary">
+            <Button
+              className="btn-padding"
+              variant="secondary"
+              onClick={onClearData}
+            >
               CLEAR
             </Button>
           </Col>
