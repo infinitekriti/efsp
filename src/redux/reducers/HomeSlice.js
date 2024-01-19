@@ -6,6 +6,12 @@ const initialState = {
   name: "",
   data: {},
   error: "",
+  AffiliationInfo: {
+    lroAffiliation: "",
+    lroTarget1: "",
+    lroTarget2: "",
+    lroTarget3: "",
+  },
   bankDetails: {
     lroABANumber: "",
     lroAccountNumber: "",

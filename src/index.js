@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import Store from "./redux/Store";
-import Test from "./pages/Test";
+// import Test from "./pages/Test";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

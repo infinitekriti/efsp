@@ -1,14 +1,26 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button } from "react-bootstrap";
 import arrowRight from "../../../../assets/images/svgIcons/arrow-right.svg";
 import saveIcon from "../../../../assets/images/svgIcons/save-icon.svg";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  clearFormData,
+  updateFormData,
+} from "../../../../redux/reducers/HomeSlice";
 
 export default function AffiliationInformation() {
+  const { AffiliationInfo } = useSelector((state) => state.HomeReducer);
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
+  const [formData, setFormData] = useState(AffiliationInfo);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setFormData(AffiliationInfo);
+  }, [AffiliationInfo]);
 
   const SErrorMessage = (name, Message, validate) => {
     setErrorMessage((prevData) => ({
@@ -68,7 +80,10 @@ export default function AffiliationInformation() {
   };
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
     switch (name) {
       case "lroAffiliation":
         if (value === "") {
@@ -98,17 +113,23 @@ export default function AffiliationInformation() {
           feildColour(name, true);
         }
         break;
-
       default:
         break;
     }
+  };
+
+  const onSaveHandler = () => {
+    dispatch(updateFormData({ payload: formData, name: "AffiliationInfo" }));
+  };
+  const onClearData = () => {
+    dispatch(clearFormData({ name: "AffiliationInfo" }));
   };
 
   return (
     <div className="affliation-main">
       <div className="address-step-title d-flex justify-content-between mb-3">
         <h6>Step 5. Affiliation</h6>
-        <div className="address-step-save ">
+        <div className="address-step-save " onClick={onSaveHandler}>
           <img src={saveIcon} alt="" />
         </div>
       </div>
@@ -121,6 +142,7 @@ export default function AffiliationInformation() {
           <Form.Select
             as="select"
             name="lroAffiliation"
+            value={formData.lroAffiliation}
             style={{ borderColor: borderColor.lroAffiliation }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
@@ -138,6 +160,7 @@ export default function AffiliationInformation() {
           <Form.Select
             as="select"
             name="lroTarget1"
+            value={formData.lroTarget1}
             style={{ borderColor: borderColor.lroTarget1 }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
@@ -155,6 +178,7 @@ export default function AffiliationInformation() {
           <Form.Select
             as="select"
             name="lroTarget2"
+            value={formData.lroTarget2}
             style={{ borderColor: borderColor.lroTarget2 }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
@@ -172,6 +196,7 @@ export default function AffiliationInformation() {
           <Form.Select
             as="select"
             name="lroTarget3"
+            value={formData.lroTarget3}
             style={{ borderColor: borderColor.lroTarget3 }}
             onChange={handleInputChange}
             onBlur={handleInputChangeBlur}
@@ -186,7 +211,11 @@ export default function AffiliationInformation() {
         <div className="border-top mt-4"></div>
         <Row className="mt-4">
           <Col>
-            <Button className="btn-padding" variant="secondary">
+            <Button
+              className="btn-padding"
+              variant="secondary"
+              onClick={onClearData}
+            >
               CLEAR
             </Button>
           </Col>
