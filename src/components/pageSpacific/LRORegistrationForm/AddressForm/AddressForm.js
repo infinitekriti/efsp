@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -14,15 +14,28 @@ import {
   formateZip,
   validateZip,
 } from "../../../common/formValidation/FormValidation";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  clearFormData,
+  updateFormData,
+} from "../../../../redux/reducers/HomeSlice";
 
 export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
-  const [lroFaxNumber, setlroFaxNumber] = useState("+1");
-  const [lroPhoneNumber, setlroPhoneNumber] = useState("");
-  const [lroZip , setlroZip]=useState("");
-  const [lroUID, setlroUID] = useState("+1");
+  const { addressInformation } = useSelector((state) => state.HomeReducer);
+  const [formData, setFormData] = useState(addressInformation);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    setFormData(addressInformation);
+  }, [addressInformation]);
+  const onSaveHandler = () => {
+    dispatch(updateFormData({ payload: formData, name: "addressInformation" }));
+  };
+  const onClearData = () => {
+    dispatch(clearFormData({ name: "addressInformation" }));
+  };
   const SErrorMessage = (name, Message, validate) => {
     setErrorMessage((prevData) => ({
       ...prevData,
@@ -111,6 +124,18 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+    const exceptionNames = [
+      "lroZip",
+      "lroPhoneNumber",
+      "lroFaxNumber",
+      "lroUID",
+    ];
+    if (!exceptionNames.includes(name)) {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
     switch (name) {
       case "lroAddress1":
         feildColour(name, validateText(value, 3, 40), value);
@@ -120,24 +145,42 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
         break;
       case "lroZip":
         const zip = formateZip(value);
-        setlroZip(zip)
+        setFormData((prevData) => ({
+          ...prevData,
+          lroZip: zip,
+        }));
         feildColour(name, validateZip(zip), zip);
         break;
       case "lroExt":
         break;
+      case "lroState":
+        feildColour(name, validateText(value, 1), value);
+        break;
+      case "lroCity":
+        feildColour(name, validateText(value, 1), value);
+        break;
       case "lroPhoneNumber":
         const PhoneNumber = formatePhoneNumber(value);
-        setlroPhoneNumber(PhoneNumber);
+        setFormData((prevData) => ({
+          ...prevData,
+          lroPhoneNumber: PhoneNumber,
+        }));
         feildColour(name, validatePhoneNumber(PhoneNumber), PhoneNumber);
         break;
       case "lroFaxNumber":
         const FaxNumber = formateFaxNumber(value);
-        setlroFaxNumber(FaxNumber);
+        setFormData((prevData) => ({
+          ...prevData,
+          lroFaxNumber: FaxNumber,
+        }));
         feildColour(name, validateFaxNumber(FaxNumber), FaxNumber);
         break;
       case "lroUID":
         const UID = formateFaxNumber(value);
-        setlroUID(UID);
+        setFormData((prevData) => ({
+          ...prevData,
+          lroUID: UID,
+        }));
         feildColour(name, validateFaxNumber(UID), UID);
         break;
       default:
@@ -146,6 +189,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
   };
 
   const handleNext = () => {
+    onSaveHandler();
     const currentTabIndex = newTabData.findIndex(
       (tab) => tab.id === activeTab.id
     );
@@ -153,12 +197,25 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
       setActiveTab(newTabData[currentTabIndex + 1]);
     }
   };
+
+  const {
+    lroAddress1,
+    lroAddress2,
+    lroAddress3,
+    lroZip,
+    lroCity,
+    lroState,
+    lroExt,
+    lroPhoneNumber,
+    lroFaxNumber,
+    lroUID,
+  } = formData;
   return (
     <Fragment>
       <div className="address-info-main">
         <div className="address-step-title d-flex justify-content-between mb-3">
           <h6>Step 2. Address Information</h6>
-          <div className="address-step-save ">
+          <div className="address-step-save " onClick={onSaveHandler}>
             <img src={saveIcon} alt="" />
           </div>
         </div>
@@ -172,6 +229,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
               type="text"
               placeholder="Building, Apartment, Complex"
               name="lroAddress1"
+              value={lroAddress1}
               style={{ borderColor: borderColor.lroAddress1 }}
               onChange={handleInputChange}
               onBlur={handleInputChangeBlur}
@@ -186,6 +244,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
               type="text"
               placeholder="Flat no., Room, Office"
               name="lroAddress2"
+              value={lroAddress2}
               style={{ borderColor: borderColor.lroAddress2 }}
               onChange={handleInputChange}
               onBlur={handleInputChangeBlur}
@@ -200,6 +259,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
               type="text"
               placeholder="More Details"
               name="lroAddress3"
+              value={lroAddress3}
               onChange={handleInputChange}
             />
           </Form.Group>
@@ -228,11 +288,13 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
                 <span className="requred">* </span>
                 <Form.Select
                   name="lroCity"
+                  value={lroCity}
                   style={{ borderColor: borderColor.lroCity }}
                   onChange={handleInputChange}
                   onBlur={handleInputChangeBlur}
                 >
                   <option value="">select City</option>
+                  <option value="S">S City</option>
                 </Form.Select>
                 {borderColor.lroCity === "red" && (
                   <span className="formWarning">{ErrorMessage.lroCity}</span>
@@ -245,11 +307,13 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
                 <span className="requred">* </span>
                 <Form.Select
                   name="lroState"
+                  value={lroState}
                   style={{ borderColor: borderColor.lroState }}
                   onChange={handleInputChange}
                   onBlur={handleInputChangeBlur}
                 >
                   <option value="">select State</option>
+                  <option value="S">S</option>
                 </Form.Select>
                 {borderColor.lroState === "red" && (
                   <span className="formWarning">{ErrorMessage.lroState}</span>
@@ -267,6 +331,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
                   type="number"
                   placeholder="Enter Ext"
                   name="lroExt"
+                  value={lroExt}
                   style={{ borderColor: borderColor.lroExt }}
                   onChange={handleInputChange}
                   onBlur={handleInputChangeBlur}
@@ -332,7 +397,12 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
           <div className="border-top mt-4"></div>
           <Row className="mt-4">
             <Col>
-              <Button className="btn-padding" variant="secondary" type="reset">
+              <Button
+                className="btn-padding"
+                variant="secondary"
+                type="reset"
+                onClick={onClearData}
+              >
                 CLEAR
               </Button>
             </Col>

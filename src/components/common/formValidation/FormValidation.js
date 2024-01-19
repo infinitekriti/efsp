@@ -1,4 +1,4 @@
-export const validateText = (value, minLength, maxLength) =>
+export const validateText = (value, minLength, maxLength = 255) =>
   value.length >= minLength && value.length <= maxLength;
 
 export const validateEmail = (value) => {
@@ -13,12 +13,11 @@ export const formateZip = (value) => {
   if (cleaned.length >= 0) {
     formatted += `${cleaned.substring(0, 5)}`;
   }
-  
 
   if (cleaned.length >= 5) {
     formatted += `-${cleaned.substring(5, 9)}`;
   }
-  if(formatted.length === 6){
+  if (formatted.length === 6) {
     formatted = `${cleaned.substring(0, 5)}`;
   }
 
