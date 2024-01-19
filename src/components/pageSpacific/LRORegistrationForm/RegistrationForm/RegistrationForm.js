@@ -298,11 +298,11 @@ export default function RegistrationForm({
         <Form.Group className="mb-3" controlId="formLroCaptcha">
           <Form.Label>Captcha</Form.Label>
           <Row>
-            <Col xs={4} className="captcha">
+            <Col  xs={6} sm={4} className="captcha">
               <LoadCanvasTemplateNoReload
               />
             </Col>
-            <Col xs={5}>
+            <Col xs={6} sm={5}>
                 <Form.Control
                   placeholder="Enter Captcha Value"
                   id="user_captcha_input"
