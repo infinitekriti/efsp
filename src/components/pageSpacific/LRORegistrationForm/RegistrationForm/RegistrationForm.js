@@ -190,7 +190,7 @@ export default function RegistrationForm({
   return (
     <div className="registration-form">
       <Form>
-        <Form.Group className="mb-3" controlId="formLroName">
+        <Form.Group className="mb-3">
           <Form.Label>Local Recipient Organization Name</Form.Label>
           <span className="requred">* </span>
           <Form.Control
@@ -247,7 +247,7 @@ export default function RegistrationForm({
             </Col>
           </Row>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formLroEmail">
+        <Form.Group className="mb-3">
           <Form.Label>Email / UserID</Form.Label>
           <span className="requred">* </span>
           <Form.Control
@@ -263,7 +263,7 @@ export default function RegistrationForm({
             <span className="formWarning">{ErrorMessage.lroEmail}</span>
           )}
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formLroPassword">
+        <Form.Group className="mb-3">
           <Form.Label>Password</Form.Label>
           <span className="requred">* </span>
           <Form.Control
@@ -279,7 +279,7 @@ export default function RegistrationForm({
             <span className="formWarning">{ErrorMessage.lroPassword}</span>
           )}
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formLroCPassword">
+        <Form.Group className="mb-3">
           <Form.Label>Re-enter Password</Form.Label>
           <span className="requred">* </span>
           <Form.Control
@@ -295,7 +295,7 @@ export default function RegistrationForm({
             <span className="formWarning">{ErrorMessage.lroCPassword}</span>
           )}
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formLroCaptcha">
+        <Form.Group className="mb-3">
           <Form.Label>Captcha</Form.Label>
           <Row>
             <Col  xs={6} sm={4} className="captcha">

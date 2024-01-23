@@ -30,6 +30,66 @@ $sizes: 1em, 2em, 3em, 4em, 5em;
   }
 }
 
+@mixin formFields{
+  label {
+    font-size: 0.85em;
+    color: var(--labelColor);
+    font-weight: 400;
+}
+
+button {
+    color: #fff;
+    font-weight: 500;
+    font-size: 1em;
+}
+
+.requred {
+    color: var(--FormWarrining);
+    margin-left: 0.2em;
+}
+
+input,
+select {
+    font-size: 0.8em;
+    border: 1px solid var(--borderColor);
+    color: var(--placeHolderColor);
+
+    &::placeholder {
+        color: var(--placeHolderColor);
+    }
+}
+
+.btn-padding {
+    padding: 0.6em 3.5em !important;
+    text-transform: capitalize;
+}
+
+.btn-icon {
+    display: flex;
+    gap: 0.8em;
+
+    img {
+        width: 1.4em;
+    }
+}
+
+.btn-secondary {
+    border: 1px solid #D9DBE3;
+    background-color: #D9DBE3;
+    color: #000;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
 @mixin checkbox {
   input[type="checkbox"] {
     --active: var(--checkboxButtonActiveBackgroundColor);
