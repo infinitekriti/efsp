@@ -1,7 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { REPORTS_REDUCER } from "../constants";
 
-const initialState = {};
+const initialState = {
+  listingInformation: {
+    phase: "",
+    affiliation: "",
+    target: "",
+    funded: false,
+    includeContactAddress: false,
+    list: "",
+  },
+};
 export const reportsSlice = createSlice({
   name: REPORTS_REDUCER,
   initialState: initialState,
