@@ -36,12 +36,44 @@ export default function LROListing() {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col lg={2}>
+            <Form.Group className="mb-3">
+              <Form.Check
+                type="radio"
+                label="All States"
+                name="radioGroup1"
+                aria-label="radio 1"
+              />
+            </Form.Group>
+          </Col>
+          <Col lg={4}>
+            <Form.Group className="mb-3">
+              <Form.Check
+                type="radio"
+                label="Multiple States"
+                name="radioGroup1"
+                aria-label="radio 1"
+              />
+            </Form.Group>
+          </Col>
+          <Col lg={2}>
+            <Form.Group className="mb-3">
+              <Form.Check
+                type="radio"
+                label="Single LB"
+                name="radioGroup1"
+                aria-label="radio 1"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={2}>
             <Form.Group className="mb-3">
               <Form.Check label="Funded" aria-label="option 1" />
             </Form.Group>
           </Col>
-          <Col>
+          <Col lg={4}>
             <Form.Group className="mb-3">
               <Form.Check
                 label="Include contact & address"
@@ -51,7 +83,7 @@ export default function LROListing() {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col lg={2}>
             <Form.Group className="mb-3">
               <Form.Check
                 type="radio"
@@ -61,7 +93,7 @@ export default function LROListing() {
               />
             </Form.Group>
           </Col>
-          <Col>
+          <Col lg={2}>
             <Form.Group className="mb-3">
               <Form.Check
                 type="radio"
