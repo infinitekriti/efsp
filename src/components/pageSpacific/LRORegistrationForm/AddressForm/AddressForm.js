@@ -362,38 +362,47 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
               </Form.Group>
             </Col>
           </Row>
-          <Form.Group className="mb-3" controlId="faxNumber">
-            <Form.Label>Fax</Form.Label>
-            <span className="requred">* </span>
-            <Form.Control
-              type="tel"
-              name="lroFaxNumber"
-              placeholder="Enter Fax"
-              value={lroFaxNumber}
-              style={{ borderColor: borderColor.lroFaxNumber }}
-              onChange={handleInputChange}
-              onBlur={handleInputChangeBlur}
-            />
-            {borderColor.lroFaxNumber === "red" && (
-              <span className="formWarning">{ErrorMessage.lroFaxNumber}</span>
-            )}
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="uid">
-            <Form.Label>UID</Form.Label>
-            <span className="requred">* </span>
-            <Form.Control
-              type="tel"
-              name="lroUID"
-              placeholder="Enter UID"
-              value={lroUID}
-              style={{ borderColor: borderColor.lroUID }}
-              onChange={handleInputChange}
-              onBlur={handleInputChangeBlur}
-            />
-            {borderColor.lroUID === "red" && (
-              <span className="formWarning">{ErrorMessage.lroUID}</span>
-            )}
-          </Form.Group>
+          <Row>
+            <Col>
+              <Form.Group className="mb-3" controlId="faxNumber">
+                <Form.Label>Fax</Form.Label>
+                <span className="requred">* </span>
+                <Form.Control
+                  type="tel"
+                  name="lroFaxNumber"
+                  placeholder="Enter Fax"
+                  value={lroFaxNumber}
+                  style={{ borderColor: borderColor.lroFaxNumber }}
+                  onChange={handleInputChange}
+                  onBlur={handleInputChangeBlur}
+                />
+                {borderColor.lroFaxNumber === "red" && (
+                  <span className="formWarning">
+                    {ErrorMessage.lroFaxNumber}
+                  </span>
+                )}
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group className="mb-3" controlId="uid">
+                <Form.Label>UIE ID</Form.Label>
+                <span className="requred">* </span>
+                <Form.Control
+                  type="tel"
+                  name="lroUID"
+                  placeholder="Enter UID"
+                  value={lroUID}
+                  style={{ borderColor: borderColor.lroUID }}
+                  onChange={handleInputChange}
+                  onBlur={handleInputChangeBlur}
+                />
+                {borderColor.lroUID === "red" && (
+                  <span className="formWarning">{ErrorMessage.lroUID}</span>
+                )}
+              </Form.Group>
+            </Col>
+          </Row>
+
           <div className="border-top mt-4"></div>
           <Row className="mt-4">
             <Col>
