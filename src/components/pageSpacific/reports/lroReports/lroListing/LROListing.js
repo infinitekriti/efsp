@@ -8,6 +8,7 @@ const initialListingInformation = {
   phase: "",
   affiliation: "",
   target: "",
+  radioGroup1: "",
   funded: false,
   includeContactAddress: false,
   list: "",
@@ -16,8 +17,15 @@ export default function LROListing() {
   const { listingInformation } = useSelector((state) => state.ReportsReducer);
   const [formData, setFormData] = useState(listingInformation);
   const dispatch = useDispatch();
-  const { phase, affiliation, target, funded, includeContactAddress, list } =
-    formData;
+  const {
+    phase,
+    affiliation,
+    target,
+    radioGroup1,
+    funded,
+    includeContactAddress,
+    list,
+  } = formData;
   useEffect(() => {
     setFormData(listingInformation);
   }, [listingInformation]);
@@ -90,7 +98,12 @@ export default function LROListing() {
                 type="radio"
                 label="All States"
                 name="radioGroup1"
+                value={"All States"}
+                checked={radioGroup1 === "All States"}
                 aria-label="radio 1"
+                onChange={({ target: { name, value } }) =>
+                  handleChange(name, value)
+                }
               />
             </Form.Group>
           </Col>
@@ -100,7 +113,12 @@ export default function LROListing() {
                 type="radio"
                 label="Multiple States"
                 name="radioGroup1"
+                value={"Multiple States"}
+                checked={radioGroup1 === "Multiple States"}
                 aria-label="radio 1"
+                onChange={({ target: { name, value } }) =>
+                  handleChange(name, value)
+                }
               />
             </Form.Group>
           </Col>
@@ -110,7 +128,12 @@ export default function LROListing() {
                 type="radio"
                 label="Single LB"
                 name="radioGroup1"
+                value={"Single LB"}
+                checked={radioGroup1 === "Single LB"}
                 aria-label="radio 1"
+                onChange={({ target: { name, value } }) =>
+                  handleChange(name, value)
+                }
               />
             </Form.Group>
           </Col>
@@ -163,10 +186,10 @@ export default function LROListing() {
             <Form.Group className="mb-3">
               <Form.Check
                 type="radio"
-                label="list 2"
+                label="Labels"
                 name="list"
-                value={"list 2"}
-                checked={list === "list 2"}
+                value={"Labels"}
+                checked={list === "Labels"}
                 aria-label="radio 1"
                 onChange={({ target: { name, value } }) =>
                   handleChange(name, value)

@@ -6,6 +6,7 @@ const initialState = {
     phase: "",
     affiliation: "",
     target: "",
+    radioGroup1: "",
     funded: false,
     includeContactAddress: false,
     list: "",
