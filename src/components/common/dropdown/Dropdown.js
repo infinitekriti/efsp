@@ -2,8 +2,8 @@ import React, { useState, useRef } from "react";
 import "./Dropdown.css";
 import { Form } from "react-bootstrap";
 
-export default function Dropdown({ options, onSelect, name, label }) {
-  const [searchTerm, setSearchTerm] = useState();
+export default function Dropdown({ options, onSelect, name, label, value }) {
+  const [searchTerm, setSearchTerm] = useState(value);
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
   const [filteredOptions, setFilteredOptions] = useState(options);
@@ -38,22 +38,24 @@ export default function Dropdown({ options, onSelect, name, label }) {
     SErrorMessage(name, "", true);
     setBorderColor((prevData) => ({
       ...prevData,
-      [name]: "#dee2e6", 
+      [name]: "#dee2e6",
     }));
-    optionClicked.current = true; 
+    optionClicked.current = true;
   };
 
   const handleBlur = () => {
-    setIsDropdownOpen(false);
+    setTimeout(() => {
+      setIsDropdownOpen(false);
 
-    if (!optionClicked.current && !filteredOptions.includes(searchTerm)) {
-      SErrorMessage(name, "Select a valid value", false);
-      setBorderColor((prevData) => ({
-        ...prevData,
-        [name]: "red",
-      }));
-    }
-    optionClicked.current = false;
+      if (!optionClicked.current && !filteredOptions.includes(searchTerm)) {
+        SErrorMessage(name, "Select a valid value", false);
+        setBorderColor((prevData) => ({
+          ...prevData,
+          [name]: "red",
+        }));
+      }
+      optionClicked.current = false;
+    }, 100);
   };
 
   const handleFocus = () => {

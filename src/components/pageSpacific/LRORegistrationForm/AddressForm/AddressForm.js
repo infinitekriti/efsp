@@ -202,17 +202,24 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
   const stateOptions = ["California", "New York", "Texas"];
 
   const handleSelect = (selectedValue, name) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: selectedValue,
-    }));
-
-    if (name === "lroState") {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: selectedValue,
-      }));
-      console.log("Selected state:", lroState, lroCity);
+    const value = selectedValue
+    switch (name) {
+      case "lroState":
+        setFormData((prevData) => ({
+          ...prevData,
+          lroState: value,
+        }));
+        console.log( value)
+        break;
+      case "lroCity":
+        setFormData((prevData) => ({
+          ...prevData,
+          lroCity: value,
+        }));
+        console.log( value)
+        break;
+      default:
+        break;
     }
   };
   const {
@@ -311,6 +318,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
                   onSelect={handleSelect}
                   name="lroCity"
                   label="City"
+                  value={lroCity}
                 />
                 {/* <Form.Label>Select City</Form.Label>
                 <span className="requred">* </span>
@@ -348,6 +356,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
                   onSelect={handleSelect}
                   name="lroState"
                   label="State"
+                  value={lroState}
                 />
 
                 {/* <Form.Label>Select State</Form.Label>
