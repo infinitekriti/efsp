@@ -19,6 +19,7 @@ import {
   clearFormData,
   updateFormData,
 } from "../../../../redux/reducers/HomeSlice";
+import Dropdown from "../../../common/dropdown/Dropdown";
 
 export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
   const [borderColor, setBorderColor] = useState({});
@@ -198,6 +199,22 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
     }
   };
 
+  const stateOptions = ["California", "New York", "Texas"];
+
+  const handleSelect = (selectedValue, name) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: selectedValue,
+    }));
+
+    if (name === "lroState") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: selectedValue,
+      }));
+      console.log("Selected state:", lroState, lroCity);
+    }
+  };
   const {
     lroAddress1,
     lroAddress2,
@@ -284,7 +301,13 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
             </Col>
             <Col>
               <Form.Group className="mb-3" controlId="formCity">
-                <Form.Label>Select City</Form.Label>
+                <Dropdown
+                  options={stateOptions}
+                  onSelect={handleSelect}
+                  name="lroCity"
+                  label="City"
+                />
+                {/* <Form.Label>Select City</Form.Label>
                 <span className="requred">* </span>
                 <Form.Select
                   name="lroCity"
@@ -298,12 +321,19 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
                 </Form.Select>
                 {borderColor.lroCity === "red" && (
                   <span className="formWarning">{ErrorMessage.lroCity}</span>
-                )}
+                )} */}
               </Form.Group>
             </Col>
             <Col>
               <Form.Group className="mb-3" controlId="formState">
-                <Form.Label>Select State</Form.Label>
+                <Dropdown
+                  options={stateOptions}
+                  onSelect={handleSelect}
+                  name="lroState"
+                  label="State"
+                />
+
+                {/* <Form.Label>Select State</Form.Label>
                 <span className="requred">* </span>
                 <Form.Select
                   name="lroState"
@@ -314,10 +344,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
                 >
                   <option value="">select State</option>
                   <option value="S">S</option>
-                </Form.Select>
-                {borderColor.lroState === "red" && (
-                  <span className="formWarning">{ErrorMessage.lroState}</span>
-                )}
+                </Form.Select> */}
               </Form.Group>
             </Col>
           </Row>
