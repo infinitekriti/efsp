@@ -234,11 +234,6 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
     lroFaxNumber,
     lroUID,
   } = formData;
-
-  // const onVaildate = () =>{
-   
-      
-  // }
   return (
     <Fragment>
       <div className="address-info-main">
@@ -322,18 +317,6 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
                 />
                 {/* <Form.Label>Select City</Form.Label>
                 <span className="requred">* </span>
-                 {/* <SearchableDropdown
-                    options={animals}
-                    labelName="Select City"
-                    label="name"
-                    id="id"
-                    selectedVal={lroCity}
-                    isValidationCheck={true}
-                    placeholder="Select City"
-                    requred
-                    onValidation={onVaildate}
-                    // handleChange={handleInputChange}
-                  /> */}
                 <Form.Select
                   name="lroCity"
                   value={lroCity}

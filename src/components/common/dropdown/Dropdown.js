@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
-import "./Dropdown.css";
+import "./Dropdown.scss";
 import { Form } from "react-bootstrap";
+import { ReactComponent as DropDownIcon } from "../../../assets/images/svgIcons/dropdownIcon.svg"
 
 export default function Dropdown({ options, onSelect, name, label, value }) {
   const [searchTerm, setSearchTerm] = useState(value);
@@ -45,18 +46,18 @@ export default function Dropdown({ options, onSelect, name, label, value }) {
   };
 
   const handleBlur = () => {
-    setTimeout(() => {
-      setIsDropdownOpen(false);
+    // setTimeout(() => {
+    //   setIsDropdownOpen(false);
 
-      if (!optionClicked.current && !filteredOptions.includes(searchTerm)) {
-        SErrorMessage(name, "Select a valid value", false);
-        setBorderColor((prevData) => ({
-          ...prevData,
-          [name]: "red",
-        }));
-      }
-      optionClicked.current = false;
-    }, 100);
+    //   if (!optionClicked.current && !filteredOptions.includes(searchTerm)) {
+    //     SErrorMessage(name, "Select a valid value", false);
+    //     setBorderColor((prevData) => ({
+    //       ...prevData,
+    //       [name]: "red",
+    //     }));
+    //   }
+    //   optionClicked.current = false;
+    // }, 100);
   };
 
   const handleFocus = () => {
@@ -66,6 +67,7 @@ export default function Dropdown({ options, onSelect, name, label, value }) {
   return (
     <div className={`custom-select-dropdown ${name}`} ref={dropdownRef}>
       <Form.Label>{label}</Form.Label>
+      <div className="position-relative">
       <Form.Control
         type="text"
         placeholder={`Select a ${label}`}
@@ -75,11 +77,10 @@ export default function Dropdown({ options, onSelect, name, label, value }) {
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
-      {borderColor[name] === "red" && (
-        <span className="formWarning">{ErrorMessage[name]}</span>
-      )}
-
-      {isDropdownOpen && (
+       <div className={`arrow`}>
+            <DropDownIcon />
+        </div>
+        {isDropdownOpen && (
         <div className="floating-table">
           <table>
             <tbody>
@@ -92,6 +93,13 @@ export default function Dropdown({ options, onSelect, name, label, value }) {
           </table>
         </div>
       )}
+      </div>
+      
+      
+      {borderColor[name] === "red" && (
+        <span className="formWarning">{ErrorMessage[name]}</span>
+      )}
+
     </div>
   );
 }
