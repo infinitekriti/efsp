@@ -8,7 +8,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
-  const [isFocused, setIsFocused] = useState(false);
+  //const [isFocused, setIsFocused] = useState(false);
   const [isBlur, setIsBlur] = useState(false);
   const inputRef = useRef();
   const SErrorMessage = (name, Message, validate) => {
@@ -71,7 +71,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
   };
 
   const handleOptionClick = (option) => {
-    setIsFocused(true);
+    //setIsFocused(true)
     setInputValue(option);
     setShowOptions(false);
     onSelect(option, name);
@@ -80,58 +80,48 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
 
   return (
     <div className={`custom-select-dropdown ${name}`} ref={inputRef}>
-      <Form.Group>
-        <Form.Label>{label}</Form.Label>
-        <div className="position-relative">
-          <Form.Control
-            type="text"
-            placeholder={`Select a ${label}`}
-            value={inputValue}
-            id="dropdown"
-            style={{
-              borderColor:
-                isBlur && borderColor[name] === "#A30000" && borderColor[name],
-            }}
-            onChange={handleInputChange}
-            onBlur={() => {
-              setIsBlur(true);
-            }}
-            onFocus={() => {
-              setIsFocused(true);
-              setShowOptions(true);
-            }}
-          />
-          <div
-            className="arrow"
-            onClick={() => {
-              setIsFocused(true);
-              setShowOptions(true);
-            }}
-          >
+      <Form.Label>{label}</Form.Label> <span className="requred">* </span>
+      <div className="position-relative"> 
+      <Form.Control
+        type="text"
+        placeholder={`Select a ${label}`}
+        value={inputValue}
+        style={{
+          borderColor:isBlur && borderColor[name] === "#A30000" && borderColor[name],
+        }}
+        onChange={handleInputChange}
+        onBlur={()=>{
+          setTimeout(()=>{
+            setIsBlur(true);
+          },1000)
+        }}
+        onFocus={() => {
+          //setIsFocused(true);
+          setShowOptions(true);
+        }}
+      />
+       <div className="arrow">
             <DropDownIcon />
-          </div>
-          {showOptions && (
-            <div className="floating-table">
-              <table>
-                <tbody>
-                  {filteredOptions.map((option, index) => (
-                    <tr
-                      for="dropdown"
-                      key={index}
-                      onClick={() => handleOptionClick(option)}
-                    >
-                      <td>{option}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
         </div>
-        {isBlur && borderColor[name] === "#A30000" && (
-          <span className="formWarning">{ErrorMessage[name]}</span>
-        )}
-      </Form.Group>
+       {showOptions && (
+        <div className="floating-table">
+          <table>
+            <tbody>
+              {filteredOptions.map((option, index) => (
+                <tr key={index} onClick={() => handleOptionClick(option)}>
+                  <td>{option}</td>
+                  
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      </div>
+      {isBlur && borderColor[name] === "#A30000" && (
+        <span className="formWarning">{ErrorMessage[name]}</span>
+      )}
+     
     </div>
   );
 };

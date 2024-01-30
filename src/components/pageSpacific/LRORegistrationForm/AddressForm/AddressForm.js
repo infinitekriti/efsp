@@ -309,6 +309,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
             <Col>
               <Form.Group className="mb-3" controlId="formCity">
                 <Dropdown
+                controlId="formCity"
                   options={stateOptions}
                   onSelect={handleSelect}
                   name="lroCity"
