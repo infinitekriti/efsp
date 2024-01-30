@@ -158,14 +158,6 @@ export default function RegistrationForm({ setModalShow }) {
   };
 
   const handleRegister = () => {
-    setModalShow(true);
-    dispatch(
-      updateFormData({
-        payload: LRORegisterDetails,
-        name: "lroRegisterDetails",
-      })
-    );
-    return;
     let Message = "Enter the required feilds";
     if (LRORegisterDetails.lroName === "") {
       SErrorMessage("Register", Message);

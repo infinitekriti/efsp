@@ -10,7 +10,7 @@ API.interceptors.request.use(
     // const authToken = getAuthToken() || "ZWZzcGFkbWluOkFseXhAMjAyMyE=";
     const authToken = btoa("efspadmin:Alyx@2023!");
     if (authToken) {
-      config.headers.Authorization = `Bearer ${authToken}`;
+      config.headers.Authorization = `Basic ${authToken}`;
     }
     config.headers["Access-Control-Allow-Origin"] = "*";
     config.headers["Access-Control-Allow-Headers"] =
