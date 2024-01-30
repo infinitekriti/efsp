@@ -1,0 +1,45 @@
+.custom-select-dropdown {
+  position: relative;
+  .arrow {
+    position: absolute;
+    top: 5px;
+    right: 16px;  
+      svg{
+          width: 12px;
+      }
+    }
+    input{
+      padding-right: 2.25em;
+    }
+    .floating-table {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        td {
+          padding: 0.5em 0.7em;
+          font-size: 0.7em;
+          cursor: pointer;
+        }
+        
+        td:hover {
+          background-color: #f2f2f2;
+        }
+      }
+    }
+    
+}
+
+
+
+
+
