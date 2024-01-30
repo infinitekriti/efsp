@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Form } from "react-bootstrap";
-
-
+import { ReactComponent as DropDownIcon } from "../../../assets/images/svgIcons/dropdownIcon.svg"
+import "./Dropdown.scss"
 const Dropdown = ({ options, onSelect, name, label, value }) => {
   const [inputValue, setInputValue] = useState(value);
   const [filteredOptions, setFilteredOptions] = useState(options);
@@ -9,6 +9,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
   const [isFocused, setIsFocused] = useState(false);
+  const [isBlur, setIsBlur] = useState(false);
   const inputRef = useRef();
   const SErrorMessage = (name, Message, validate) => {
     setErrorMessage((prevData) => ({
@@ -20,7 +21,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
     SErrorMessage(name, "Select a valid value", false);
     setBorderColor((prevData) => ({
       ...prevData,
-      [name]: "red",
+      [name]: "#A30000",
     }));
   };
   const onSuccessValidation = () => {
@@ -70,6 +71,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
   };
  
   const handleOptionClick = (option) => {
+    setIsFocused(true)
     setInputValue(option);
     setShowOptions(false);
     onSelect(option, name);
@@ -78,31 +80,35 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
  
   return (
     <div className={`custom-select-dropdown ${name}`} ref={inputRef}>
+    <Form.Group >
       <Form.Label>{label}</Form.Label>
+      <div className="position-relative"> 
       <Form.Control
         type="text"
         placeholder={`Select a ${label}`}
         value={inputValue}
+        id="dropdown"
         style={{
-          borderColor:
-            isFocused && borderColor[name] === "red" && borderColor[name],
+          borderColor:isBlur && borderColor[name] === "#A30000" && borderColor[name],
         }}
         onChange={handleInputChange}
+        onBlur={()=>{
+          setIsBlur(true);
+        }}
         onFocus={() => {
           setIsFocused(true);
           setShowOptions(true);
         }}
       />
-      {isFocused && borderColor[name] === "red" && (
-        <span className="formWarning">{ErrorMessage[name]}</span>
-      )}
- 
-      {showOptions && (
+       <div className="arrow">
+            <DropDownIcon />
+        </div>
+       {showOptions && (
         <div className="floating-table">
           <table>
             <tbody>
               {filteredOptions.map((option, index) => (
-                <tr key={index} onClick={() => handleOptionClick(option)}>
+                <tr for="dropdown" key={index} onClick={() => handleOptionClick(option)}>
                   <td>{option}</td>
                 </tr>
               ))}
@@ -110,6 +116,12 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
           </table>
         </div>
       )}
+      </div>
+      {isBlur && borderColor[name] === "#A30000" && (
+        <span className="formWarning">{ErrorMessage[name]}</span>
+      )}
+    </Form.Group>
+     
     </div>
   );
 };
