@@ -56,7 +56,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [inputValue]);
-
+ 
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
@@ -66,14 +66,14 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
     setFilteredOptions(filtered);
     setShowOptions(true);
   };
-
+ 
   const handleOptionClick = (option) => {
     setInputValue(option);
     setShowOptions(false);
     onSelect(option, name);
     onSuccessValidation();
   };
-
+ 
   return (
     <div className={`custom-select-dropdown ${name}`} ref={inputRef}>
       <Form.Label>{label}</Form.Label>
@@ -94,7 +94,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
       {isFocused && borderColor[name] === "red" && (
         <span className="formWarning">{ErrorMessage[name]}</span>
       )}
-
+ 
       {showOptions && (
         <div className="floating-table">
           <table>
@@ -111,5 +111,5 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
     </div>
   );
 };
-
+ 
 export default Dropdown;
