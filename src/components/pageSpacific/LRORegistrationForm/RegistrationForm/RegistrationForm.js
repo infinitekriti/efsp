@@ -158,6 +158,9 @@ export default function RegistrationForm({
   };
 
   const handleRegister = () => {
+    
+    setModalShow(true)
+    return
     let Message = "Enter the required feilds";
     if (LRORegisterDetails.lroName === "") {
       SErrorMessage("Register", Message);
