@@ -13,10 +13,10 @@ import {
   LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
+import { useDispatch } from "react-redux";
+import { updateFormData } from "../../../../redux/reducers/HomeSlice";
 
-export default function RegistrationForm({
-  setModalShow
-}) {
+export default function RegistrationForm({ setModalShow }) {
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
   const [LRORegisterDetails, setLRORegisterDetails] = useState({
@@ -27,9 +27,9 @@ export default function RegistrationForm({
     lroPassword: "",
     lroCPassword: "",
   });
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    loadCaptchaEnginge(6,"#F0F0E44D");
+    loadCaptchaEnginge(6, "#F0F0E44D");
   }, []);
   const SErrorMessage = (name, Message, validate) => {
     setErrorMessage((prevData) => ({
@@ -158,6 +158,14 @@ export default function RegistrationForm({
   };
 
   const handleRegister = () => {
+    setModalShow(true);
+    dispatch(
+      updateFormData({
+        payload: LRORegisterDetails,
+        name: "lroRegisterDetails",
+      })
+    );
+    return;
     let Message = "Enter the required feilds";
     if (LRORegisterDetails.lroName === "") {
       SErrorMessage("Register", Message);
@@ -182,8 +190,13 @@ export default function RegistrationForm({
       if (!validateCaptcha(userCaptcha)) {
         SErrorMessage("user_captcha_input", "Enter the Vaild Captcha");
       } else {
-       
-        setModalShow(true)
+        setModalShow(true);
+        dispatch(
+          updateFormData({
+            payload: LRORegisterDetails,
+            name: "lroRegisterDetails",
+          })
+        );
       }
     }
   };
@@ -298,18 +311,16 @@ export default function RegistrationForm({
         <Form.Group className="mb-3">
           <Form.Label>Captcha</Form.Label>
           <Row>
-            <Col  xs={6} sm={4} className="captcha">
-              <LoadCanvasTemplateNoReload
-              />
+            <Col xs={6} sm={4} className="captcha">
+              <LoadCanvasTemplateNoReload />
             </Col>
             <Col xs={6} sm={5}>
-                <Form.Control
-                  placeholder="Enter Captcha Value"
-                  id="user_captcha_input"
-                  name="user_captcha_input"
-                  type="text"
-                />
-              
+              <Form.Control
+                placeholder="Enter Captcha Value"
+                id="user_captcha_input"
+                name="user_captcha_input"
+                type="text"
+              />
             </Col>
           </Row>
           {ErrorMessage.user_captcha_input !== "" && (

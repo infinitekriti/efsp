@@ -24,7 +24,7 @@ export default function EmployeeIDForm({
   const [ErrorMessage, setErrorMessage] = useState({});
   const { EmployerId } = useSelector((state) => state.HomeReducer);
   const [formData, setFormData] = useState(EmployerId);
- console.log(EmployerId)
+  console.log(EmployerId);
   const dispatch = useDispatch();
   useEffect(() => {
     setFormData(EmployerId);
@@ -106,6 +106,7 @@ export default function EmployeeIDForm({
   };
 
   const handleNext = () => {
+    onSaveHandler();
     const currentTabIndex = newTabData.findIndex(
       (tab) => tab.id === activeTab.id
     );
@@ -119,11 +120,7 @@ export default function EmployeeIDForm({
   const onClearData = () => {
     dispatch(clearFormData({ name: "EmployerId" }));
   };
-  const {
-    lroEni,
-    lroSubOrdinateEin,
-    lroeinextention
-  } = formData;
+  const { lroEni, lroSubOrdinateEin, lroeinextention } = formData;
   return (
     <div className="employee-id-form">
       <div className="address-step-title d-flex justify-content-between mb-3">
@@ -189,7 +186,11 @@ export default function EmployeeIDForm({
         <div className="border-top mt-4"></div>
         <Row className="mt-4">
           <Col>
-            <Button className="btn-padding" variant="secondary" onClick={onClearData}>
+            <Button
+              className="btn-padding"
+              variant="secondary"
+              onClick={onClearData}
+            >
               CLEAR
             </Button>
           </Col>

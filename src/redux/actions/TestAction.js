@@ -8,7 +8,7 @@ export const getTestDataAsync = createAsyncThunk(
     try {
       //start loading //dispatch(startLoadingAction(true))
       const res = await getTestData(data);
-      if (res.status!==200) {
+      if (res.status !== 200) {
         throw new Error(`HTTP error! Status: ${res.status}`);
       }
       return res.data;
