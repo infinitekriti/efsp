@@ -1,101 +1,133 @@
-import React, { useState, useRef } from "react";
-import "./Dropdown.scss";
+import React, { useState, useEffect, useRef } from "react";
 import { Form } from "react-bootstrap";
 import { ReactComponent as DropDownIcon } from "../../../assets/images/svgIcons/dropdownIcon.svg";
-
-export default function Dropdown({ options, onSelect, name, label, value }) {
-  const [searchTerm, setSearchTerm] = useState(value);
+import "./Dropdown.scss";
+const Dropdown = ({ options, onSelect, name, label, value }) => {
+  const [inputValue, setInputValue] = useState(value);
+  const [filteredOptions, setFilteredOptions] = useState(options);
+  const [showOptions, setShowOptions] = useState(false);
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
-  const [filteredOptions, setFilteredOptions] = useState(options);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const optionClicked = useRef(false); // Flag to track if an option was clicked
-
-  const dropdownRef = useRef(null);
-
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-
-    const filtered = options.filter((option) =>
-      option.toLowerCase().includes(value.toLowerCase())
-    );
-
-    setFilteredOptions(filtered);
-    setIsDropdownOpen(true);
-  };
-
+  const [isFocused, setIsFocused] = useState(false);
+  const [isBlur, setIsBlur] = useState(false);
+  const inputRef = useRef();
   const SErrorMessage = (name, Message, validate) => {
     setErrorMessage((prevData) => ({
       ...prevData,
       [name]: validate ? "" : Message,
     }));
   };
-
-  const handleOptionClick = (option) => {
-    setSearchTerm(option);
-    setIsDropdownOpen(false);
-    onSelect(option, name);
+  const onErrorValidation = () => {
+    SErrorMessage(name, "Select a valid value", false);
+    setBorderColor((prevData) => ({
+      ...prevData,
+      [name]: "#A30000",
+    }));
+  };
+  const onSuccessValidation = () => {
     SErrorMessage(name, "", true);
     setBorderColor((prevData) => ({
       ...prevData,
       [name]: "#dee2e6",
     }));
-    optionClicked.current = true;
+  };
+  const isCheckValidData = () => {
+    const filtered =
+      inputValue &&
+      options.filter(
+        (option) => option.toLowerCase() === inputValue.toLowerCase()
+      );
+    return !filtered.length <= 0 ? false : true;
+  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (inputRef.current && !inputRef.current.contains(event.target)) {
+        setShowOptions(false);
+        if (isCheckValidData()) {
+          onErrorValidation();
+        }
+      } else {
+        if (isCheckValidData()) {
+          onErrorValidation();
+        } else {
+          onSuccessValidation();
+        }
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [inputValue]);
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    const filtered = options.filter((option) =>
+      option.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredOptions(filtered);
+    setShowOptions(true);
   };
 
-  const handleBlur = () => {
-    // setTimeout(() => {
-    //   setIsDropdownOpen(false);
-    //   if (!optionClicked.current && !filteredOptions.includes(searchTerm)) {
-    //     SErrorMessage(name, "Select a valid value", false);
-    //     setBorderColor((prevData) => ({
-    //       ...prevData,
-    //       [name]: "red",
-    //     }));
-    //   }
-    //   optionClicked.current = false;
-    // }, 100);
-  };
-
-  const handleFocus = () => {
-    setIsDropdownOpen(true);
+  const handleOptionClick = (option) => {
+    setIsFocused(true);
+    setInputValue(option);
+    setShowOptions(false);
+    onSelect(option, name);
+    onSuccessValidation();
   };
 
   return (
-    <div className={`custom-select-dropdown ${name}`} ref={dropdownRef}>
-      <Form.Label>{label}</Form.Label>
-      <div className="position-relative">
-        <Form.Control
-          type="text"
-          placeholder={`Select a ${label}`}
-          value={searchTerm}
-          style={{ borderColor: borderColor[name] }}
-          onChange={handleInputChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
-        <div className={`arrow`}>
-          <DropDownIcon />
-        </div>
-        {isDropdownOpen && (
-          <div className="floating-table">
-            <table>
-              <tbody>
-                {filteredOptions.map((option, index) => (
-                  <tr key={index} onClick={() => handleOptionClick(option)}>
-                    <td>{option}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+    <div className={`custom-select-dropdown ${name}`} ref={inputRef}>
+      <Form.Group>
+        <Form.Label>{label}</Form.Label>
+        <div className="position-relative">
+          <Form.Control
+            type="text"
+            placeholder={`Select a ${label}`}
+            value={inputValue}
+            id="dropdown"
+            style={{
+              borderColor:
+                isBlur && borderColor[name] === "#A30000" && borderColor[name],
+            }}
+            onChange={handleInputChange}
+            onBlur={() => {
+              setIsBlur(true);
+            }}
+            onFocus={() => {
+              setIsFocused(true);
+              setShowOptions(true);
+            }}
+          />
+          <div className="arrow">
+            <DropDownIcon />
           </div>
+          {showOptions && (
+            <div className="floating-table">
+              <table>
+                <tbody>
+                  {filteredOptions.map((option, index) => (
+                    <tr
+                      for="dropdown"
+                      key={index}
+                      onClick={() => handleOptionClick(option)}
+                    >
+                      <td>{option}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+        {isBlur && borderColor[name] === "#A30000" && (
+          <span className="formWarning">{ErrorMessage[name]}</span>
         )}
-      </div>
-
-      {borderColor[name] === "red" && (
-        <span className="formWarning">{ErrorMessage[name]}</span>
-      )}
+      </Form.Group>
     </div>
   );
-}
+};
+
+export default Dropdown;
