@@ -1,85 +1,101 @@
-import React, { useState, useRef } from "react";
-import "./Dropdown.css";
+import React, { useState, useEffect, useRef } from "react";
 import { Form } from "react-bootstrap";
-
-export default function Dropdown({ options, onSelect, name, label, value }) {
-  const [searchTerm, setSearchTerm] = useState(value);
+const Dropdown = ({ options, onSelect, name, label, value }) => {
+  const [inputValue, setInputValue] = useState(value);
+  const [filteredOptions, setFilteredOptions] = useState(options);
+  const [showOptions, setShowOptions] = useState(false);
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
-  const [filteredOptions, setFilteredOptions] = useState(options);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const optionClicked = useRef(false); // Flag to track if an option was clicked
-
-  const dropdownRef = useRef(null);
-  
-
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-
-    const filtered = options.filter((option) =>
-      option.toLowerCase().includes(value.toLowerCase())
-    );
-
-    setFilteredOptions(filtered);
-    setIsDropdownOpen(true);
-  };
-
+  const [isFocused, setIsFocused] = useState(false);
+  const inputRef = useRef();
   const SErrorMessage = (name, Message, validate) => {
     setErrorMessage((prevData) => ({
       ...prevData,
       [name]: validate ? "" : Message,
     }));
   };
-
-  const handleOptionClick = (option) => {
-    setSearchTerm(option);
-    setIsDropdownOpen(false);
-    onSelect(option, name);
+  const onErrorValidation = () => {
+    SErrorMessage(name, "Select a valid value", false);
+    setBorderColor((prevData) => ({
+      ...prevData,
+      [name]: "red",
+    }));
+  };
+  const onSuccessValidation = () => {
     SErrorMessage(name, "", true);
     setBorderColor((prevData) => ({
       ...prevData,
       [name]: "#dee2e6",
     }));
-    optionClicked.current = true;
   };
-
-  const handleBlur = () => {
-    setTimeout(() => {
-      setIsDropdownOpen(false);
-
-      if (!optionClicked.current && !filteredOptions.includes(searchTerm)) {
-        SErrorMessage(name, "Select a valid value", false);
-        setBorderColor((prevData) => ({
-          ...prevData,
-          [name]: "red",
-        }));
+  const isCheckValidData = () => {
+    const filtered =
+      inputValue &&
+      options.filter(
+        (option) => option.toLowerCase() === inputValue.toLowerCase()
+      );
+    return !filtered.length <= 0 ? false : true;
+  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (inputRef.current && !inputRef.current.contains(event.target)) {
+        setShowOptions(false);
+        if (isCheckValidData()) {
+          onErrorValidation();
+        }
+      } else {
+        if (isCheckValidData()) {
+          onErrorValidation();
+        } else {
+          onSuccessValidation();
+        }
       }
-      optionClicked.current = false;
-    }, 100);
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [inputValue]);
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    const filtered = options.filter((option) =>
+      option.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredOptions(filtered);
+    setShowOptions(true);
   };
 
-  const handleFocus = () => {
-    setIsDropdownOpen(true);
+  const handleOptionClick = (option) => {
+    setInputValue(option);
+    setShowOptions(false);
+    onSelect(option, name);
+    onSuccessValidation();
   };
 
   return (
-    <div className={`custom-select-dropdown ${name}`} ref={dropdownRef}>
+    <div className={`custom-select-dropdown ${name}`} ref={inputRef}>
       <Form.Label>{label}</Form.Label>
       <Form.Control
         type="text"
         placeholder={`Select a ${label}`}
-        value={searchTerm}
-        style={{ borderColor: borderColor[name] }}
+        value={inputValue}
+        style={{
+          borderColor:
+            isFocused && borderColor[name] === "red" && borderColor[name],
+        }}
         onChange={handleInputChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
+        onFocus={() => {
+          setIsFocused(true);
+          setShowOptions(true);
+        }}
       />
-      {borderColor[name] === "red" && (
+      {isFocused && borderColor[name] === "red" && (
         <span className="formWarning">{ErrorMessage[name]}</span>
       )}
 
-      {isDropdownOpen && (
+      {showOptions && (
         <div className="floating-table">
           <table>
             <tbody>
@@ -94,4 +110,6 @@ export default function Dropdown({ options, onSelect, name, label, value }) {
       )}
     </div>
   );
-}
+};
+
+export default Dropdown;
