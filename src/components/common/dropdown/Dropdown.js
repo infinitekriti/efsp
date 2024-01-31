@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Form } from "react-bootstrap";
 import { ReactComponent as DropDownIcon } from "../../../assets/images/svgIcons/dropdownIcon.svg";
 import "./Dropdown.scss";
-import { ReactComponent as DropDownIcon } from "../../../assets/images/svgIcons/dropdownIcon.svg";
-import "./Dropdown.scss";
 const Dropdown = ({ options, onSelect, name, label, value }) => {
   const [inputValue, setInputValue] = useState(value);
   const [filteredOptions, setFilteredOptions] = useState(options);
