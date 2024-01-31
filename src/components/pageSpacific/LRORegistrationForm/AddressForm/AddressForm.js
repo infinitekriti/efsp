@@ -78,7 +78,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
     }
     setBorderColor((prevData) => ({
       ...prevData,
-      [name]: validate ? "#dee2e6" : "red",
+      [name]: validate ? "#dee2e6" : "#A30000",
     }));
   };
 
@@ -118,7 +118,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
       }
       setBorderColor((prevData) => ({
         ...prevData,
-        [name]: "red",
+        [name]: "#A30000",
       }));
     }
   };
