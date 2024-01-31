@@ -13,13 +13,13 @@ const Footer = () => {
          <Container>
         <div className="footer-volunteer">
             <Row>
-                <Col>
+                <Col xs={12} sm={6} md={6} lg={6} xl={6}>
                     <div className="footer-volLeft">
                         <h2>Volunteer With Us</h2>
                         <p>Share yout love to make someone's life better</p>
                     </div>
                 </Col>
-                <Col>
+                <Col xs={12} sm={6} md={6} lg={6} xl={6}>
                     <div className="footer-volRight">
                         <Button title="Learn how" img={arrowRight}/>
                     </div>
@@ -32,10 +32,10 @@ const Footer = () => {
             <Container>
             <div className="footer-descrip-inner">
             <Row>
-                <Col xs={12} sm={3} md={3} lg={4} xl={5}>
+                <Col xs={12} sm={12} md={3} lg={4} xl={5}>
                    <div className="footer-descrip-logo">
                         <h4>EFSP</h4>
-                        <p>Our vision is to provide convenience <br/> and help 
+                        <p>Our vision is to provide convenience  and help 
                             increase your sales business</p>
                             <div className="footer-socialicon">
                                     <div className="icon-name">
@@ -50,7 +50,7 @@ const Footer = () => {
                              </div>    
                     </div>
                 </Col>
-                <Col xs={12} sm={3} md={3} lg={3} xl={3}>
+                <Col xs={12} sm={4} md={3} lg={3} xl={3}>
                     <div className="footer-descrip-link">
                          <h6>About</h6>
                          <div className="footer-link">
@@ -62,7 +62,7 @@ const Footer = () => {
                         </div> 
                     </div>
                 </Col>
-                <Col xs={12} sm={3} md={3} lg={3} xl={3}>
+                <Col xs={12} sm={4} md={3} lg={3} xl={3}>
                    <div className="footer-descrip-link">
                          <h6>Quick Links</h6>
                          <div className="footer-link">
@@ -74,7 +74,7 @@ const Footer = () => {
                         </div> 
                     </div>
                 </Col>
-                <Col xs={12} sm={3} md={3} lg={2} xl={1}>
+                <Col xs={12} sm={4} md={3} lg={2} xl={1}>
                     <div className="footer-descrip-link">
                          <h6>Socials</h6>
                          <div className="footer-link">
@@ -89,10 +89,10 @@ const Footer = () => {
            </div>
            <div className="footer-descrip-copyright">
                 <Row>
-                    <Col>
+                    <Col xs={12} sm={12} md={6} lg={6} xl={6}>
                      <p>©1998-2023 United Way Worldwide. All reights reserved</p>
                     </Col>
-                    <Col>
+                    <Col xs={12} sm={12} md={6} lg={6} xl={6}>
                         <div className="footer-termcondion">
                             <div>Privacy & Policy</div>
                             <div>Terms & Conditions</div>

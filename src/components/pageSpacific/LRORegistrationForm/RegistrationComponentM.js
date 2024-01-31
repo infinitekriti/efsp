@@ -118,10 +118,10 @@ export default function RegistrationComponentM() {
                   />
                   </div>:
                   <Row>
-                     <Col sm={12} md={5} xl={6}>
+                     <Col sm={{ span: 12, order: 2 }}  md={{ span: 5, order: 1 }} xl={{ span: 6, order: 1 }}>
                           <LroLeftTabContent />
                      </Col>
-                     <Col sm={12} md={7} xl={6}>
+                     <Col sm={{ span: 12, order: 1 }}  md={{ span: 7, order: 2 }} xl={{ span: 6, order: 2 }}>
                      <div className="lro-components mb-5">
                         {getProperComponent()}
                         </div>

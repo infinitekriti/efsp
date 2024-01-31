@@ -53,6 +53,7 @@
             p {
                 font-size: 0.7em;
                 margin-bottom: 2em;
+                width: 48%;
             }
 
             .footer-socialicon {
@@ -111,6 +112,48 @@
                     &:hover {
                         color: var(--primaryColor);
                     }
+                }
+            }
+        }
+    }
+}
+//for mobile
+@media only screen and (max-width: 575px) {
+    .footer-volLeft{
+        text-align: center;
+        margin-bottom: 1em;
+    }
+   .footer-volRight{
+    justify-content: center !important;
+   }
+}
+//for tablet
+@media only screen and (max-width: 768px){
+    .footer-main {
+        .footer-description {
+            padding-top: 80px;
+            .footer-descrip-logo{
+                text-align: center;
+                margin-bottom: 4em;
+                p{
+                    width: 100%;
+                }
+            }
+            .footer-socialicon{
+               display: flex;
+               justify-content: center;
+            }
+            .footer-descrip-link{
+                text-align: center;
+            }
+            .footer-descrip-copyright{
+                text-align: center;
+                p{
+                    margin-bottom: 0.5em;
+                }
+                .footer-termcondion{
+                    justify-content: center;
+                    margin-bottom: 1.8em;
                 }
             }
         }
