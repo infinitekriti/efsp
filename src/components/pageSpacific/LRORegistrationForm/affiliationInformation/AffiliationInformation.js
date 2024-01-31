@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -10,9 +10,15 @@ import {
   clearFormData,
   updateFormData,
 } from "../../../../redux/reducers/HomeSlice";
+import { onSubmitDataAsync } from "../../../../redux/actions/HomeActions";
 
 export default function AffiliationInformation() {
-  const { AffiliationInfo } = useSelector((state) => state.HomeReducer);
+  const {
+    AffiliationInfo,
+    lroRegisterDetails,
+    EmployerId,
+    addressInformation,
+  } = useSelector((state) => state.HomeReducer);
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
   const [formData, setFormData] = useState(AffiliationInfo);
@@ -124,7 +130,52 @@ export default function AffiliationInformation() {
   const onClearData = () => {
     dispatch(clearFormData({ name: "AffiliationInfo" }));
   };
-
+  const onSubmitHandler = () => {
+    const { lroZip } = addressInformation;
+    const zip = lroZip ? lroZip.split("-") : [];
+    const data = {
+      lroid: 208,
+      userid: 131200004,
+      lbno: 120800,
+      lrono: 342,
+      lroname: lroRegisterDetails.lroName,
+      salut: lroRegisterDetails.lroSalute,
+      contact: lroRegisterDetails.lroContact,
+      add1: addressInformation.lroAddress1,
+      add2: addressInformation.lroAddress2,
+      add3: addressInformation.lroAddress3,
+      city: addressInformation.lroCity,
+      statecode: addressInformation.lroState,
+      zip: lroZip && zip[0],
+      zip2: lroZip && zip[1],
+      phone: addressInformation.lroPhoneNumber,
+      ext: addressInformation.lroExt,
+      fax: addressInformation.lroFaxNumber,
+      email: lroRegisterDetails.lroEmail,
+      accttype: "s",
+      efteffect: "testeffect",
+      isdeleted: true,
+      hcaccess: false,
+      affil: formData.lroAffiliation,
+      target1: formData.lroTarget1,
+      target2: formData.lroTarget2,
+      target3: formData.lroTarget3,
+      ein: EmployerId.lroEni,
+      subordinateein: EmployerId.lroSubOrdinateEin,
+      einextension: EmployerId.lroeinextention,
+      fiscalagent: false,
+      super1: false,
+      super2: false,
+      eftrcvd: "effectreceived",
+      websitelink: "sitelink",
+      chgby: "change is",
+      password: lroRegisterDetails.lroPassword,
+      isreceiveemail: false,
+      ispasswordchanged: true,
+      trial478: "T",
+    };
+    dispatch(onSubmitDataAsync(data));
+  };
   return (
     <div className="affliation-main">
       <div className="address-step-title d-flex justify-content-between mb-3">
@@ -220,7 +271,11 @@ export default function AffiliationInformation() {
             </Button>
           </Col>
           <Col className="d-flex justify-content-end">
-            <Button className="btn-padding btn-icon" variant="primary">
+            <Button
+              className="btn-padding btn-icon"
+              variant="primary"
+              onClick={onSubmitHandler}
+            >
               SUBMIT <img src={arrowRight} alt="" />
             </Button>
           </Col>

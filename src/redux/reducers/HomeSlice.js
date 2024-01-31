@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { HOME_REDUCER } from "../constants";
+import { onSubmitDataAsync } from "../actions/HomeActions";
 
 const initialState = {
   AffiliationInfo: {
@@ -32,6 +33,14 @@ const initialState = {
     lroFaxNumber: "+1",
     lroUID: "+1",
   },
+  lroRegisterDetails: {
+    lroName: "",
+    lroSalute: "Select",
+    lroContact: "",
+    lroEmail: "",
+    lroPassword: "",
+    lroCPassword: "",
+  },
 };
 export const homeSlice = createSlice({
   name: HOME_REDUCER,
@@ -43,6 +52,16 @@ export const homeSlice = createSlice({
     clearFormData: (state, { payload: { name } }) => {
       state[name] = initialState[name];
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(onSubmitDataAsync.fulfilled, (state, { payload }) => {
+        state.data = payload;
+      })
+      .addCase(onSubmitDataAsync.rejected, (state, { payload }) => {
+        state.error = payload;
+      });
+    //.addCase(getNewHomeData.fulfilled,(state,{payload})=>{})
   },
 });
 export const { updateName, updateFormData, clearFormData } = homeSlice.actions;

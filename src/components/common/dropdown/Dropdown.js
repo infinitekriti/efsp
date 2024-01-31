@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Form } from "react-bootstrap";
-import { ReactComponent as DropDownIcon } from "../../../assets/images/svgIcons/dropdownIcon.svg"
-import "./Dropdown.scss"
+import { ReactComponent as DropDownIcon } from "../../../assets/images/svgIcons/dropdownIcon.svg";
+import "./Dropdown.scss";
 const Dropdown = ({ options, onSelect, name, label, value }) => {
   const [inputValue, setInputValue] = useState(value);
   const [filteredOptions, setFilteredOptions] = useState(options);
@@ -59,7 +59,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [inputValue]);
- 
+
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
@@ -69,7 +69,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
     setFilteredOptions(filtered);
     setShowOptions(true);
   };
- 
+
   const handleOptionClick = (option) => {
     //setIsFocused(true)
     setInputValue(option);
@@ -77,7 +77,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
     onSelect(option, name);
     onSuccessValidation();
   };
- 
+
   return (
     <div className={`custom-select-dropdown ${name}`} ref={inputRef}>
       <Form.Label>{label}</Form.Label> <span className="requred">* </span>
@@ -102,6 +102,24 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
       />
        <div className="arrow">
             <DropDownIcon />
+          </div>
+          {showOptions && (
+            <div className="floating-table">
+              <table>
+                <tbody>
+                  {filteredOptions.map((option, index) => (
+                    <tr
+                      for="dropdown"
+                      key={index}
+                      onClick={() => handleOptionClick(option)}
+                    >
+                      <td>{option}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
        {showOptions && (
         <div className="floating-table">
@@ -117,13 +135,11 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
           </table>
         </div>
       )}
-      </div>
       {isBlur && borderColor[name] === "#A30000" && (
         <span className="formWarning">{ErrorMessage[name]}</span>
       )}
-     
     </div>
   );
 };
- 
+
 export default Dropdown;
