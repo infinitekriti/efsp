@@ -1,13 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { GET_HOME_DATA } from "../constants";
-import {  getTestData } from "../../apiServices/test.api";
+import { ON_SUBMIT_DATA } from "../constants";
+import { onSubmitData } from "../../apiServices/home.api";
 
-export const getHomeDataAsync = createAsyncThunk(
-  GET_HOME_DATA,
+export const onSubmitDataAsync = createAsyncThunk(
+  ON_SUBMIT_DATA,
   async (data, { dispatch, rejectWithValue }) => {
     try {
       //start loading //dispatch(startLoadingAction(true))
-      const res = await getTestData();
+      const res = await onSubmitData(data);
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
       }

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { Form } from "react-bootstrap";
 import { ReactComponent as DropDownIcon } from "../../../assets/images/svgIcons/dropdownIcon.svg";
 import "./Dropdown.scss";
+import { ReactComponent as DropDownIcon } from "../../../assets/images/svgIcons/dropdownIcon.svg";
+import "./Dropdown.scss";
 const Dropdown = ({ options, onSelect, name, label, value }) => {
   const [inputValue, setInputValue] = useState(value);
   const [filteredOptions, setFilteredOptions] = useState(options);
@@ -60,6 +62,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
     };
   }, [inputValue]);
 
+
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
@@ -70,6 +73,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
     setShowOptions(true);
   };
 
+
   const handleOptionClick = (option) => {
     //setIsFocused(true)
     setInputValue(option);
@@ -77,6 +81,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
     onSelect(option, name);
     onSuccessValidation();
   };
+
 
   return (
     <div className={`custom-select-dropdown ${name}`} ref={inputRef}>
@@ -126,4 +131,6 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
   );
 };
 
+
 export default Dropdown;
+
