@@ -60,6 +60,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
     };
   }, [inputValue]);
 
+
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
@@ -70,6 +71,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
     setShowOptions(true);
   };
 
+
   const handleOptionClick = (option) => {
     //setIsFocused(true)
     setInputValue(option);
@@ -77,6 +79,7 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
     onSelect(option, name);
     onSuccessValidation();
   };
+
 
   return (
     <div className={`custom-select-dropdown ${name}`} ref={inputRef}>
@@ -102,24 +105,6 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
       />
        <div className="arrow">
             <DropDownIcon />
-          </div>
-          {showOptions && (
-            <div className="floating-table">
-              <table>
-                <tbody>
-                  {filteredOptions.map((option, index) => (
-                    <tr
-                      for="dropdown"
-                      key={index}
-                      onClick={() => handleOptionClick(option)}
-                    >
-                      <td>{option}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
         </div>
        {showOptions && (
         <div className="floating-table">
@@ -139,7 +124,10 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
         <span className="formWarning">{ErrorMessage[name]}</span>
       )}
     </div>
+    </div>
   );
 };
 
+
 export default Dropdown;
+
