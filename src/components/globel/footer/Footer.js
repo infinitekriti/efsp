@@ -1,5 +1,5 @@
 
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Nav, Row } from 'react-bootstrap';
 import Button from '../../common/button/Button';
 import arrowRight from "../../../assets/images/svgIcons/arrow-right.svg"
 import facebook from "../../../assets/images/svgIcons/facebook.svg"
@@ -21,7 +21,7 @@ const Footer = () => {
                 </Col>
                 <Col xs={12} sm={6} md={6} lg={6} xl={6}>
                     <div className="footer-volRight">
-                        <Button title="Learn how" img={arrowRight}/>
+                        <Button title="Learn how" img={arrowRight} alt="arrowRight"/>
                     </div>
                 </Col>
             </Row>
@@ -39,13 +39,13 @@ const Footer = () => {
                             increase your sales business</p>
                             <div className="footer-socialicon">
                                     <div className="icon-name">
-                                       <img src={facebook} alt="" />
+                                    <Nav.Link><img src={facebook} alt="facebookIcon" /> </Nav.Link>
                                     </div>
                                     <div className="icon-name">
-                                        <img src={tweeter} alt="" />
+                                    <Nav.Link><img src={tweeter} alt="tweeterIcon" /></Nav.Link>
                                     </div>
                                     <div className="icon-name">
-                                        <img src={instagram} alt="" />
+                                    <Nav.Link><img src={instagram} alt="instagramIcon" /> </Nav.Link>
                                     </div>
                              </div>    
                     </div>
@@ -54,11 +54,11 @@ const Footer = () => {
                     <div className="footer-descrip-link">
                          <h6>About</h6>
                          <div className="footer-link">
-                            <div>Founding Information</div>
-                            <div>Humanitarian Founding</div>
-                            <div>FAQ'S</div>
-                            <div>About Us</div>
-                            <div>Contact Us</div>
+                         <Nav.Link>Founding Information</Nav.Link>
+                         <Nav.Link>Humanitarian Founding</Nav.Link>
+                         <Nav.Link>FAQ'S</Nav.Link>
+                         <Nav.Link>About Us</Nav.Link>
+                         <Nav.Link>Contact Us</Nav.Link>
                         </div> 
                     </div>
                 </Col>
@@ -66,11 +66,11 @@ const Footer = () => {
                    <div className="footer-descrip-link">
                          <h6>Quick Links</h6>
                          <div className="footer-link">
-                            <div>Awards</div>
-                            <div>Funded Organisations</div>
-                            <div>Your Community</div>
-                            <div>Volunteering</div>
-                            <div>Seeking Assistence </div>
+                         <Nav.Link>Awards</Nav.Link>
+                         <Nav.Link>Funded Organisations</Nav.Link>
+                         <Nav.Link>Your Community </Nav.Link>
+                         <Nav.Link>Volunteering </Nav.Link>
+                         <Nav.Link>Seeking Assistence </Nav.Link>
                         </div> 
                     </div>
                 </Col>
@@ -78,10 +78,10 @@ const Footer = () => {
                     <div className="footer-descrip-link">
                          <h6>Socials</h6>
                          <div className="footer-link">
-                            <div>Discord</div>
-                            <div>Instagram</div>
-                            <div>Twitter</div>
-                            <div>Facebook</div>
+                         <Nav.Link>Discord</Nav.Link>
+                         <Nav.Link>Instagram</Nav.Link>
+                         <Nav.Link>Twitter </Nav.Link>
+                         <Nav.Link>Facebook </Nav.Link>
                         </div> 
                     </div>
                 </Col>
@@ -94,8 +94,8 @@ const Footer = () => {
                     </Col>
                     <Col xs={12} sm={12} md={6} lg={6} xl={6}>
                         <div className="footer-termcondion">
-                            <div>Privacy & Policy</div>
-                            <div>Terms & Conditions</div>
+                        <Nav.Link>Privacy & Policy </Nav.Link>
+                        <Nav.Link>Terms & Conditions</Nav.Link>
                         </div>
                     </Col>
                 </Row>
