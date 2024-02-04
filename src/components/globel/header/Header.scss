@@ -1,50 +1,113 @@
 .header-main {
-    position: sticky;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: #fff;
+  box-shadow: 0px 6px 11px 0px #40444d0f;
+  -webkit-box-shadow: 0px 6px 11px 0px #40444d0f;
+
+  .logo-text {
+    font-weight: 600;
+    font-size: 1.8em;
+    cursor: pointer;
+  }
+
+  .border {
+    height: 20px;
+
+    @media only screen and (max-width: 992px) {
+      display: none;
+    }
+  }
+
+  .nav-link {
+    color: var(--bodyTextColor);
+    font-weight: 500;
+    font-size: 0.95em;
+    svg {
+      width: 1.8em;
+    }
+    &:hover {
+      color: var(--primaryColor);
+      svg {
+        path {
+          stroke: var(--primaryColor);
+        }
+      }
+    }
+  }
+
+  .me-auto {
+    justify-content: end;
+    gap: 1em;
+    width: 100%;
+    align-items: center;
+    .sub-links {
+      position: fixed;
+      top: 5.875em;
+      left: 13.5625em;
+      background-color: white;
+      z-index: 1000;
+      padding: 10px;
+      width: 496px;
+      // height: 160px;
+      box-shadow: 0px 4px 14.4px 0px rgba(0, 0, 0, 0.33);
+
+      .sub-menu {
+        display: flex;
+        flex-direction: row;
+        .feature {
+          width: 215px;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-collapse {
+    width: 256px;
+    position: fixed;
+    overflow-y: auto;
+    height: 100vh;
     top: 0;
-    z-index: 999;
-    background-color: #fff;
-    box-shadow: 0px 6px 11px 0px #40444D0F;
-    -webkit-box-shadow: 0px 6px 11px 0px #40444D0F;
-
-    .logo-text {
-        font-weight: 600;
-        font-size: 1.8em;
-        cursor: pointer;
-    }
-
-    .border {
-        height: 20px;
-
-        @media only screen and (max-width: 992px) {
-            display: none;
-        }
-    }
-
-    .nav-link {
-        color: var(--bodyTextColor);
-        font-weight: 500;
-        font-size: 0.95em;
-        svg{
-            width: 1.8em;
-        }
-        &:hover {
-            color: var(--primaryColor);
-            svg{
-                path{
-                    stroke: var(--primaryColor);
-                }
-                }
-        }
-    }
+    left: 0;
+    background-color: white;
+    z-index: 1000;
 
     .me-auto {
-        justify-content: end;
-        gap: 1em;
-        width: 100%;
-        align-items: center;
+      margin: 2.5em 1.5em 3.7em 1.5em;
+      align-items: initial;
+      gap: 0em;
+      .botton {
+        position: fixed;
+        z-index: 1000;
+        background-color: white;
+        bottom: 0;
+        left: 0;
+        width: 256px;
+        padding: 15px;
+      }
+      .sub-links {
+        top: 0;
+        left: 0;
+        width: 32.9375em;
+        margin: 0em 2.5em;
+        position: relative;
+        flex-direction: column;
+        box-shadow: none;
 
-        @media only screen and (max-width: 992px) {
-            align-items: initial;
+        .sub-menu {
+          display: flex;
+          flex-direction: column;
+          .feature {
+            width: 215px;
+            height: 40px;
+            margin: 5px 0px;
+          }
         }
+      }
     }
+  }
 }
