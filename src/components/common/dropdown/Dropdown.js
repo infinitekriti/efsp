@@ -120,11 +120,10 @@ const Dropdown = ({ options, onSelect, name, label, value }) => {
           </table>
         </div>
       )}
-      </div>
       {isBlur && borderColor[name] === "#A30000" && (
         <span className="formWarning">{ErrorMessage[name]}</span>
       )}
-     
+    </div>
     </div>
   );
 };

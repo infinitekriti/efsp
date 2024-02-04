@@ -200,7 +200,7 @@ export default function EmployeeIDForm({
               className="btn-padding btn-icon"
               variant="primary"
             >
-              NEXT <img src={arrowRight} alt="" />
+              NEXT <img src={arrowRight} alt="arrow-right-icon" />
             </Button>
           </Col>
         </Row>

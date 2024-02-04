@@ -1,5 +1,5 @@
 import React, { Fragment, useCallback, useState } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Nav, Row } from 'react-bootstrap'
 import "./RegistrationComponentM.scss"
 import RegistrationForm from './RegistrationForm/RegistrationForm';
 import LroTopTitle from './lroTopTitle/LroTopTitle';
@@ -84,10 +84,10 @@ export default function RegistrationComponentM() {
               </Fragment>
               <Fragment>
               {activeTab?.id !== 1 &&
-                 <ul className="lro-progress-steps">
+                <Nav className="lro-progress-steps" as="ul">
                   {tabData.map((selectedTab, id) => {
                     return (
-                      <li
+                      <Nav.Item as="li"
                         key={selectedTab.id}
                         className={`${
                           activeTab.id === selectedTab.id
@@ -101,11 +101,11 @@ export default function RegistrationComponentM() {
                           tabChangeHandler(selectedTab)}
                       >
                         <div className="lro-value">
-                          <p>{selectedTab.name}</p></div>
-                      </li>
+                        <Nav.Link><p>{selectedTab.name}</p></Nav.Link></div>
+                      </Nav.Item>
                     );
                   })}
-                </ul>
+                </Nav>
               }
                 <Container>
                 {activeTab?.id === 1 ?
@@ -118,10 +118,10 @@ export default function RegistrationComponentM() {
                   />
                   </div>:
                   <Row>
-                     <Col sm={12} md={5} xl={6}>
+                     <Col sm={{ span: 12, order: 2 }}  md={{ span: 4, order: 1 }} xl={{ span: 6, order: 1 }}>
                           <LroLeftTabContent />
                      </Col>
-                     <Col sm={12} md={7} xl={6}>
+                     <Col sm={{ span: 12, order: 1 }}  md={{ span: 8, order: 2 }} xl={{ span: 6, order: 2 }}>
                      <div className="lro-components mb-5">
                         {getProperComponent()}
                         </div>

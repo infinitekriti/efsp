@@ -37,7 +37,7 @@
 
         p {
             color: #7F7F7F;
-            font-size: 0.85em;
+            font-size: 0.9em;
             font-weight: 400;
         }
     }
@@ -98,14 +98,14 @@
                 height: 12px;
                 border-radius: 50%;
 
-                @media all and (max-width: 600px) {
+                @media all and (max-width: 300px) {
                     top: calc(50% - 8px);
                     font-size: 0.9em;
                 }
             }
         }
 
-        @media all and (min-width: 600px) {
+        @media all and (min-width: 300px) {
             display: table;
             list-style-type: none;
             margin: 1.6em auto;
@@ -117,7 +117,6 @@
                 display: table-cell;
                 text-align: center;
                 padding: 0;
-                padding-bottom: 1em;
                 font-size: 0.8em;
                 position: relative;
                 border-left-width: 0;
@@ -132,11 +131,14 @@
                     bottom: -70px;
                     display: flex;
                     justify-content: center;
-
-                    p {
+                    a{
+                        color: inherit;
+                        p {
                         margin-bottom: 0;
                         width: 153px;
-                    }
+                    }}
+
+                    
                 }
 
                 &.upcoming {
@@ -191,8 +193,9 @@
         margin-top: 4em;
         padding: 2.5em 3em;
 
-        @media all and (max-width: 767px) {
+        @media all and (max-width: 992px) {
             width: 100%;
+            margin-top: 5.5em;
         }
 
        @include formFields;
@@ -223,3 +226,34 @@
            }
     }
 }
+  @media all and (min-width: 300px) and (max-width: 575px) {
+    .lro-progress-steps {
+        display: flex !important;
+        table-layout: initial !important;
+        li{
+            display: initial !important;
+            &:first-child{
+                width: 50% !important;
+            }
+            &:nth-child(2){
+                width: 49% !important;
+            }
+            &:nth-child(3){
+                width: 33.3% !important;
+                margin-top: 50px !important;
+            }
+            &:nth-child(4){
+                width: 33.3% !important;
+            }
+            &:nth-child(5){
+                width: 33% !important;
+            }
+            .lro-value {
+                bottom: -53px !important;
+            }
+        }
+    }
+    .lro-components {
+    border-radius: 8px !important;
+    }
+  }
