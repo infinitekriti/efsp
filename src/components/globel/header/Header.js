@@ -13,11 +13,21 @@ import { ReactComponent as Help } from "../../../assets/images/svgIcons/help-cir
 import { ReactComponent as Alert } from "../../../assets/images/svgIcons/alert-circle.svg";
 import { ReactComponent as Phone } from "../../../assets/images/svgIcons/phone.svg";
 import { ReactComponent as Globe } from "../../../assets/images/svgIcons/globe.svg";
+import { ReactComponent as Polygon } from "../../../assets/images/svgIcons/Polygon.svg";
 
 import Awards from "../../../assets/images/svgIcons/Awards.svg";
 import Volunteering from "../../../assets/images/svgIcons/Volunteering.svg";
 const Header = () => {
   const [showSubLinks, setShowSubLinks] = useState(false);
+  const [isToggleOpen, setToggleOpen] = useState(false);
+
+  const toggleNavbar = () => {
+    setToggleOpen(!isToggleOpen);
+  };
+
+  const closeToggle = () => {
+    setToggleOpen(false);
+  };
 
   const handleFeaturesClick = () => {
     setShowSubLinks(!showSubLinks);
@@ -31,6 +41,7 @@ const Header = () => {
               <Navbar.Toggle
                 aria-controls="basic-navbar-nav"
                 className="m-2 custom-toggle"
+                onClick={toggleNavbar}
               />
               <Navbar.Brand href="/" className="m-2 logo-text">
                 EFSP
@@ -38,7 +49,7 @@ const Header = () => {
             </div>
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link onClick={handleFeaturesClick}>
+                <Nav.Link onClick={handleFeaturesClick} className="NavLinks">
                   <Features className="d-lg-none px-1 " />
                   Features
                   {showSubLinks ? (
@@ -47,12 +58,17 @@ const Header = () => {
                     <DropDownIcon className="px-1" />
                   )}
                   {showSubLinks && (
+                    <div className="polygon">
+                      <Polygon className="px-1" />
+                    </div>
+                  )}
+                  {showSubLinks && (
                     <div className="sub-links active">
                       <Nav className="sub-menu">
                         <Nav.Link href="#feature1" className="feature">
                           <img
                             src={Awards}
-                            className="px-1"
+                            className="px-1 Logo"
                             alt="Volunteering"
                           />
                           Awards
@@ -60,7 +76,7 @@ const Header = () => {
                         <Nav.Link href="#feature1" className="feature">
                           <img
                             src={Volunteering}
-                            className="px-1"
+                            className="px-1 Logo"
                             alt="Volunteering"
                           />
                           Volunteering
@@ -70,7 +86,7 @@ const Header = () => {
                         <Nav.Link href="#feature1" className="feature">
                           <img
                             src={Volunteering}
-                            className="px-1"
+                            className="px-1 Logo"
                             alt="Volunteering"
                           />
                           Funded Organisation
@@ -78,7 +94,7 @@ const Header = () => {
                         <Nav.Link href="#feature1" className="feature">
                           <img
                             src={Volunteering}
-                            className="px-1"
+                            className="px-1 Logo"
                             alt="Volunteering"
                           />
                           Seeking Assistance
@@ -88,7 +104,7 @@ const Header = () => {
                         <Nav.Link href="#feature1" className="feature">
                           <img
                             src={Volunteering}
-                            className="px-1"
+                            className="px-1 Logo"
                             alt="Volunteering"
                           />
                           Your Community
@@ -96,7 +112,7 @@ const Header = () => {
                         <Nav.Link href="#feature1" className="feature">
                           <img
                             src={Volunteering}
-                            className="px-1"
+                            className="px-1 Logo"
                             alt="Volunteering"
                           />
                           Getting Funding
@@ -129,7 +145,7 @@ const Header = () => {
                   <Globe className="d-lg-none px-1" />
                   News
                 </Nav.Link>
-                <Nav.Link className="botton">
+                <Nav.Link className="botton" onClick={closeToggle}>
                   <div className="d-lg-none d-flex flex-row ">Version I</div>
                 </Nav.Link>
               </Nav>

@@ -42,24 +42,36 @@
     gap: 1em;
     width: 100%;
     align-items: center;
-    .sub-links {
-      position: fixed;
-      top: 5.875em;
-      left: 13.5625em;
-      background-color: white;
-      z-index: 1000;
-      padding: 10px;
-      width: 496px;
-      font-weight: 500;
-      font-size: 0.95em;
-      box-shadow: 0px 4px 14.4px 0px rgba(0, 0, 0, 0.33);
+    .NavLinks {
+      position: relative;
+      .polygon {
+        position: absolute;
+        z-index: 999;
+        margin-top: 20%;
+        margin-left: 25%;
+      }
+      .sub-links {
+        position: absolute;
+        background-color: white;
+        z-index: 1000;
+        padding: 10px 1px;
+        width: 496px;
+        margin-top: 34%;
+        border-radius: 5px;
+        margin-left: -180%;
+        font-weight: 500;
+        font-size: 0.95em;
+        box-shadow: 0px 4px 14.4px 0px rgba(0, 0, 0, 0.33);
 
-      .sub-menu {
-        display: flex;
-        flex-direction: row;
-        .feature {
-          width: 215px;
-          margin-left: 20px;
+        .sub-menu {
+          display: flex;
+          flex-direction: row;
+          .feature {
+            width: 215px;
+            margin-right: 20px;
+            display: flex;
+            flex-direction: row;
+          }
         }
       }
     }
@@ -76,6 +88,7 @@
     left: 0;
     background-color: white;
     z-index: 1000;
+    transition: max-height 0.01s ease-in-out;
 
     .me-auto {
       margin: 2.5em 1.5em 3.7em 1.5em;
@@ -91,22 +104,24 @@
         padding: 15px;
       }
       .sub-links {
-        top: 0;
-        left: 0;
-        width: 32.9375em;
-        margin: 0em 2.5em;
-        position: relative;
-        flex-direction: column;
-        box-shadow: none;
+        width: 200px !important;
+        padding-left: 20px !important;
+        position: relative !important;
+        margin-top: 0 !important;
+        border-radius: 0 !important;
+        margin-left: 0 !important;
+        flex-direction: column !important;
+        box-shadow: none !important;
         font-weight: 500;
         font-size: 0.95em;
 
         .sub-menu {
-          display: flex;
-          flex-direction: column;
+          display: flex !important;
+          flex-direction: column !important;
           .feature {
-            width: 180px;
-            height: 40px;
+            width: 180px !important;
+            height: 20px;
+            padding: 2px;
             margin: 5px 0px;
           }
         }
