@@ -10,7 +10,10 @@ import {
   clearFormData,
   updateFormData,
 } from "../../../../redux/reducers/HomeSlice";
-import { onSubmitDataAsync } from "../../../../redux/actions/HomeActions";
+import {
+  onAffiliationDataAsync,
+  onSubmitDataAsync,
+} from "../../../../redux/actions/HomeActions";
 
 export default function AffiliationInformation() {
   const {
@@ -18,6 +21,7 @@ export default function AffiliationInformation() {
     lroRegisterDetails,
     EmployerId,
     addressInformation,
+    affiliations,
   } = useSelector((state) => state.HomeReducer);
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
@@ -27,7 +31,9 @@ export default function AffiliationInformation() {
   useEffect(() => {
     setFormData(AffiliationInfo);
   }, [AffiliationInfo]);
-
+  useEffect(() => {
+    dispatch(onAffiliationDataAsync());
+  }, []);
   const SErrorMessage = (name, Message, validate) => {
     setErrorMessage((prevData) => ({
       ...prevData,
@@ -199,7 +205,13 @@ export default function AffiliationInformation() {
             onBlur={handleInputChangeBlur}
           >
             <option value="">Select Name as per/in Bank Records</option>
-            <option value="1">Target1</option>
+            {affiliations?.map((e) => {
+              return (
+                <option value={e.acode} key={e.affiliationid}>
+                  {e.aaffil}
+                </option>
+              );
+            })}
           </Form.Select>
           {borderColor.lroAffiliation === "#A30000" && (
             <span className="formWarning">{ErrorMessage.lroAffiliation}</span>

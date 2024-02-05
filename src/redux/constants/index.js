@@ -5,3 +5,5 @@ export const REPORTS_REDUCER = "ReportsReducer";
 export const GET_HOME_DATA = "data/getHomeData";
 export const GET_TEST_DATA = "data/getTestData";
 export const ON_SUBMIT_DATA = "data/onSubmitData";
+export const ON_GET_AFFILIATION_DATA = "data/onAffiliationData";
+export const ON_GET_STATE_DATA = "data/onStateData";

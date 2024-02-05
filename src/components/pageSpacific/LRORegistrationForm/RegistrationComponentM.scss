@@ -222,6 +222,10 @@
         .captcha{
             >div{
                 background-color: rgb(247 247 241);
+                width: fit-content;
+                @media only screen and (max-width: 575px) {
+                    margin-bottom: 15px;
+                }
             }
            }
     }

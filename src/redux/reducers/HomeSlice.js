@@ -1,8 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { HOME_REDUCER } from "../constants";
-import { onSubmitDataAsync } from "../actions/HomeActions";
+import {
+  onAffiliationDataAsync,
+  onStatesDataAsync,
+  onSubmitDataAsync,
+} from "../actions/HomeActions";
 
 const initialState = {
+  affiliations: [],
+  states: [],
   AffiliationInfo: {
     lroAffiliation: "",
     lroTarget1: "",
@@ -41,6 +47,7 @@ const initialState = {
     lroPassword: "",
     lroCPassword: "",
   },
+  error: "",
 };
 export const homeSlice = createSlice({
   name: HOME_REDUCER,
@@ -59,6 +66,18 @@ export const homeSlice = createSlice({
         state.data = payload;
       })
       .addCase(onSubmitDataAsync.rejected, (state, { payload }) => {
+        state.error = payload;
+      })
+      .addCase(onAffiliationDataAsync.fulfilled, (state, { payload }) => {
+        state.affiliations = payload;
+      })
+      .addCase(onAffiliationDataAsync.rejected, (state, { payload }) => {
+        state.error = payload;
+      })
+      .addCase(onStatesDataAsync.fulfilled, (state, { payload }) => {
+        state.states = payload;
+      })
+      .addCase(onStatesDataAsync.rejected, (state, { payload }) => {
         state.error = payload;
       });
     //.addCase(getNewHomeData.fulfilled,(state,{payload})=>{})
