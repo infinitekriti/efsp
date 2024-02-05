@@ -305,10 +305,10 @@ export default function RegistrationForm({ setModalShow }) {
         <Form.Group className="mb-3">
           <Form.Label>Captcha</Form.Label>
           <Row>
-            <Col xs={6} sm={4} className="captcha">
+            <Col xs={6} sm={4} className="captcha" mb-2>
               <LoadCanvasTemplateNoReload />
             </Col>
-            <Col xs={6} sm={5}>
+            <Col xs={12} sm={5} md={6}>
               <Form.Control
                 placeholder="Enter Captcha Value"
                 id="user_captcha_input"
