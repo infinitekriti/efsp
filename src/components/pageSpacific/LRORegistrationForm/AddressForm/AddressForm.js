@@ -20,17 +20,23 @@ import {
   updateFormData,
 } from "../../../../redux/reducers/HomeSlice";
 import Dropdown from "../../../common/dropdown/Dropdown";
+import { onStatesDataAsync } from "../../../../redux/actions/HomeActions";
 
 export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
   const [borderColor, setBorderColor] = useState({});
   const [ErrorMessage, setErrorMessage] = useState({});
-  const { addressInformation } = useSelector((state) => state.HomeReducer);
+  const { addressInformation, states } = useSelector(
+    (state) => state.HomeReducer
+  );
   const [formData, setFormData] = useState(addressInformation);
   const dispatch = useDispatch();
 
   useEffect(() => {
     setFormData(addressInformation);
   }, [addressInformation]);
+  useEffect(() => {
+    dispatch(onStatesDataAsync());
+  }, []);
   const onSaveHandler = () => {
     dispatch(updateFormData({ payload: formData, name: "addressInformation" }));
   };
@@ -199,24 +205,24 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
     }
   };
 
-  const stateOptions = ["California", "New York", "Texas"];
+  const stateOptions = states;
 
   const handleSelect = (selectedValue, name) => {
-    const value = selectedValue
+    const value = selectedValue;
     switch (name) {
       case "lroState":
         setFormData((prevData) => ({
           ...prevData,
           lroState: value,
         }));
-        console.log( value)
+        console.log(value);
         break;
       case "lroCity":
         setFormData((prevData) => ({
           ...prevData,
           lroCity: value,
         }));
-        console.log( value)
+        console.log(value);
         break;
       default:
         break;
@@ -309,7 +315,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
             <Col>
               <Form.Group className="mb-3" controlId="formCity">
                 <Dropdown
-                controlId="formCity"
+                  controlId="formCity"
                   options={stateOptions}
                   onSelect={handleSelect}
                   name="lroCity"
