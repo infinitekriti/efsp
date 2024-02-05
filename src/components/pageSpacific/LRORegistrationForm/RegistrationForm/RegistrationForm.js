@@ -158,8 +158,8 @@ export default function RegistrationForm({ setModalShow }) {
   };
 
   const handleRegister = () => {
-    setModalShow(true);
-    return;
+    // setModalShow(true);
+    // return;
     let Message = "Enter the required feilds";
     if (LRORegisterDetails.lroName === "") {
       SErrorMessage("Register", Message);
@@ -305,7 +305,7 @@ export default function RegistrationForm({ setModalShow }) {
         <Form.Group className="mb-3">
           <Form.Label>Captcha</Form.Label>
           <Row>
-            <Col xs={6} sm={4} className="captcha" mb-2>
+            <Col xs={6} sm={4} className="captcha">
               <LoadCanvasTemplateNoReload />
             </Col>
             <Col xs={12} sm={5} md={6}>
