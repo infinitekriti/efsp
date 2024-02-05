@@ -288,7 +288,7 @@ export default function AffiliationInformation() {
               variant="primary"
               onClick={onSubmitHandler}
             >
-              SUBMIT <img src={arrowRight} alt="" />
+              SUBMIT <img src={arrowRight} alt="arrow-right-icon" />
             </Button>
           </Col>
         </Row>

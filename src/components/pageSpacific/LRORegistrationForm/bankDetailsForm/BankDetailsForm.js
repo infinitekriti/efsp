@@ -186,7 +186,7 @@ export default function BankDetailsForm({
           )}
         </Form.Group>
         <Row>
-          <Col>
+          <Col xs={12} sm={12} md={6} lg={6}>
             <Form.Group className="fromInput  mb-3">
               <Form.Label>Account Type</Form.Label>
               <Form.Select
@@ -209,7 +209,7 @@ export default function BankDetailsForm({
               )}
             </Form.Group>
           </Col>
-          <Col>
+          <Col xs={12} sm={12} md={6} lg={6}>
             <Form.Group className="mb-3">
               <Form.Label>Account Number</Form.Label>
               <Form.Control
@@ -261,7 +261,7 @@ export default function BankDetailsForm({
               className="btn-padding btn-icon"
               variant="primary"
             >
-              NEXT <img src={arrowRight} alt="" />
+              NEXT <img src={arrowRight} alt="arrow-right-icon" />
             </Button>
           </Col>
         </Row>

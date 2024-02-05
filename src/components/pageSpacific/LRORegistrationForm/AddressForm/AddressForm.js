@@ -294,7 +294,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
             />
           </Form.Group>
           <Row>
-            <Col>
+            <Col xs={12} sm={12} md={4} lg={4}>
               <Form.Group className="mb-3" controlId="formZip">
                 <Form.Label>Zip</Form.Label>
                 <span className="requred">* </span>
@@ -312,7 +312,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
                 )}
               </Form.Group>
             </Col>
-            <Col>
+            <Col xs={12} sm={12} md={4} lg={4}>
               <Form.Group className="mb-3" controlId="formCity">
                 <Dropdown
                   controlId="formCity"
@@ -339,7 +339,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
                 )} */}
               </Form.Group>
             </Col>
-            <Col>
+            <Col xs={12} sm={12} md={4} lg={4}>
               <Form.Group className="mb-3" controlId="formState">
                 <Dropdown
                   options={stateOptions}
@@ -366,7 +366,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
           </Row>
 
           <Row>
-            <Col>
+            <Col xs={12} sm={12} md={6} lg={6}>
               <Form.Group className="mb-3" controlId="ext">
                 <Form.Label>Ext</Form.Label>
                 <span className="requred">* </span>
@@ -384,7 +384,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
                 )}
               </Form.Group>
             </Col>
-            <Col>
+            <Col xs={12} sm={12} md={6} lg={6}>
               <Form.Group className="mb-3" controlId="phoneNumber">
                 <Form.Label>Phone No.</Form.Label>
                 <span className="requred">* </span>
@@ -406,7 +406,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col xs={12} sm={12} md={6} lg={6}>
               <Form.Group className="mb-3" controlId="faxNumber">
                 <Form.Label>Fax</Form.Label>
                 <span className="requred">* </span>
@@ -426,7 +426,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
                 )}
               </Form.Group>
             </Col>
-            <Col>
+            <Col xs={12} sm={12} md={6} lg={6}>
               <Form.Group className="mb-3" controlId="uid">
                 <Form.Label>UIE ID</Form.Label>
                 <span className="requred">* </span>
@@ -464,7 +464,7 @@ export default function AddressForm({ newTabData, activeTab, setActiveTab }) {
                 variant="primary"
                 onClick={handleNext}
               >
-                NEXT <img src={arrowRight} alt="" />
+                NEXT <img src={arrowRight} alt="arrow-right-icon" />
               </Button>
             </Col>
           </Row>
