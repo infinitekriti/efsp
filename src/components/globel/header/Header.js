@@ -19,14 +19,11 @@ import Awards from "../../../assets/images/svgIcons/Awards.svg";
 import Volunteering from "../../../assets/images/svgIcons/Volunteering.svg";
 const Header = () => {
   const [showSubLinks, setShowSubLinks] = useState(false);
-  const [isToggleOpen, setToggleOpen] = useState(false);
-
-  const toggleNavbar = () => {
-    setToggleOpen(!isToggleOpen);
-  };
-
   const closeToggle = () => {
-    setToggleOpen(false);
+    const navbar = document.getElementById("basic-navbar-nav");
+    if (navbar && navbar.classList.contains("show")) {
+      navbar.classList.remove("show");
+    }
   };
 
   const handleFeaturesClick = () => {
@@ -41,7 +38,6 @@ const Header = () => {
               <Navbar.Toggle
                 aria-controls="basic-navbar-nav"
                 className="m-2 custom-toggle"
-                onClick={toggleNavbar}
               />
               <Navbar.Brand href="/" className="m-2 logo-text">
                 EFSP
@@ -58,12 +54,10 @@ const Header = () => {
                     <DropDownIcon className="px-1" />
                   )}
                   {showSubLinks && (
-                    <div className="polygon">
-                      <Polygon className="px-1" />
-                    </div>
-                  )}
-                  {showSubLinks && (
                     <div className="sub-links active">
+                      <div className="polygon">
+                        <Polygon className="px-1" />
+                      </div>
                       <Nav className="sub-menu">
                         <Nav.Link href="#feature1" className="feature">
                           <img
