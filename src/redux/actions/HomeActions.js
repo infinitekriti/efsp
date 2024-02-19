@@ -9,22 +9,30 @@ import {
   onStateData,
   onSubmitData,
 } from "../../apiServices/home.api";
+import {
+  onError,
+  onSuccess,
+  startLoading,
+  stopLoading,
+} from "../reducers/GlobalSlice";
 
 export const onSubmitDataAsync = createAsyncThunk(
   ON_SUBMIT_DATA,
   async (data, { dispatch, rejectWithValue }) => {
     try {
-      //start loading //dispatch(startLoadingAction(true))
+      dispatch(startLoading());
       const res = await onSubmitData(data);
       if (!res.ok) {
+        dispatch(onError(`HTTP error! Status: ${res.status}`));
         throw new Error(`HTTP error! Status: ${res.status}`);
       }
+      dispatch(onSuccess("Successfully Submited Data... "));
       return res;
     } catch (err) {
-      //stop loading //dispatch(startLoadingAction(false))
+      dispatch(onError(err.message));
       return rejectWithValue(err.message);
     } finally {
-      //stop loading //dispatch(startLoadingAction(false))
+      dispatch(stopLoading());
     }
   }
 );
@@ -32,17 +40,19 @@ export const onAffiliationDataAsync = createAsyncThunk(
   ON_GET_AFFILIATION_DATA,
   async (_, { dispatch, rejectWithValue }) => {
     try {
-      //start loading //dispatch(startLoadingAction(true))
+      dispatch(startLoading());
       const res = await onAffiliationData();
+      console.log("res", res);
       if (!res.statusText === "OK") {
+        dispatch(onError(`HTTP error! Status: ${res.status}`));
         throw new Error(`HTTP error! Status: ${res.status}`);
       }
       return res?.data;
     } catch (err) {
-      //stop loading //dispatch(startLoadingAction(false))
+      dispatch(onError(err.message));
       return rejectWithValue(err.message);
     } finally {
-      //stop loading //dispatch(startLoadingAction(false))
+      dispatch(stopLoading());
     }
   }
 );
@@ -50,10 +60,10 @@ export const onStatesDataAsync = createAsyncThunk(
   ON_GET_STATE_DATA,
   async (_, { dispatch, rejectWithValue }) => {
     try {
-      //start loading //dispatch(startLoadingAction(true))
+      dispatch(startLoading());
       const res = await onStateData();
-      console.log("onStatesDataAsync", res);
       if (!res.statusText === "OK") {
+        dispatch(onError(`HTTP error! Status: ${res.status}`));
         throw new Error(`HTTP error! Status: ${res.status}`);
       }
       if (res?.data?.length > 0) {
@@ -65,10 +75,10 @@ export const onStatesDataAsync = createAsyncThunk(
       }
       return res?.data;
     } catch (err) {
-      //stop loading //dispatch(startLoadingAction(false))
+      dispatch(onError(err.message));
       return rejectWithValue(err.message);
     } finally {
-      //stop loading //dispatch(startLoadingAction(false))
+      dispatch(stopLoading());
     }
   }
 );

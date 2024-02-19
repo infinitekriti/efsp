@@ -1,0 +1,15 @@
+.alertStyle{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    min-width: 200 px;
+    z-index: 100000,
+}
+.alertSuccess{
+    background-color: var(--greenColor);
+    color: var(--whiteColor);
+}
+.alertError{
+    background-color: var(--warriningColor);
+    color: var(--whiteColor);
+}
